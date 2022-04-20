@@ -1,6 +1,5 @@
 const { User } = require('../models');
 const bcrypt = require('bcrypt');
-const { isAuth } = require('./authorize');
 const {
   generateAccessToken,
   sendToken,
@@ -43,6 +42,7 @@ module.exports = {
     const { email, password } = req.body;
     try {
       const userInfo = await User.findOne({ where: { email } });
+
       if (!userInfo) {
         return res.status(401).json({
           success: false,
@@ -59,17 +59,46 @@ module.exports = {
           message: '비밀번호가 잘못되었습니다.',
         });
       }
+      delete userInfo.dataValues.password;
+
       const newAccessToken = generateAccessToken(userInfo.dataValues);
       const newRefreshToken = generateRefreshToken();
       sendToken(res, newAccessToken, newRefreshToken);
-      res.status(200).json({ userInfo });
+      res.status(200).json({ userInfo, newAccessToken });
     } catch (err) {
       console.error(err);
       next(err);
     }
   },
+  token: async (req, res) => {
+    try {
+      // 쿠키에 에세스 토큰이 유무 확인.
+      const { accessToken } = req.cookies;
+      if (!accessToken) {
+        return res.status(401).json({ message: 'Access token not provided!' });
+      }
+
+      // 에세스 토큰이 유효한지 확인.
+      const accessTokenData = checkToken(accessToken);
+      if (!accessTokenData) {
+        return res.status(401).json({ message: 'Invalid token!' });
+      }
+
+      // 에세스 토큰 정보가 유효한지 확인.
+
+      const { email } = accessTokenData;
+      const userInfo = await User.findOne({ where: { email } });
+      if (!userInfo) {
+        return res.status(403).json({ message: 'Not authorized!' });
+      }
+      return res.status(200).json(accessTokenData);
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ message: 'Server error!' });
+    }
+  },
   // 로그아웃
-  logout: async (req, res, next) => {
+  signout: async (req, res, next) => {
     try {
       // 로그아웃 할 때는 쿠키를 삭제한다.
       res.clearCookie('refreshToken');
