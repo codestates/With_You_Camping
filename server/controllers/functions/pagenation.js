@@ -88,7 +88,7 @@ module.exports = {
     });
   },
   // 내가 북마크 한 글
-  myBookmarks: async (userId, page, limit) => {
+  myLikes: async (userId, page, limit) => {
     return await User.findAndCountAll({
       attributes: ['id'],
       where: {
