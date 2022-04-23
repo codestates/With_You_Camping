@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
-const { hashPassword } = require('./functions/security');
 const pagenation = require('./functions/pagenation');
+const { hashPassword } = require('./functions/security');
 
 module.exports = {
   // 비밀번호 확인
@@ -89,10 +89,6 @@ module.exports = {
 
     const boards = await pagenation.myBoards(userId, pages, limit);
 
-    // if (boards.count === 0) {
-    //   return res.status(400).json({ message: '내가 쓴 게시물이 없습니다.' });
-    // }
-    // 좋아요 갯수 추가하기
     const boardsId = boards.rows.map(board => {
       return board.id;
     });
@@ -109,15 +105,9 @@ module.exports = {
 
     return res.status(200).json({
       boards,
-      //board,
-      //boardData,
-      //comment,
-      //likeCount,
-      //isBoardLike,
       message: '내가 쓴 게시물을 불러왔습니다,',
     });
   },
-
   // 유저가 좋아요 한 게시글 내려주기
   like: async (req, res) => {
     const { pages, limit } = req.query;
