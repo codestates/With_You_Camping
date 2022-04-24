@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 import React, { useState } from "react";
 import styled from "styled-components";
-import SignupModal from "./SignupModal";
 
 const ModalContainer = styled.div``;
 
@@ -18,17 +17,7 @@ const ModalBackdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-const ModalBtn = styled.button`
-  text-decoration: none;
-  color: black;
-  cursor: grab;
-  position: relative;
-  cursor: pointer;
-`;
-
-const ModalView = styled.div.attrs(() => ({
-  role: "dialog",
-}))`
+const ModalView = styled.div.attrs(() => ({}))`
   position: absolute;
   left: 35%;
   right: 35%;
@@ -53,6 +42,7 @@ const ModalView = styled.div.attrs(() => ({
     display: flex;
     flex-direction: column;
     align-items: center;
+
     input {
       outline: none;
       border: none;
@@ -62,9 +52,13 @@ const ModalView = styled.div.attrs(() => ({
       margin-bottom: 20px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     }
+
     div {
-      margin-top: 50px;
-      button {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+
+      .login_button {
         outline: none;
         border: none;
         border-radius: 10px;
@@ -73,6 +67,16 @@ const ModalView = styled.div.attrs(() => ({
         padding: 0.45rem 1rem;
         background: #12b886;
         color: white;
+        margin-top: 30px;
+      }
+
+      div {
+        background: #12b886;
+        height: 40px;
+        border-radius: 10px;
+        color: white;
+        margin-bottom: -30px;
+        align-items: center;
       }
     }
   }
@@ -85,41 +89,41 @@ const ModalView = styled.div.attrs(() => ({
   }
 `;
 
-function LoginModal() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openModalHandler = () => {
-    setIsOpen(!isOpen);
+function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal }) {
+  const openSignup = () => {
+    setOpenLoginModal(false);
+    setOpenSignupModal(true);
   };
 
   return (
     <ModalContainer>
-      <ModalBtn onClick={openModalHandler}>로그인</ModalBtn>
-      {!isOpen ? null : (
-        <ModalBackdrop>
-          <ModalView>
-            <div>
-              <div
-                role="button"
-                onClick={openModalHandler}
-                className="back-arrow"
-                aria-hidden="true"
-              >
-                &times;
-              </div>
+      <ModalBackdrop>
+        <ModalView>
+          <div>
+            <div
+              role="button"
+              onClick={closeFn}
+              className="back-arrow"
+              aria-hidden="true"
+            >
+              &times;
             </div>
-            <form>
-              <input name="email" type="email" placeholder="email" />
-              <input name="password" type="password" placeholder="password" />
-              <div>
-                <button type="button">Login</button>
-              </div>
-              <span>Don`t have an account?</span>
-              <SignupModal />
-            </form>
-          </ModalView>
-        </ModalBackdrop>
-      )}
+          </div>
+          <form>
+            <label htmlFor="user-email" />
+            <input id="user-email" type="email" placeholder="email" />
+
+            <label htmlFor="user-password" />
+            <input id="user-password" type="password" placeholder="password" />
+            <div>
+              <button className="login_button" type="button">
+                Login
+              </button>
+              <div onClick={openSignup}>Signup</div>
+            </div>
+          </form>
+        </ModalView>
+      </ModalBackdrop>
     </ModalContainer>
   );
 }

@@ -1,13 +1,9 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 function Postdetail() {
   return (
     <>
-      <div>
-        <NavLink to="/">Home</NavLink>
-      </div>
-      <div>Postdetail</div>
+      <div>상세 페이지</div>
     </>
   );
 }
