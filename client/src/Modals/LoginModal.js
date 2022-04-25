@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const ModalContainer = styled.div``;

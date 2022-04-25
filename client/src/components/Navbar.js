@@ -21,8 +21,6 @@ const Page = styled.div`
   margin-right: 200px;
 `;
 
-const Button = styled.button``;
-
 function Navber() {
   const [onLogin, setLogin] = useState(false);
 
