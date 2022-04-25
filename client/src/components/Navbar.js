@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import LoginModal from "../Modals/LoginModal";
-import SignupModal from "../Modals/SignupModal";
+import LoginModal from "../modals/LoginModal";
+import SignupModal from "../modals/SignupModal";
 import Search from "./Search";
 
 const Nav = styled.nav`
@@ -68,7 +68,7 @@ function Navber() {
             <NavLink to="/postlist">게시물 목록</NavLink>
           </Div>
           <Div>
-            <NavLink to="/postfrom">게시물 작성</NavLink>
+            <NavLink to="/post">게시물 작성</NavLink>
           </Div>
           <Div>
             <NavLink to="/mypage">마이페이지</NavLink>
@@ -80,7 +80,7 @@ function Navber() {
             <NavLink to="/postlist">게시물 목록</NavLink>
           </Div>
           <Div>
-            <NavLink to="/postfrom">게시물 작성</NavLink>
+            <NavLink to="/post">게시물 작성</NavLink>
           </Div>
           <Div
             className="login"
