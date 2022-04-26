@@ -14,10 +14,10 @@ import { PageTitle } from "../components/pageTitle";
 // import { TagSelection } from "../components/tagSelection";
 import { LoadingIndicator } from "../components/loadingIndicator";
 import { BtnComponent as Btn } from "../components/BtnComponent";
-import { Tag } from "../components/tagComponent"
-import { PlaceSearch } from "../modals/placeSearch";
+import { Tag } from "../components/tagComponent";
 
 import markerImg from "../img/marker.png";
+import { PlaceSearch } from "../modals/placeSearch";
 
 const Container = styled.section`
   display: grid;
@@ -189,7 +189,6 @@ const TitleContainer = styled.section`
   }
 `;
 
-
 const DescContainer = styled.section`
   textarea {
     width: 100%;
@@ -247,30 +246,30 @@ const BtnContainer = styled.section`
 const OuterTagContainer = styled.section`
   width: 100%;
   h3 {
-    font-size: 1.0rem;
+    font-size: 1rem;
     margin-top: 17px;
     margin-bottom: 7px;
   }
-`
+`;
 
 const InnerTagContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap : 12px 10px;
+  gap: 12px 10px;
   width: 100%;
 
   height: max-content;
   margin-left: 5px;
 
-  transition : 0.3s;
-`
+  transition: 0.3s;
+`;
 
 const LoadingContainer = styled.section`
   display: grid;
-  place-items : center;
+  place-items: center;
   width: 100%;
   height: 300px;
-`
+`;
 
 function AddPost() {
   const navigate = useNavigate();
@@ -294,8 +293,8 @@ function AddPost() {
   const [title, setTitle] = useState("");
   const [description, setDesctription] = useState("");
 
-  const [tagData, setTagData] = useState([])
-  const [selectedTags, setSelectedTags] = useState([])
+  const [tagData, setTagData] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
   // tagData, selectedTags
   const [openSearchModal, setOpenSearchModal] = useState(false);
 
@@ -610,17 +609,17 @@ function AddPost() {
         </KakaoMapBox>
         <h4 className="position">
           <GiCheckMark /> 현재 등록된 위치가 맞으신가요?{" "}
-          <span style={{ textDecoration: 'underline' }}>{address.lotAdd}</span>
+          <span style={{ textDecoration: "underline" }}>{address.lotAdd}</span>
         </h4>
 
-          <h3 className="category"> 추가 정보 체크</h3>
-          {/* <TagSelection setTags={setTags} /> */}
-          <OuterTagContainer>
+        <h3 className="category"> 추가 정보 체크</h3>
+        {/* <TagSelection setTags={setTags} /> */}
+        <OuterTagContainer>
           {/* tagData, selectedTags */}
           <div>
             <h3>지역</h3>
             <InnerContainer> </InnerContainer>
-             {/* {tagData[0].map((tag) => <Tag key={tag} selectFn={selectTag} tags={tags}>{tag}</Tag>) } */}
+            {/* {tagData[0].map((tag) => <Tag key={tag} selectFn={selectTag} tags={tags}>{tag}</Tag>) } */}
             <h3>인터넷 유무</h3>
             <InnerContainer> </InnerContainer>
             <h3>주차장 공간</h3>
@@ -629,7 +628,7 @@ function AddPost() {
             <InnerContainer> </InnerContainer>
             <h3>화장실 유형</h3>
             <InnerContainer> </InnerContainer>
-          </div>  
+          </div>
         </OuterTagContainer>
         <BtnContainer>
           <div className="requires_wrapper">
