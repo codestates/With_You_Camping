@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Btn = styled.div`
+  margin-top: 60px;
   font-size: 1rem;
   display: grid;
   place-items: center;
@@ -8,7 +9,7 @@ const Btn = styled.div`
   width: ${props => props.width ? props.width : '305px'};
   height: 40px;
 
-  background-color: ${props => props.color ? `${props.color}` : '#FFD600'};
+  background-color: ${props => props.color ? `${props.color}` : '#ffe5ce'};
   background-color: ${props => props.disabled ? '#DDDDDD' : null};
 
   border: 1px solid #ddd;

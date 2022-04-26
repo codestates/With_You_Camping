@@ -7,15 +7,16 @@ import styled from "styled-components";
 import { BsCameraFill } from "react-icons/bs";
 import { GiCheckMark } from "react-icons/gi";
 import { IoLocateSharp as LocationPin, IoSearch } from "react-icons/io5";
-import { BsCheckCircleFill, BsXCircleFill } from "react-icons/bs";
+
+
 import imageCompression from "browser-image-compression";
 
 import { PageTitle } from "../components/pageTitle";
-// import { TagSelection } from "../components/tagSelection";
+
 import { LoadingIndicator } from "../components/loadingIndicator";
 import { BtnComponent as Btn } from "../components/BtnComponent";
-import { Tag } from "../components/tagComponent"
 import { PlaceSearch } from "../modals/placeSearch";
+import Checkinfo from "../components/Checkinfo";
 
 import markerImg from "../img/marker.png";
 
@@ -32,7 +33,7 @@ const Container = styled.section`
   .category {
     font-size: 1.5rem;
     margin-top: 50px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
   }
 
   .position {
@@ -189,7 +190,6 @@ const TitleContainer = styled.section`
   }
 `;
 
-
 const DescContainer = styled.section`
   textarea {
     width: 100%;
@@ -244,33 +244,14 @@ const BtnContainer = styled.section`
   }
 `;
 
-const OuterTagContainer = styled.section`
-  width: 100%;
+const OuterCheckContainer = styled.section`
+  /* width: 100%; */
   h3 {
-    font-size: 1.0rem;
+    font-size: 1rem;
     margin-top: 17px;
     margin-bottom: 7px;
   }
-`
-
-const InnerTagContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap : 12px 10px;
-  width: 100%;
-
-  height: max-content;
-  margin-left: 5px;
-
-  transition : 0.3s;
-`
-
-const LoadingContainer = styled.section`
-  display: grid;
-  place-items : center;
-  width: 100%;
-  height: 300px;
-`
+`;
 
 function AddPost() {
   const navigate = useNavigate();
@@ -294,9 +275,9 @@ function AddPost() {
   const [title, setTitle] = useState("");
   const [description, setDesctription] = useState("");
 
-  const [tagData, setTagData] = useState([])
-  const [selectedTags, setSelectedTags] = useState([])
-  // tagData, selectedTags
+  const [checkDetail, setCheckDetail] = useState(null);
+  console.log(checkDetail);
+
   const [openSearchModal, setOpenSearchModal] = useState(false);
 
   const imgInput = useRef();
@@ -474,7 +455,7 @@ function AddPost() {
         roadAdd: address.roadAdd,
         lotAdd: address.lotAdd,
       },
-      // hashtags: tags,
+      checkDetail: checkDetail
     };
     // try {
     //   // const res = await axios.post(`${serverPath}/api/posts`, body, headers)
@@ -486,70 +467,14 @@ function AddPost() {
     // }
   };
 
-  const UploadBtnByCondition = () => {
-    if (title && imgHostUrl && location) {
-      return (
-        <Btn action={uploadPost} width={"100%"}>
-          업로드하기
-        </Btn>
-      );
-    } else {
-      return (
-        <Btn disabled={true} width={"100%"}>
-          업로드하기
-        </Btn>
-      );
-    }
-  };
-
-  const RequireNotification = () => {
-    return (
-      <div className="requires">
-        {title ? (
-          <div className="msg">
-            제목
-            <BsCheckCircleFill />
-          </div>
-        ) : (
-          <div className="msg check">
-            제목
-            <BsXCircleFill />
-          </div>
-        )}
-        {imgHostUrl ? (
-          <div className="msg">
-            사진 업로드
-            <BsCheckCircleFill />
-          </div>
-        ) : (
-          <div className="msg check">
-            사진 업로드
-            <BsXCircleFill />
-          </div>
-        )}
-        {location ? (
-          <div className="msg">
-            장소 정보 입력
-            <BsCheckCircleFill />
-          </div>
-        ) : (
-          <div className="msg check">
-            장소 정보 입력
-            <BsXCircleFill />
-          </div>
-        )}
-      </div>
-    );
-  };
-
   const modalHandler = (modal) => {
     if (modal === "search") {
       openSearchModal ? setOpenSearchModal(false) : setOpenSearchModal(true);
     }
   };
 
-  console.log(location);
-  console.log(address);
+  // console.log(location);
+  // console.log(address);
 
   return (
     <Container>
@@ -610,33 +535,17 @@ function AddPost() {
         </KakaoMapBox>
         <h4 className="position">
           <GiCheckMark /> 현재 등록된 위치가 맞으신가요?{" "}
-          <span style={{ textDecoration: 'underline' }}>{address.lotAdd}</span>
+          <span style={{ textDecoration: "underline" }}>{address.lotAdd}</span>
         </h4>
 
-          <h3 className="category"> 추가 정보 체크</h3>
-          {/* <TagSelection setTags={setTags} /> */}
-          <OuterTagContainer>
-          {/* tagData, selectedTags */}
-          <div>
-            <h3>지역</h3>
-            <InnerContainer> </InnerContainer>
-             {/* {tagData[0].map((tag) => <Tag key={tag} selectFn={selectTag} tags={tags}>{tag}</Tag>) } */}
-            <h3>인터넷 유무</h3>
-            <InnerContainer> </InnerContainer>
-            <h3>주차장 공간</h3>
-            <InnerContainer> </InnerContainer>
-            <h3>전기 사용</h3>
-            <InnerContainer> </InnerContainer>
-            <h3>화장실 유형</h3>
-            <InnerContainer> </InnerContainer>
-          </div>  
-        </OuterTagContainer>
-        <BtnContainer>
-          <div className="requires_wrapper">
-            <RequireNotification />
-          </div>
-          <UploadBtnByCondition />
-        </BtnContainer>
+        <OuterCheckContainer>
+          <h3 className="category">추가 정보 체크</h3>
+          <Checkinfo
+            checkDetail={checkDetail}
+            setCheckDetail={setCheckDetail}
+          />
+        </OuterCheckContainer>
+        <BtnContainer> <Btn width={"100%"}>게시물 등록하기</Btn></BtnContainer>
       </InnerContainer>
     </Container>
   );
