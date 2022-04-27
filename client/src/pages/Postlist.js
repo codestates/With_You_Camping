@@ -2,6 +2,9 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 function Postlist() {
+
+
+
   return (
     <>
       <div>게시글 목록 페이지</div>
