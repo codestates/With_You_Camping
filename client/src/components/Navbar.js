@@ -4,14 +4,36 @@ import styled from "styled-components";
 import LoginModal from "../modals/LoginModal";
 import SignupModal from "../modals/SignupModal";
 
-import Search from "./Search";
-
 const Container = styled.header`
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+
   width: 100%;
+  min-width: 1200px;
+  height: 50px;
+
+  @media screen and (max-width: 500px) {
+    min-width: 0;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    display: block;
+    min-width: 0;
+    grid-gap: 0;
+
+    .left-btns,
+    .right-btns {
+      display: none;
+    }
+
+    .menu_mobile_btn,
+    .user_mobile_btn {
+      display: block;
+    }
+  }
 `;
 
 const Logo = styled.div`
@@ -19,9 +41,6 @@ const Logo = styled.div`
   font-size: 2.3rem;
   text-align: center;
   cursor: pointer;
-  span {
-    color: #e80707;
-  }
 `;
 
 const Page = styled.div`
@@ -32,6 +51,11 @@ const Page = styled.div`
 
 const Div = styled.div`
   margin: 40px 30px;
+  &:hover {
+    a {
+      color: red;
+    }
+  }
 `;
 
 function Navber() {
@@ -78,28 +102,53 @@ function Navber() {
       </button>
       <Container>
         <Logo onClick={() => navigate("/")}>
-          WYC<span>.</span>
+          With You Camping<span>.</span>
         </Logo>
-        <Search />
+
         {onLogin ? (
           <Page>
             <Div>
-              <NavLink to="/postlist">게시물 목록</NavLink>
+              <NavLink
+                style={{ textDecoration: "none", color: "inherit" }}
+                to="/postlist"
+              >
+                게시물 목록
+              </NavLink>
             </Div>
             <Div>
-              <NavLink to="/post">게시물 작성</NavLink>
+              <NavLink
+                style={{ textDecoration: "none", color: "inherit" }}
+                to="/post"
+              >
+                게시물 작성
+              </NavLink>
             </Div>
             <Div>
-              <NavLink to="/mypage">마이페이지</NavLink>
+              <NavLink
+                style={{ textDecoration: "none", color: "inherit" }}
+                to="/mypage"
+              >
+                마이페이지
+              </NavLink>
             </Div>
           </Page>
         ) : (
           <Page>
             <Div>
-              <NavLink to="/postlist">게시물 목록</NavLink>
+              <NavLink
+                style={{ textDecoration: "none", color: "inherit" }}
+                to="/postlist"
+              >
+                게시물 목록
+              </NavLink>
             </Div>
             <Div>
-              <NavLink to="/post">게시물 작성</NavLink>
+              <NavLink
+                style={{ textDecoration: "none", color: "inherit" }}
+                to="/post"
+              >
+                게시물 작성
+              </NavLink>
             </Div>
             <Div
               className="login"

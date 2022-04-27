@@ -6,13 +6,14 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
 import ModifyMyinfo from "./pages/ModifyMyinfo";
 import Mypage from "./pages/Mypage";
 import Postdetail from "./pages/Postdetail";
 import Postedit from "./pages/Postedit";
 import AddPost from "./pages/addPost";
 import Postlist from "./pages/Postlist";
+import Footer from "./components/Footer";
+import Landing from "./pages/Landing";
 
 const GlobalStyles = createGlobalStyle`
 
@@ -33,49 +34,46 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const Container = styled.div`
-position: relative;
-width: 100vw;
-min-height: 100vh;
-`
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+`;
 
 const InnerContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  
+
   height: max-content;
   min-height: 800px;
-  
+
   margin-top: 100px;
   margin-bottom: 200px;
-`
-
-
+`;
 
 function Router() {
-
   const { pathname } = useLocation();
-useEffect(() => {
-  window.scrollTo(0, 0)
-}, [pathname])
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <Container>
       <GlobalStyles />
       <Navbar />
       <InnerContainer>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/mypage" element={<Mypage />} />
-        <Route path="/postlist" element={<Postlist />} />
-        <Route path="/postdetail" element={<Postdetail />} />
-        <Route path="/post" element={<AddPost />} />
-        <Route path="/postedit" element={<Postedit />} />
-        <Route path="/modifymyinfo" element={<ModifyMyinfo />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/postlist" element={<Postlist />} />
+          <Route path="/postdetail" element={<Postdetail />} />
+          <Route path="/post" element={<AddPost />} />
+          <Route path="/postedit" element={<Postedit />} />
+          <Route path="/modifymyinfo" element={<ModifyMyinfo />} />
+        </Routes>
       </InnerContainer>
-    </ Container>
+      <Footer />
+    </Container>
   );
 }
 
