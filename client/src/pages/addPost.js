@@ -17,7 +17,7 @@ import { LoadingIndicator } from "../components/loadingIndicator";
 import { AddBtnComponent as Btn } from "../components/AddBtnComponent";
 import { PlaceSearch } from "../modals/placeSearch";
 import Checkinfo from "../components/Checkinfo";
-import StarRatingCheck from "../components/starRatingCheck";
+import StarRatingCheck from "../components/StarRatingCheck";
 
 import markerImg from "../img/marker.png";
 
@@ -32,9 +32,9 @@ const Container = styled.section`
   }
 
   .category {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin-top: 50px;
-    /* margin-bottom: 20px; */
+    margin-bottom: 5px;
   }
 
   .position {
@@ -55,15 +55,6 @@ const InnerContainer = styled.div`
   height: max-content;
 `;
 
-const BoxContianer = styled.section`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
-  @media screen and (max-width: 500px) {
-    display: block;
-  }
-`;
 
 const UploadImageBox = styled.section`
   display: grid;
@@ -118,7 +109,7 @@ const KakaoMapBox = styled.section`
 
   @media screen and (max-width: 500px) {
     width: 100%;
-    aspect-ratio: 2 / 1;
+    aspect-ratio: 1.5 / 1;
   }
 `;
 

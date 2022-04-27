@@ -13,7 +13,7 @@ import { MdPersonPin } from "react-icons/md";
 import { DetailBtnComponent as Btn } from "../components/DetailBtnComponent";
 
 import sample from "../img/sample.jpeg";
-import StarRating from "../components/starRating";
+import StarRating from "../components/StarRating";
 import markerImg from "../img/marker.png";
 import TagComponent from "../components/TagComponent";
 import CommentInput from "../components/CommentInput";
@@ -46,6 +46,7 @@ const InnerContainer = styled.div`
   grid-column: 2 / 12;
   height: max-content;
 `;
+
 const TitleContainer = styled.div`
   float: right;
   width: 45%;
@@ -59,7 +60,7 @@ const TitleContainer = styled.div`
 const HeartButton = styled.div`
   text-align: right;
   margin-bottom: 50px;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   .fas {
     &:hover{
     transform: translateY(-2px);
@@ -389,8 +390,8 @@ export default function DetailPost() {
 
   useEffect(() => {
     if (coords.latitude && coords.longitude) {
-      const imageSrc = markerImg, // 마커이미지의 주소입니다
-        imageSize = new kakao.maps.Size(50, 45), // 마커이미지의 크기입니다
+      const imageSrc = markerImg, // 마커이미지 주소
+        imageSize = new kakao.maps.Size(50, 45), // 마커이미지 크기
         imageOption = { offset: new kakao.maps.Point(13, 38) };
 
       const markerImage = new kakao.maps.MarkerImage(
@@ -481,7 +482,7 @@ export default function DetailPost() {
       <InnerContainer>
         <TitleContainer>
           <HeartButton>
-            <div className="heart">
+           
             <i
               className="fas fa-heart fa-lg"
               style={{
@@ -489,12 +490,11 @@ export default function DetailPost() {
               }}
               onClick={() => checkLoginStatus(interestPost)}
             />
-            </div>
+
             
           </HeartButton>
 
           <div className="title">양양 오토 캠핑장 괜찮네요~</div>
-
           <div className="wrapper">
             <TagContainer>
               {tags.length ? (
@@ -539,7 +539,7 @@ export default function DetailPost() {
               {showOnMap ? (
                 <div className="wrapper">
                   <BsMapFill />
-                  <span>카카오 지도에서 보기</span>
+                  <span>카카오 지도로 이동하기</span>
                 </div>
               ) : (
                 <div className="wrapper">
