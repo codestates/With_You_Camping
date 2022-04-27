@@ -6,14 +6,14 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 import Navbar from "./components/Navbar";
-import ModifyMyinfo from "./pages/ModifyMyinfo";
-import Mypage from "./pages/Mypage";
-import Postdetail from "./pages/Postdetail";
-import Postedit from "./pages/Postedit";
-import AddPost from "./pages/addPost";
-import Postlist from "./pages/Postlist";
-import Footer from "./components/Footer";
 import Landing from "./pages/Landing";
+import Mypage from "./pages/Mypage";
+import EditPost from "./pages/editPost";
+import DetailPost from "./pages/DetailPost";
+import AddPost from "./pages/AddPost";
+import Postlist from "./pages/PostList";
+import ModifyMyinfo from "./pages/ModifyMyinfo";
+import Footer from "./components/Footer";
 
 const GlobalStyles = createGlobalStyle`
 
@@ -64,11 +64,13 @@ function Router() {
       <InnerContainer>
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/mypage" element={<Mypage />} />
           <Route path="/postlist" element={<Postlist />} />
-          <Route path="/postdetail" element={<Postdetail />} />
-          <Route path="/post" element={<AddPost />} />
-          <Route path="/postedit" element={<Postedit />} />
+
+          <Route path="/add_post" element={<AddPost />} />
+          <Route path="/post" element={<DetailPost />} />
+          <Route path="/edit_post" element={<EditPost />} />
+
+          <Route path="/mypage" element={<Mypage />} />
           <Route path="/modifymyinfo" element={<ModifyMyinfo />} />
         </Routes>
       </InnerContainer>

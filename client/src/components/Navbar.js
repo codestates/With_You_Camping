@@ -118,7 +118,7 @@ function Navber() {
             <Div>
               <NavLink
                 style={{ textDecoration: "none", color: "inherit" }}
-                to="/post"
+                to="/add_post"
               >
                 게시물 작성
               </NavLink>
@@ -145,7 +145,7 @@ function Navber() {
             <Div>
               <NavLink
                 style={{ textDecoration: "none", color: "inherit" }}
-                to="/post"
+                to="/add_post"
               >
                 게시물 작성
               </NavLink>
