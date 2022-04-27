@@ -61,7 +61,7 @@ function Router() {
       <GlobalStyles />
       <Navbar />
       <InnerContainer>
-        <Routes>
+        <Routes>  
           <Route path="/" element={<Landing />} />
           <Route path="/postlist" element={<Postlist />} />
 
