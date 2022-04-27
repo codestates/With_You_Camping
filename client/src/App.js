@@ -6,7 +6,7 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
+import Landing from "./pages/Landing";
 import Mypage from "./pages/Mypage";
 import EditPost from "./pages/editPost";
 import DetailPost from "./pages/DetailPost";
@@ -62,7 +62,7 @@ function Router() {
       <Navbar />
       <InnerContainer>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Landing />} />
           <Route path="/postlist" element={<Postlist />} />
 
           <Route path="/add_post" element={<AddPost />} />
