@@ -70,7 +70,7 @@ function Navber() {
             <NavLink to="/postlist">게시물 목록</NavLink>
           </Div>
           <Div>
-            <NavLink to="/post">게시물 작성</NavLink>
+            <NavLink to="/add_post">게시물 작성</NavLink>
           </Div>
           <Div>
             <NavLink to="/mypage">마이페이지</NavLink>
@@ -82,7 +82,7 @@ function Navber() {
             <NavLink to="/postlist">게시물 목록</NavLink>
           </Div>
           <Div>
-            <NavLink to="/post">게시물 작성</NavLink>
+            <NavLink to="/add_post">게시물 작성</NavLink>
           </Div>
           <Div
             className="login"

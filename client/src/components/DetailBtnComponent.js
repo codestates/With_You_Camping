@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 
 const Btn = styled.div`
-  margin-top: 60px;
+  margin-top: 10px;
   font-size: 1rem;
   display: grid;
   place-items: center;
+  /* float: left; */
 
-  width: ${props => props.width ? props.width : '305px'};
+  /* width: ${props => props.width ? props.width : '305px'}; */
+  width: 45%;
   height: 40px;
+  /* margin-left: 10%; */
 
   background-color: ${props => props.color ? `${props.color}` : '#ffe5ce'};
   background-color: ${props => props.disabled ? '#DDDDDD' : null};
@@ -32,7 +35,7 @@ const Btn = styled.div`
   }
 `
 
-export const BtnComponent = ({ children, disabled, color, width, action, hover }) => {
+export const DetailBtnComponent = ({ children, disabled, color, width, action, hover }) => {
 
   return (
     <Btn disabled={disabled} color={color} width={width} onClick={action} hover={hover}>{children}</Btn>

@@ -268,6 +268,8 @@ export default function Checkinfo({ setCheckDetail, checkDetail }) {
           </CheckContainer>
         ))}
       <InnerContainer> </InnerContainer>
+      <TitleContainer>&nbsp;</TitleContainer>
+      {/* <TitleContainer>&nbsp;</TitleContainer> */}
     </div>
   );
 }
