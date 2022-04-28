@@ -5,10 +5,10 @@ import image from "../img/camping.jpeg";
 import image1 from "../img/camping1.jpeg";
 import image3 from "../img/camping3.jpeg";
 import image4 from "../img/camping4.jpeg";
-
+import image5 from "../img/campingMedia.jpg";
 
 const Container = styled.section`
-  font-family: "Square Peg", cursive;
+  font-family: "Stylish", sans-serif;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   width: 1200px;
@@ -22,7 +22,7 @@ const Container = styled.section`
 
 const Picture = styled.div`
   position: absolute;
-  top: -100px;
+  top: -80px;
   left: 0;
   display: grid;
   place-items: center;
@@ -33,15 +33,17 @@ const Picture = styled.div`
       rgba(255, 255, 255, 0) 60%,
       rgba(255, 255, 255, 1) 100%
     ),
-    url(https://images.unsplash.com/photo-1531012804729-7df44b58327b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1710&q=80);
+    url(${image});
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 450px;
+
   .wrapper {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     width: 2000px;
     height: max-content;
+
     .intro {
       grid-column: 2 / 12;
       /* position: absolute; */
@@ -51,8 +53,9 @@ const Picture = styled.div`
       width: 100%;
       padding: 70px;
       box-sizing: border-box;
-      font-size: 1.8rem;
+      font-size: 2.2rem;
       height: max-content;
+
       p {
         color: white;
         margin-top: 20px;
@@ -63,21 +66,35 @@ const Picture = styled.div`
       }
     }
   }
+
   @media screen and (max-width: 500px) {
     min-height: 300px;
     height: max-content;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0) 60%,
+        rgba(255, 255, 255, 1) 100%
+      ),
+      url(${image5});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
     .wrapper {
       position: relative;
       display: block;
       width: 100vw;
       height: 100%;
+
       .intro {
         position: absolute;
         top: 0;
         grid-column: 0 / -1;
-        font-size: 1rem;
+        font-size: 1.3rem;
         height: 150px;
         padding: 20px;
+
         p {
           margin-top: 10px;
           margin-bottom: 10px;
@@ -93,6 +110,7 @@ const InnerContainer = styled.div`
   width: 100%;
   height: max-content;
   margin-top: 350px;
+
   section {
     position: relative;
     display: flex;
@@ -108,6 +126,7 @@ const InnerContainer = styled.div`
         height: 400px;
       }
     }
+
     .text {
       position: absolute;
       right: 0;
@@ -117,45 +136,55 @@ const InnerContainer = styled.div`
       align-items: flex-end;
       width: 700px;
       height: 400px;
+
       .wrapper {
         display: flex;
       }
       p {
-        font-size: 2rem;
+        font-size: 2.5rem;
         margin-bottom: 20px;
       }
     }
   }
+
   @media screen and (max-width: 500px) {
     width: 100%;
     margin-top: 250px;
+
     section {
       display: grid;
       place-items: center;
       height: max-content;
+
       margin-top: 30px;
+
       .image {
         display: flex;
         justify-content: center;
         height: 200px;
+
         z-index: -1;
         img {
           width: 300px;
           height: auto;
         }
       }
+
       .text {
         position: static;
         display: flex;
         flex-direction: column;
         align-items: center;
+
         width: 100%;
         height: 100px;
+
         .wrapper {
           display: flex;
         }
+
         p {
-          font-size: 1.1rem;
+          font-size: 1.3rem;
         }
       }
     }

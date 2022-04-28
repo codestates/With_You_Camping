@@ -8,7 +8,6 @@ import { BsCameraFill } from "react-icons/bs";
 import { GiCheckMark } from "react-icons/gi";
 import { IoLocateSharp as LocationPin, IoSearch } from "react-icons/io5";
 
-
 import imageCompression from "browser-image-compression";
 
 import { PageTitle } from "../components/pageTitle";
@@ -54,7 +53,6 @@ const InnerContainer = styled.div`
   grid-column: 2 / 12;
   height: max-content;
 `;
-
 
 const UploadImageBox = styled.section`
   display: grid;
@@ -249,7 +247,7 @@ const StarCheckContainer = styled.div`
   margin-top: 20px;
   height: 20px;
   font-size: 2rem;
-`
+`;
 
 function AddPost() {
   const navigate = useNavigate();
@@ -455,7 +453,7 @@ function AddPost() {
         roadAdd: address.roadAdd,
         lotAdd: address.lotAdd,
       },
-      checkDetail: checkDetail
+      checkDetail: checkDetail,
     };
     // try {
     //   // const res = await axios.post(`${serverPath}/api/posts`, body, headers)
@@ -543,7 +541,7 @@ function AddPost() {
           <Checkinfo
             checkDetail={checkDetail}
             setCheckDetail={setCheckDetail}
-          /> 
+          />
         </OuterCheckContainer>
 
         <h3 className="category"> 캠핑장 어떠셨나요? </h3>
@@ -551,8 +549,10 @@ function AddPost() {
           <StarRatingCheck setCheckRating={setCheckRating} />
         </StarCheckContainer>
 
-
-        <BtnContainer> <Btn width={"100%"}>게시물 등록하기</Btn></BtnContainer>
+        <BtnContainer>
+          {" "}
+          <Btn width={"100%"}>게시물 등록하기</Btn>
+        </BtnContainer>
       </InnerContainer>
     </Container>
   );

@@ -1,10 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-function Postlist() {
-
-
-
+function PostList() {
   return (
     <>
       <div>게시글 목록 페이지</div>
@@ -15,4 +12,4 @@ function Postlist() {
   );
 }
 
-export default Postlist;
+export default PostList;

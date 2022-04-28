@@ -62,11 +62,12 @@ const HeartButton = styled.div`
   margin-bottom: 50px;
   font-size: 1.7rem;
   .fas {
-    &:hover{
-    transform: translateY(-2px);
-    box-shadow: 0px 5px 4px rgba(0,0,0,0.1);
-    /* background-color: ${props => props.hover ? `${props.hover}` : null}; */
-  }
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.1);
+      /* background-color: ${(props) =>
+        props.hover ? `${props.hover}` : null}; */
+    }
   }
 `;
 
@@ -482,7 +483,6 @@ export default function DetailPost() {
       <InnerContainer>
         <TitleContainer>
           <HeartButton>
-           
             <i
               className="fas fa-heart fa-lg"
               style={{
@@ -490,8 +490,6 @@ export default function DetailPost() {
               }}
               onClick={() => checkLoginStatus(interestPost)}
             />
-
-            
           </HeartButton>
 
           <div className="title">양양 오토 캠핑장 괜찮네요~</div>

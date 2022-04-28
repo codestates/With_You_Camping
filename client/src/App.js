@@ -11,8 +11,9 @@ import Mypage from "./pages/Mypage";
 import EditPost from "./pages/editPost";
 import DetailPost from "./pages/DetailPost";
 import AddPost from "./pages/AddPost";
-import Postlist from "./pages/postList";
+import PostList from "./pages/PostList";
 import ModifyMyinfo from "./pages/ModifyMyinfo";
+import Footer from "./components/Footer";
 
 const GlobalStyles = createGlobalStyle`
 
@@ -63,7 +64,7 @@ function Router() {
       <InnerContainer>
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/postlist" element={<Postlist />} />
+          <Route path="/postlist" element={<PostList />} />
 
           <Route path="/add_post" element={<AddPost />} />
           <Route path="/post" element={<DetailPost />} />
@@ -73,6 +74,7 @@ function Router() {
           <Route path="/modifymyinfo" element={<ModifyMyinfo />} />
         </Routes>
       </InnerContainer>
+      <Footer />
     </Container>
   );
 }
