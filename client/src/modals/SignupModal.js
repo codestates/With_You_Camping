@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import axios from 'axios'
+import axios from "axios";
 import { IoClose } from "react-icons/io5";
 import Confirm from "../components/Confirm";
 
@@ -111,7 +111,13 @@ const Nofication = styled.h1`
   font-size: 3rem; ;
 `;
 
-function SignupModal({ closeFn, setOpenLoginModal, setOpenSignupModal }) {
+function SignupModal({
+  closeFn,
+  setOpenLoginModal,
+  setOpenSignupModal,
+  setMessageModal,
+  setConfirmSignupModal,
+}) {
   const serverPath = process.env.REACT_APP_SERVER_PATH;
 
   const [userInfo, setUserInfo] = useState({
@@ -170,13 +176,12 @@ function SignupModal({ closeFn, setOpenLoginModal, setOpenSignupModal }) {
     if (isFull === false) {
       setMessage("userinfo_blank");
     } else if (!validateEmail(userInfo.email)) {
-      setMessage('email_validate_fail');
+      setMessage("email_validate_fail");
     } else if (!validateNickname(userInfo.nickname)) {
-      setMessage('nickname_validate_fail')
+      setMessage("nickname_validate_fail");
     } else if (!validateName(userInfo.name)) {
-      setMessage('username_validate_fail')
-    }
-    else {
+      setMessage("username_validate_fail");
+    } else {
       try {
         const res = await axios.post(`${serverPath}/auth/signup`, {
           email: userInfo.email,
@@ -185,24 +190,14 @@ function SignupModal({ closeFn, setOpenLoginModal, setOpenSignupModal }) {
           name: userInfo.name,
         });
         if (res.status === 201) {
-          setMessage("signup_success")
-          setOpenSignupModal(false)
-          setOpenLoginModal(true)
+          setConfirmSignupModal(true);
+          setOpenSignupModal(false);
+          setOpenLoginModal(true);
         }
       } catch (err) {
-        console.log(err)
+        setMessage("signup_failed");
       }
     }
-    //   e.preventDefault();
-    //   if (userInfo.password_check === userInfo.password) {
-    //     signupMutation.mutate({
-    //       username: userInfo.username,
-    //       email: userInfo.email,
-    //       password: userInfo.password,
-    //     });
-    //   } else {
-    //     setMessage('password_check_fail');
-    //   }
   };
 
   const resetMessage = () => {
@@ -212,9 +207,10 @@ function SignupModal({ closeFn, setOpenLoginModal, setOpenSignupModal }) {
   return (
     <SignContainer>
       <ModalBackdrop>
-      {message ? <Confirm message={message} handleMessage={resetMessage} /> : null}
+        {message ? (
+          <Confirm message={message} handleMessage={resetMessage} />
+        ) : null}
         <SignModalView>
-          
           <CloseBtn onClick={closeFn}>
             <IoClose size={"1.5rem"} />
           </CloseBtn>

@@ -65,7 +65,7 @@ export default function Checkinfo({ setCheckDetail, checkDetail }) {
   ]);
   const [toilet, setToilet] = useState([
     { contents: "양호", checked: false, info: "toilet" },
-    { contents: "불결", checked: false, info: "toilet" },
+    { contents: "불량", checked: false, info: "toilet" },
   ]);
 
   const [nowArea, setNowArea] = useState(null);

@@ -12,11 +12,11 @@ const Container = styled.div`
   height: 100%;
   background-color: rgba(0, 5, 12, 0.5);
   z-index: 999;
-  margin-left: 45px;
+
   /* left: 3%; */
   .back-arrow {
     font-size: 20px;
-    margin-left: 5px;
+    margin-left: 10px;
     margin-top: 70px;
     /* margin-bottom: 10px; */
     font-weight: 800;
@@ -26,10 +26,11 @@ const Container = styled.div`
 
 const MessageBox = styled.div`
   background-color: white;
-  width: 400px;
+  width: 500px;
   height: 250px;
   z-index: 10;
   border-radius: 3px;
+  margin-left: 50px;
   h2 {
     text-align: center;
     margin-bottom: 3rem;
@@ -91,48 +92,36 @@ function Confirm({ message, handleMessage }) {
     }
     else if ( message === "login_failed") {
       setCurMessage('이메일 또는 비밀번호가 올바르지 않습니다.');
+      
+    }
+    else if ( message === "login_check" ) {
+      setCurMessage('로그인 후 사용해 주세요.')
+      setBtnInfo('닫 기');
+    }
+    else if ( message === "post_full_check") {
+      setCurMessage('게시물의 모든 항목을 작성 해주세요')
+      setBtnInfo('닫 기');
+    }
+    else if ( message === "add_post_success") {
+      setCurMessage('게시물 작성 되었습니다.')
       setBtnInfo('닫 기');
     }
   }, []);
 
-  // useEffect(() => {
-  //   if (message === 'success_signup') {
-  //     setBtnInfo('로그인 하기');
-  //     setCurMessage('회원가입 성공');
-  //   } else if (message === 'error_signup') {
-  //     setBtnInfo('닫 기');
-  //     setCurMessage('회원가입 실패');
-  //   } else if (message === 'password_check_fail') {
-  //     setBtnInfo('닫 기');
-  //     setCurMessage('비밀번호가 일치하지 않습니다');
-  //   } else if (message === 'login_fail') {
-  //     setBtnInfo('닫 기');
-  //     setCurMessage('로그인 실패');
-  //   } else if (message === 'should_login') {
-  //     setBtnInfo('로그인 하기');
-  //     setCurMessage('로그인 해야 사용가능합니다.');
-  //   } else if (message === 'info_edit_fail') {
-  //     setBtnInfo('닫 기');
-  //     setCurMessage('변경하는 정보를 다시 확인해주세요.');
-  //   } else if (message === 'info_edit_success') {
-  //     setBtnInfo('수정 완료');
-  //     setCurMessage('수정이 완료되었습니다');
-  //   } 
-  // }, []);
 
-  const handleConfirm = () => {
-    if (message === 'success_signup') {
-      navigate('/login');
-    } else if (
-      message === 'error_signup' ||
-      message === 'password_check_fail' ||
-      message === 'login_fail' ||
-      message === 'info_dit_fail' ||
-      message === 'info_edit_success'
-    ) {
-      handleMessage('');
-    }
-  };
+  // const handleConfirm = () => {
+  //   if (message === 'success_signup') {
+  //     navigate('/login');
+  //   } else if (
+  //     message === 'error_signup' ||
+  //     message === 'password_check_fail' ||
+  //     message === 'login_fail' ||
+  //     message === 'info_dit_fail' ||
+  //     message === 'info_edit_success'
+  //   ) {
+  //     handleMessage('');
+  //   }
+  // };
 
   const handleCancel = () => {
     handleMessage('');
@@ -140,14 +129,6 @@ function Confirm({ message, handleMessage }) {
   return (
     <Container>
       <MessageBox>
-        {/* <div
-          role="button"
-          onClick={handleCancel}
-          className="back-arrow"
-          aria-hidden="true"
-        >
-          ❌
-        </div> */}
         <div className="back-arrow">
         <h2>{curMessage}</h2>
         <button type="button" onClick={handleCancel}>

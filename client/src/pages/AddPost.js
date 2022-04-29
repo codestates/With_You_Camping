@@ -8,8 +8,6 @@ import { BsCameraFill } from "react-icons/bs";
 import { GiCheckMark } from "react-icons/gi";
 import { IoLocateSharp as LocationPin, IoSearch } from "react-icons/io5";
 
-import imageCompression from "browser-image-compression";
-
 import { PageTitle } from "../components/pageTitle";
 
 import { LoadingIndicator } from "../components/loadingIndicator";
@@ -17,6 +15,7 @@ import { AddBtnComponent as Btn } from "../components/AddBtnComponent";
 import { PlaceSearch } from "../modals/placeSearch";
 import Checkinfo from "../components/Checkinfo";
 import StarRatingCheck from "../components/StarRatingCheck";
+import Confirm from "../components/Confirm";
 
 import markerImg from "../img/marker.png";
 
@@ -58,8 +57,8 @@ const UploadImageBox = styled.section`
   display: grid;
   place-items: center;
 
-  width: calc(20% - 5px);
-  aspect-ratio: 1 / 1;
+  width: calc(35% - 5px);
+  aspect-ratio: 2 / 1.5;
 
   background-color: ${(props) => (props.img ? "#000" : "#fff")};
   background-image: ${(props) => (props.img ? `url(${props.img})` : null)};
@@ -249,32 +248,67 @@ const StarCheckContainer = styled.div`
   font-size: 2rem;
 `;
 
+const SignContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const ModalBackdrop = styled.div`
+  position: fixed;
+  z-index: 809;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+
 function AddPost() {
   const navigate = useNavigate();
 
   const kakao = window.kakao;
   // const daum = window.daum
 
-  // const serverPath = process.env.REACT_APP_SERVER_PATH
-  // const imgbbApi = process.env.REACT_APP_IMGBB_API_KEY
-  // const accessToken = window.sessionStorage.getItem('loginToken')
+  const serverPath = process.env.REACT_APP_SERVER_PATH;
+  const accessToken = window.sessionStorage.getItem("loginToken");
 
-  const [imgBase64, setImgBase64] = useState(null);
+  // 모든 항목 작성했는지 체크
+  const [isFull, setIsFull] = useState(false);
+
+  // 제목
+  const [title, setTitle] = useState("");
+
+  // 내용
+  const [content, setContent] = useState("");
+
+  // 이미지 url
   const [imgHostUrl, setImgHostUrl] = useState("");
 
+  // 게시물 세부 사항 체크
+  const [checkDetail, setCheckDetail] = useState({
+    area: null,
+    internet: null,
+    parking: null,
+    electronic: null,
+    toilet: null,
+  });
+
+  // 평가
+  const [checkRating, setCheckRating] = useState(0);
+
+  // 카카오 위치 정보
   const [location, setLocation] = useState(null);
   const [address, setAddress] = useState([]);
 
+  // 이미지 로딩
   const [isUploading, setIsUploading] = useState(false);
+  // 위치 찾기 로딩
   const [isLoadingMyLocation, setIsLoadingMyLocation] = useState(false);
 
-  const [title, setTitle] = useState("");
-  const [description, setDesctription] = useState("");
-
-  const [checkDetail, setCheckDetail] = useState(null);
-  // console.log(checkDetail);
-  const [checkRating, setCheckRating] = useState(0);
-  // console.log(checkRating)
+  const [message, setMessage] = useState("");
 
   const [openSearchModal, setOpenSearchModal] = useState(false);
 
@@ -282,46 +316,48 @@ function AddPost() {
   const kakaoMap = useRef();
   const descArea = useRef();
 
-  // useEffect(() => {
-  //   if(!accessToken){
-  //     navigate('/main')
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (!accessToken) {
+      navigate("/");
+    }
+  }, []);
 
-  // 이미지 읽어오기
+  // 이미지 업로드 및 사진 미리보기
   const uploadImage = async (e) => {
     e.preventDefault();
-    let img = e.target.files[0];
-    img = await imageCompression(img, { maxSizeMB: 1.5 });
+    setIsUploading(true);
+    const img = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", img);
 
-    const reader = new FileReader();
-    reader.readAsDataURL(img);
-    reader.onload = () => {
-      setImgBase64(reader.result.split(",")[1]);
-    };
+    const res = await axios.post(`${serverPath}/boards/img`, formData);
+    setImgHostUrl(res.data.location);
   };
 
-  // 이미지가 읽히고 나면 요청 전송
-  useEffect(() => {
-    if (imgBase64) {
-      (async () => {
-        setIsUploading(true);
-
-        const form = new FormData();
-        // form.append('key', imgbbApi)
-        form.append("image", imgBase64);
-
-        const res = await axios.post("https://api.imgbb.com/1/upload", form);
-        setImgHostUrl(res.data.data.url);
-      })();
-    }
-  }, [imgBase64]);
-
+  // 업로드 시 로딩 표현
   useEffect(() => {
     setTimeout(() => {
       setIsUploading(false);
     }, 900);
   }, [imgHostUrl]);
+
+  // 상태에 따라 로딩 이미지 상태 변경
+  const ImageContainer = () => {
+    if (isUploading) {
+      return <LoadingIndicator size="7rem" />;
+    }
+    if (!isUploading && !imgHostUrl) {
+      return (
+        <div className="click_for_upload">
+          <BsCameraFill />
+          <p>클릭하여 이미지 업로드</p>
+        </div>
+      );
+    }
+    if (imgHostUrl) {
+      return null;
+    }
+  };
 
   // 카카오 지도 API 사용
   useEffect(() => {
@@ -414,55 +450,69 @@ function AddPost() {
     }
   };
 
+  // 내용 편집 시 크기 리사이징
   const autoResizing = () => {
     const textarea = descArea.current;
     textarea.style.height = "auto";
     textarea.style.height = textarea.scrollHeight + "px";
   };
 
-  const ImageContainer = () => {
-    if (isUploading) {
-      return <LoadingIndicator size="7rem" />;
+  // 모든 항목이 채워졌는지 체크
+  useEffect(() => {
+    if (
+      title &&
+      content &&
+      imgHostUrl &&
+      location &&
+      checkDetail.toilet &&
+      checkRating > 0
+    ) {
+      setIsFull(true);
     }
-    if (!isUploading && !imgHostUrl) {
-      return (
-        <div className="click_for_upload">
-          <BsCameraFill />
-          <p>클릭하여 이미지 업로드</p>
-        </div>
-      );
-    }
-    if (imgHostUrl) {
-      return null;
+  }, [title, content, imgHostUrl, location, checkDetail, checkRating]);
+
+
+  const uploadPost = async () => {
+    if (isFull) {
+      const headers = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+      const body = {
+        title: title,
+        content: content,
+        picture: imgHostUrl,
+        location: {
+          // 위도
+          latitude: location.latitude,
+          // 경도
+          longitude: location.longitude,
+          // 도로명 주소
+          roadAdd: address.roadAdd,
+          // 지번 주소
+          lotAdd: address.lotAdd,
+        },
+        siteInfo: checkDetail,
+        rating: checkRating,
+      };
+      // console.log(body);
+      try {
+        const res = await axios.post(`${serverPath}/boards`, body, headers);
+        if (res.status === 203) {
+          // setMessage("add_post_success");
+          navigate("/post");
+        }
+      } catch (err) {
+        //err
+      }
+    } else {
+      setMessage("post_full_check");
     }
   };
-  // 업로드 요청
-  const uploadPost = async () => {
-    // const headers = {
-    //   headers: {
-    //     Authorization: accessToken
-    //   }
-    // }
-    const body = {
-      title: title,
-      description: description,
-      photo: imgHostUrl,
-      location: {
-        latitude: location.latitude,
-        longitude: location.longitude,
-        roadAdd: address.roadAdd,
-        lotAdd: address.lotAdd,
-      },
-      checkDetail: checkDetail,
-    };
-    // try {
-    //   // const res = await axios.post(`${serverPath}/api/posts`, body, headers)
-    //   if (res.status === 201) {
-    //     navigate('/my_pics')
-    //   }
-    // } catch (err) {
-    //   //err
-    // }
+
+  const resetMessage = () => {
+    setMessage("");
   };
 
   const modalHandler = (modal) => {
@@ -471,11 +521,15 @@ function AddPost() {
     }
   };
 
-  console.log(location);
-  console.log(address);
-
   return (
     <Container>
+      {message ? (
+        <SignContainer>
+          <ModalBackdrop>
+            <Confirm message={message} handleMessage={resetMessage} />
+          </ModalBackdrop>
+        </SignContainer>
+      ) : null}
       {openSearchModal ? (
         <PlaceSearch
           setLocation={setLocation}
@@ -500,7 +554,7 @@ function AddPost() {
             ref={descArea}
             onKeyUp={autoResizing}
             spellCheck={false}
-            onChange={(e) => setDesctription(e.target.value)}
+            onChange={(e) => setContent(e.target.value)}
           ></textarea>
         </DescContainer>
         <input
@@ -508,6 +562,7 @@ function AddPost() {
           accept="image/*"
           style={{ display: "none" }}
           ref={imgInput}
+          id="img"
           onChange={uploadImage}
         />
         <h3 className="category">사진 등록</h3>
@@ -532,7 +587,7 @@ function AddPost() {
           </LocationSearchBtn>
         </KakaoMapBox>
         <h4 className="position">
-          <GiCheckMark /> 현재 등록된 위치가 맞으신가요?{" "}
+          <GiCheckMark /> 현재 등록된 위치가 맞으신가요?
           <span style={{ textDecoration: "underline" }}>{address.lotAdd}</span>
         </h4>
 
@@ -550,8 +605,9 @@ function AddPost() {
         </StarCheckContainer>
 
         <BtnContainer>
-          {" "}
-          <Btn width={"100%"}>게시물 등록하기</Btn>
+          <Btn action={uploadPost} width={"100%"}>
+            게시물 등록하기
+          </Btn>
         </BtnContainer>
       </InnerContainer>
     </Container>
