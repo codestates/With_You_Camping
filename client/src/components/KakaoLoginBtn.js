@@ -3,13 +3,16 @@ import styled from "styled-components";
 import kakaoIcon from "../img/kakao_login_icon.png";
 
 const Container = styled.div`
-  margin-top: 10px;
+  /* margin-top: 10px; */
   img {
     width: 15%;
     border-radius: 5px;
     box-shadow: rgb(0 0 0 / 24%) 0px 2px 2px 0px,
       rgb(0 0 0 / 24%) 0px 0px 1px 0px;
-    margin-top: 120px;
+    margin-top: 10px;
+    margin-left: 145px;
+    left: 30%;
+    /* margin: auto; */
     cursor: pointer;
 
     transition: 0.1s;
@@ -34,7 +37,7 @@ export default function KakaoLoginBtn() {
       kakao.init(kakaoClientID);
     }
   };
-  console.log(kakao);
+  // console.log(kakao);
 
   const kakaoSignIn = () => {
     kakao.Auth.authorize({
