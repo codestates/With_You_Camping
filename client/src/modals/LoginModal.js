@@ -157,7 +157,7 @@ const Nofify = styled.div`
   font-size: 0.8rem;
 `;
 
-function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal }) {
+function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal, confirmSignupModal, setConfirmSignupModal }) {
   const sessionStorage = window.sessionStorage;
 
   const serverPath = process.env.REACT_APP_SERVER_PATH;
@@ -192,6 +192,13 @@ function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal }) {
       setIsFull(false);
     }
   }, [loginInfo]);
+
+  useEffect(() => {
+    if (confirmSignupModal === true) {
+      setMessage("signup_success") 
+      setConfirmSignupModal(false)
+    }
+  },[])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
