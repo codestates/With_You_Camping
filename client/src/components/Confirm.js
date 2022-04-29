@@ -12,6 +12,8 @@ const Container = styled.div`
   height: 100%;
   background-color: rgba(0, 5, 12, 0.5);
   z-index: 999;
+  margin-left: 45px;
+  /* left: 3%; */
   .back-arrow {
     font-size: 20px;
     margin-left: 5px;
