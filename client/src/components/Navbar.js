@@ -161,7 +161,7 @@ function Navber({ isLogin, setIsLogin }) {
           <Page>
             <Div>
               <NavLink
-                to="/postlist"
+                to="/posts"
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 게시물 목록

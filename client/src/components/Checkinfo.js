@@ -41,7 +41,7 @@ const TitleContainer = styled.div`
   /* margin-top: 40px; */
 `;
 
-export default function Checkinfo({ setCheckDetail, checkDetail }) {
+export default function Checkinfo({ setCheckDetail, checkDetail, nowCheckDetail }) {
   const [area, setArea] = useState([
     { contents: "서울", checked: false, info: "area" },
     { contents: "경기도", checked: false, info: "area" },
@@ -73,6 +73,7 @@ export default function Checkinfo({ setCheckDetail, checkDetail }) {
   const [nowParking, setNowParking] = useState(null);
   const [nowElectronic, setNowElectronic] = useState(null);
   const [nowToilet, setNowToilet] = useState(null);
+
 
   let checkData = {
     area: nowArea,

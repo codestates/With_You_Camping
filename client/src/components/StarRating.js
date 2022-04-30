@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Star = ({ starId, marked }) => {
   return (
@@ -14,12 +14,12 @@ const Star = ({ starId, marked }) => {
 
 // Create an array of 5: Array.from({length: 5}, (v,i) => i)
 
-export default function StarRating() {
+export default function StarRating({postRating}) {
   // Manages on Hover selection of a star
   const [selection, setSelection] = useState(0);
 
   // 별점 props로 받아 해당 별점 업데이트
-  const [rating, setRating] = useState(3);
+  const rating = postRating;
 
   return (
     <div>

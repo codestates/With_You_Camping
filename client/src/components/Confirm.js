@@ -106,6 +106,10 @@ function Confirm({ message, handleMessage }) {
       setCurMessage('게시물 작성 되었습니다.')
       setBtnInfo('닫 기');
     }
+    else if ( message === "login_feature" ) {
+      setCurMessage('로그인 후 사용해 주세요.')
+      setBtnInfo('닫 기');
+    }
   }, []);
 
 
