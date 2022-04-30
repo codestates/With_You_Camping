@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { BsCameraFill } from "react-icons/bs";
 import { GiCheckMark } from "react-icons/gi";
@@ -266,7 +266,7 @@ const ModalBackdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-function AddPost() {
+function ModifyPost() {
   const navigate = useNavigate();
 
   const kakao = window.kakao;
@@ -274,6 +274,8 @@ function AddPost() {
 
   const serverPath = process.env.REACT_APP_SERVER_PATH;
   const accessToken = window.sessionStorage.getItem("loginToken");
+  const userId = parseInt(window.sessionStorage.getItem("userId"));
+  const { id } = useParams();
 
   // 모든 항목 작성했는지 체크
   const [isFull, setIsFull] = useState(false);
@@ -287,6 +289,8 @@ function AddPost() {
   // 이미지 url
   const [imgHostUrl, setImgHostUrl] = useState("");
 
+
+  const [nowCheckDetail, setNowCheckDeatail] = useState(null)
   // 게시물 세부 사항 체크
   const [checkDetail, setCheckDetail] = useState({
     area: null,
@@ -315,14 +319,40 @@ function AddPost() {
   const imgInput = useRef();
   const kakaoMap = useRef();
   const descArea = useRef();
+  // 이미지 업로드 및 사진 미리보기
+
+  // console.log(nowCheckDetail)
 
   useEffect(() => {
-    if (!accessToken) {
-      navigate("/");
-    }
+    (async () => {
+      const res = await axios.get(`${serverPath}/boards/${id}`);
+
+      // console.log(res)
+      if (res.status === 200) {
+        if (res.data.board.userId !== userId) {
+          navigate("/posts");
+        }
+        const { board, boardData, locate } = res.data;
+        setTitle(board.title);
+        setContent(board.content);
+        setImgHostUrl(board.picture);
+        setLocation({
+          latitude: locate.latitude,
+          longitude: locate.longtitude
+        });
+        setCheckRating(board.rating)
+        setNowCheckDeatail({
+          area: boardData.area,
+          internet: boardData.wifi,
+          parking: boardData.parking,
+          electronic: boardData.electricity,
+          toilet: boardData.toiletType
+        })
+      }
+    })();
   }, []);
 
-  // 이미지 업로드 및 사진 미리보기
+
   const uploadImage = async (e) => {
     e.preventDefault();
     setIsUploading(true);
@@ -471,43 +501,42 @@ function AddPost() {
     }
   }, [title, content, imgHostUrl, location, checkDetail, checkRating]);
 
-
-  const uploadPost = async () => {
+  const modifyPost = async () => {
     if (isFull) {
-      const headers = {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      };
-      const body = {
-        title: title,
-        content: content,
-        picture: imgHostUrl,
-        location: {
-          // 위도
-          latitude: location.latitude,
-          // 경도
-          longitude: location.longitude,
-          // 도로명 주소
-          roadAdd: address.roadAdd,
-          // 지번 주소
-          lotAdd: address.lotAdd,
-        },
-        siteInfo: checkDetail,
-        rating: checkRating,
-      };
-      // console.log(body);
-      try {
-        const res = await axios.post(`${serverPath}/boards`, body, headers);
-        if (res.status === 203) {
-          // 상세 게시글 id
-          const boardId = res.data.boardId
-          // 정상적으로 등록되었다면 내가 작성한 상세 게시글로 이동한다.
-          navigate(`/post/${boardId}`);
-        } 
-      } catch (err) {
-        //err
-      }
+      // const headers = {
+      //   headers: {
+      //     Authorization: `Bearer ${accessToken}`,
+      //   },
+      // };
+      // const body = {
+      //   title: title,
+      //   content: content,
+      //   picture: imgHostUrl,
+      //   location: {
+      //     // 위도
+      //     latitude: location.latitude,
+      //     // 경도
+      //     longitude: location.longitude,
+      //     // 도로명 주소
+      //     roadAdd: address.roadAdd,
+      //     // 지번 주소
+      //     lotAdd: address.lotAdd,
+      //   },
+      //   siteInfo: checkDetail,
+      //   rating: checkRating,
+      // };
+      // // console.log(body);
+      // try {
+      //   const res = await axios.post(`${serverPath}/boards`, body, headers);
+      //   if (res.status === 203) {
+      //     // 상세 게시글 id
+      //     const boardId = res.data.boardId;
+      //     // 정상적으로 등록되었다면 내가 작성한 상세 게시글로 이동한다.
+      //     navigate(`/post/${boardId}`);
+      //   }
+      // } catch (err) {
+      //   //err
+      // }
     } else {
       setMessage("post_full_check");
     }
@@ -539,7 +568,7 @@ function AddPost() {
         />
       ) : null}
       <InnerContainer>
-        <PageTitle>게시글 작성</PageTitle>
+        <PageTitle>게시글 수정</PageTitle>
 
         <TitleContainer>
           <h3 className="category">제목</h3>
@@ -547,6 +576,7 @@ function AddPost() {
             type="text"
             spellCheck={false}
             onChange={(e) => setTitle(e.target.value)}
+            value={title}
           />
         </TitleContainer>
 
@@ -557,6 +587,7 @@ function AddPost() {
             onKeyUp={autoResizing}
             spellCheck={false}
             onChange={(e) => setContent(e.target.value)}
+            value={content}
           ></textarea>
         </DescContainer>
         <input
@@ -596,24 +627,24 @@ function AddPost() {
         <OuterCheckContainer>
           <h3 className="category">추가 정보</h3>
           <Checkinfo
+          nowCheckDetail={nowCheckDetail}
             checkDetail={checkDetail}
             setCheckDetail={setCheckDetail}
-          />
+          /> 
         </OuterCheckContainer>
 
         <h3 className="category"> 캠핑장 어떠셨나요? </h3>
         <StarCheckContainer>
-          <StarRatingCheck setCheckRating={setCheckRating} />
+          <StarRatingCheck checkRating={checkRating} setCheckRating={setCheckRating} />
         </StarCheckContainer>
 
         <BtnContainer>
-          <Btn action={uploadPost} width={"100%"}>
-            게시물 등록하기
+          <Btn action={modifyPost} width={"100%"}>
+            게시물 수정하기
           </Btn>
         </BtnContainer>
       </InnerContainer>
     </Container>
   );
 }
-
-export default AddPost;
+export default ModifyPost;

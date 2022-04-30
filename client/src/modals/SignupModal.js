@@ -138,8 +138,6 @@ function SignupModal({
     setUserInfo({ ...userInfo, [key]: e.target.value });
   };
 
-  console.log(userInfo);
-
   const validateEmail = (value) => {
     // 이메일 유효성 검사
     const emailRegex =
