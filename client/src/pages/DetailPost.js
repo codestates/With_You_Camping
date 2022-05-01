@@ -369,15 +369,6 @@ export default function DetailPost({ isLogin }) {
   // 게시글 위치 정보
   const [postMapData, setPostMapData] = useState({});
 
-  const [tags, setTags] = useState([
-    "서울",
-    "인터넷가능",
-    "주차장협소",
-    "전기사용",
-    "화장실청결",
-  ]);
-  const [description, setDesctription] = useState("가족끼리 갔다오기 좋아요");
-
   const [isLoading, setIsLoading] = useState(false);
 
   const [coords, setCoords] = useState([]);
@@ -386,9 +377,10 @@ export default function DetailPost({ isLogin }) {
 
   // 상세 페이지 데이터 세팅
   useEffect(() => {
+    window.scrollTo(0, 0);
     getPostDetail();
     getCommentList();
-    window.scrollTo(0, 0);
+    
   }, []);
 
   // console.log(postData)
@@ -508,7 +500,7 @@ export default function DetailPost({ isLogin }) {
         />
       ) : null}
       <InnerContainer>
-        <TitleContainer>
+        <TitleContainer> 
           <LikeComponent userId={userId} id={id} isLogin={isLogin} />
           <div className="title">{postData.title}</div>
           <div className="wrapper">
