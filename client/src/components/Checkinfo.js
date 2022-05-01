@@ -41,7 +41,12 @@ const TitleContainer = styled.div`
   /* margin-top: 40px; */
 `;
 
-export default function Checkinfo({ setCheckDetail, checkDetail, nowCheckDetail }) {
+export default function Checkinfo({
+  setCheckDetail,
+  checkDetail,
+  setNowCheckDeatail,
+  nowCheckDetail,
+}) {
   const [area, setArea] = useState([
     { contents: "서울", checked: false, info: "area" },
     { contents: "경기도", checked: false, info: "area" },
@@ -74,6 +79,56 @@ export default function Checkinfo({ setCheckDetail, checkDetail, nowCheckDetail 
   const [nowElectronic, setNowElectronic] = useState(null);
   const [nowToilet, setNowToilet] = useState(null);
 
+  // if (nowCheckDetail) {
+  //   setCheckDetail(nowCheckDetail)
+  // }
+
+  // if (nowCheckDetail) {
+  //   if (nowCheckDetail.area === "서울") {
+  //     area[0].checked = true;
+  //   } else if (nowCheckDetail.area === "경기도") {
+  //     area[1].checked = true;
+  //   } else if (nowCheckDetail.area === "충청도") {
+  //     area[2].checked = true;
+  //   } else if (nowCheckDetail.area === "강원도") {
+  //     area[3].checked = true;
+  //   } else if (nowCheckDetail.area === "경상도") {
+  //     area[4].checked = true;
+  //   } else if (nowCheckDetail.area === "전라도") {
+  //     area[5].checked = true;
+  //   } else if (nowCheckDetail.area === "제주도") {
+  //     area[6].checked = true;
+  //   }
+  //   if (nowCheckDetail.internet === "가능") {
+  //     internet[0].checked = true;
+  //   } else if (nowCheckDetail.internet === "불가") {
+  //     internet[1].checked = true;
+  //   }
+  //   if (nowCheckDetail.parking === "여유") {
+  //     parking[0].checked = true;
+  //   } else if (nowCheckDetail.parking === "협소") {
+  //     parking[1].checked = true;
+  //   }
+  //   if (nowCheckDetail.electronic === "가능") {
+  //     electronic[0].checked = true;
+  //   } else if (nowCheckDetail.electronic === "불가") {
+  //     electronic[1].checked = true;
+  //   }
+  //   if (nowCheckDetail.toilet === "양호") {
+  //     toilet[0].checked = true;
+  //   } else if (nowCheckDetail.toilet === "불량") {
+  //     toilet[0].checked = true;
+  //   }
+  //   setNowCheckDeatail(null)
+  // }
+
+  // const [checkData, setCheckData] = ({
+  //   area: nowArea,
+  //   internet: nowInternet,
+  //   parking: nowParking,
+  //   electronic: nowElectronic,
+  //   toilet: nowToilet,
+  // })
 
   let checkData = {
     area: nowArea,
@@ -83,10 +138,10 @@ export default function Checkinfo({ setCheckDetail, checkDetail, nowCheckDetail 
     toilet: nowToilet,
   };
 
-  useEffect(() => {
-    setCheckDetail(checkData)
-  },[checkData.toilet])
 
+  useEffect(() => {
+    setCheckDetail(checkData);
+  }, [checkData.area, checkData.internet, checkData.parking,checkData.electronic,checkData.toilet]);
 
   const handleChange = (data) => {
     if (data.info === "area") {
@@ -126,22 +181,22 @@ export default function Checkinfo({ setCheckDetail, checkDetail, nowCheckDetail 
     }
 
     if (data.info === "electronic") {
-        const copyProducts = [...electronic];
-        const modifiedProducts = copyProducts.map((electronic) => {
-          if (data.contents === electronic.contents) {
-            electronic.checked = !electronic.checked;
-          }
-          return electronic;
-        });
-        setNowElectronic(data.contents);
-        setElectronic(modifiedProducts);
-      }
+      const copyProducts = [...electronic];
+      const modifiedProducts = copyProducts.map((electronic) => {
+        if (data.contents === electronic.contents) {
+          electronic.checked = !electronic.checked;
+        }
+        return electronic;
+      });
+      setNowElectronic(data.contents);
+      setElectronic(modifiedProducts);
+    }
 
     if (data.info === "toilet") {
       const copyProducts = [...toilet];
       const modifiedProducts = copyProducts.map((toilet) => {
         if (data.contents === toilet.contents) {
-            toilet.checked = !toilet.checked;
+          toilet.checked = !toilet.checked;
         }
         return toilet;
       });
@@ -242,7 +297,9 @@ export default function Checkinfo({ setCheckDetail, checkDetail, nowCheckDetail 
                 handleChange(electronic);
               }}
             />
-            <label className="custom-control-label">{electronic.contents}</label>
+            <label className="custom-control-label">
+              {electronic.contents}
+            </label>
           </CheckContainer>
         ))}
       <InnerContainer> </InnerContainer>
@@ -270,7 +327,6 @@ export default function Checkinfo({ setCheckDetail, checkDetail, nowCheckDetail 
         ))}
       <InnerContainer> </InnerContainer>
       <TitleContainer>&nbsp;</TitleContainer>
-      {/* <TitleContainer>&nbsp;</TitleContainer> */}
     </div>
   );
 }

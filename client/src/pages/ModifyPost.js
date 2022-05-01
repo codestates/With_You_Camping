@@ -289,7 +289,6 @@ function ModifyPost() {
   // 이미지 url
   const [imgHostUrl, setImgHostUrl] = useState("");
 
-
   const [nowCheckDetail, setNowCheckDeatail] = useState(null)
   // 게시물 세부 사항 체크
   const [checkDetail, setCheckDetail] = useState({
@@ -501,42 +500,40 @@ function ModifyPost() {
     }
   }, [title, content, imgHostUrl, location, checkDetail, checkRating]);
 
+
   const modifyPost = async () => {
     if (isFull) {
-      // const headers = {
-      //   headers: {
-      //     Authorization: `Bearer ${accessToken}`,
-      //   },
-      // };
-      // const body = {
-      //   title: title,
-      //   content: content,
-      //   picture: imgHostUrl,
-      //   location: {
-      //     // 위도
-      //     latitude: location.latitude,
-      //     // 경도
-      //     longitude: location.longitude,
-      //     // 도로명 주소
-      //     roadAdd: address.roadAdd,
-      //     // 지번 주소
-      //     lotAdd: address.lotAdd,
-      //   },
-      //   siteInfo: checkDetail,
-      //   rating: checkRating,
-      // };
+      const headers = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+      const body = {
+        title: title,
+        content: content,
+        picture: imgHostUrl,
+        location: {
+          // 위도
+          latitude: location.latitude,
+          // 경도
+          longitude: location.longitude,
+          // 도로명 주소
+          roadAdd: address.roadAdd,
+          // 지번 주소
+          lotAdd: address.lotAdd,
+        },
+        siteInfo: checkDetail,
+        rating: checkRating,
+      };
       // // console.log(body);
-      // try {
-      //   const res = await axios.post(`${serverPath}/boards`, body, headers);
-      //   if (res.status === 203) {
-      //     // 상세 게시글 id
-      //     const boardId = res.data.boardId;
-      //     // 정상적으로 등록되었다면 내가 작성한 상세 게시글로 이동한다.
-      //     navigate(`/post/${boardId}`);
-      //   }
-      // } catch (err) {
-      //   //err
-      // }
+      try {
+        const res = await axios.put(`${serverPath}/boards/${id}`, body, headers);
+        if (res.status === 200) {
+          navigate(`/post/${id}`);
+        }
+      } catch (err) {
+        //err
+      }
     } else {
       setMessage("post_full_check");
     }
@@ -623,13 +620,14 @@ function ModifyPost() {
           <GiCheckMark /> 현재 등록된 위치가 맞으신가요?
           <span style={{ textDecoration: "underline" }}>{address.lotAdd}</span>
         </h4>
-
+ 
         <OuterCheckContainer>
           <h3 className="category">추가 정보</h3>
           <Checkinfo
-          nowCheckDetail={nowCheckDetail}
+             nowCheckDetail={nowCheckDetail}
             checkDetail={checkDetail}
             setCheckDetail={setCheckDetail}
+            setNowCheckDeatail={setNowCheckDeatail}
           /> 
         </OuterCheckContainer>
 

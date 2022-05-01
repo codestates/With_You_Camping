@@ -11,7 +11,7 @@ const Star = ({ starId, marked }) => {
     </span>
   );
 };
-
+ 
 // Create an array of 5: Array.from({length: 5}, (v,i) => i)
 
 export default function StarRatingCheck({ checkRating, setCheckRating }) {
@@ -20,8 +20,6 @@ export default function StarRatingCheck({ checkRating, setCheckRating }) {
 
   // 별점 props로 받아 해당 별점 업데이트
   const [rating, setRating] = useState(0);
-
-  const nowRating = checkRating;
 
   useEffect(() => {
     setCheckRating(rating);
@@ -42,13 +40,17 @@ export default function StarRatingCheck({ checkRating, setCheckRating }) {
       onClick={(event) => setRating(event.target.getAttribute("star-id"))}
       style={{ width: "10px" }}
     >
-      {Array.from({ length: 5 }, (v, i) => (
-        <Star
-          key={i}
-          starId={i + 1}
-          marked={selection ? selection > i : nowRating > i}
-        />
-      ))}
+      {
+        
+          Array.from({ length: 5 }, (v, i) => (
+            <Star
+              key={i}
+              starId={i + 1}
+              marked={selection ? selection > i : rating > i}
+            />
+          ))
+        
+      }
     </div>
   );
 }
