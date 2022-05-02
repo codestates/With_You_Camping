@@ -45,7 +45,7 @@ const SignModalView = styled.div`
   form {
     display: flex;
     flex-direction: column;
-   
+
     margin: 0px;
     label {
       margin-top: -12px;
@@ -60,7 +60,6 @@ const SignModalView = styled.div`
       border: none;
       outline: 2px solid red;
     }
-   
   }
   .signup_button {
     cursor: pointer;
@@ -80,7 +79,7 @@ const SignModalView = styled.div`
     place-items: center;
     background-color: white;
     width: 400px;
-    height: 650px
+    height: 650px;
     border-radius: 15px;
     z-index: 999;
   }

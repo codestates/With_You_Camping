@@ -1,21 +1,22 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
-import React, { useState } from "react";
 import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { IoClose } from "react-icons/io5";
+import Confirm from "../components/Confirm";
+import KakaoLoginBtn from "../components/KakaoLoginBtn";
 
 const ModalContainer = styled.div`
   position: fixed;
   display: grid;
   place-items: center;
-
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-
   width: 100vw;
   height: 100vh;
-
   z-index: 998;
 `;
 
@@ -25,9 +26,7 @@ const ModalBackdrop = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-
   background-color: rgba(0, 0, 0, 0.3);
-
   z-index: 998;
 `;
 
@@ -42,7 +41,6 @@ const ModalView = styled.div`
   height: 550px;
   border-radius: 15px;
   z-index: 999;
-
   span {
     color: black;
     outline: none;
@@ -66,20 +64,17 @@ const ModalView = styled.div`
 
 const InnerContainer = styled.div`
   position: relative;
-  top: 15px;
+  top: 120px;
   height: max-content;
 `;
 
 const InputContainer = styled.div`
-  margin-bottom: 35px;
-
+  margin-bottom: 25px;
   form {
     position: relative;
     top: -25%;
-
     display: grid;
     place-items: center;
-
     input {
       position: relative;
       top: -60%;
@@ -94,7 +89,6 @@ const InputContainer = styled.div`
     .button-container {
       display: flex;
       flex-direction: column;
-
       .login_button {
         margin-top: -30px;
         outline: none;
@@ -107,7 +101,6 @@ const InputContainer = styled.div`
         color: white;
         margin-bottom: 5px;
       }
-
       .signup-button {
         display: flex;
         justify-content: center;
@@ -127,10 +120,8 @@ const CloseBtn = styled.div`
   position: absolute;
   top: 30px;
   right: 30px;
-
   transition: 0.1s;
   cursor: pointer;
-
   &:hover {
     transform: translateY(-2px);
   }
@@ -153,14 +144,115 @@ const Nofify = styled.div`
 `;
 
 function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal }) {
+  const sessionStorage = window.sessionStorage;
+
+  const serverPath = process.env.REACT_APP_SERVER_PATH;
+  const kakaoClientID = process.env.REACT_APP_KAKAO_CLIENTID;
+  const kakaoCallbackURI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
+
+  console.log(serverPath);
+  console.log(kakaoClientID);
+  console.log(kakaoCallbackURI);
+
+  const navigate = useNavigate();
+  const [loginInfo, setloginInfo] = useState({
+    email: "",
+    password: "",
+  });
+  console.log(loginInfo);
+
+  const [isFull, setIsFull] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleInputValue = (key) => (e) => {
+    setloginInfo({ ...loginInfo, [key]: e.target.value });
+  };
+
+  // 이메일 유효성 검사
+  const validateEmail = (value) => {
+    const emailRegex =
+      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    return emailRegex.test(value);
+  };
+
+  useEffect(() => {
+    if (loginInfo.email && loginInfo.password) {
+      setIsFull(true);
+    } else {
+      setIsFull(false);
+    }
+  }, [loginInfo]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      if (isFull === false) {
+        setMessage("loginInfo_blank");
+      } else if (!validateEmail(loginInfo.email)) {
+        setMessage("email_validate_fail");
+      } else {
+        const res = await axios.post(
+          `${serverPath}/auth/login`,
+          {
+            email: loginInfo.email,
+            password: loginInfo.password,
+          },
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        if (res.status === 200) {
+          // setMessage("login_success");
+          setOpenSignupModal(false);
+          setOpenLoginModal(false);
+          // setMessage("login_success");
+          sessionStorage.setItem("userId", res.data.userId);
+          sessionStorage.setItem("loginToken", res.data.accessToken);
+          sessionStorage.setItem("loginMethod", "common");
+          // navigate('/');
+          window.location.reload();
+        }
+      }
+    } catch (err) {
+      setMessage("login_failed");
+    }
+  };
+
+  const resetMessage = () => {
+    setMessage("");
+  };
+
   const openSignup = () => {
     setOpenLoginModal(false);
     setOpenSignupModal(true);
   };
 
+  // 카카오 로그인
+  // useEffect(() => {
+  //   kakaoInit();
+  // }, []);
+
+  // const kakao = window.Kakao;
+  // const kakaoInit = () => {
+  //   if (kakao.isInitialized() === false) {
+  //     kakao.init(kakaoClientID);
+  //   }
+  // };
+  // console.log(kakao)
+
+  // const kakaoSignIn = () => {
+  //   kakao.Auth.authorize({
+  //     redirectUri: kakaoCallbackURI,
+  //   });
+  // };
+
   return (
     <ModalContainer>
       <ModalBackdrop>
+        {message ? (
+          <Confirm message={message} handleMessage={resetMessage} />
+        ) : null}
         <ModalView>
           <CloseBtn onClick={closeFn}>
             <IoClose size={"1.5rem"} />
@@ -188,7 +280,9 @@ function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal }) {
                   </div>
                 </div>
               </form>
+              {/* 카카오 로그인 버튼 */}
             </InputContainer>
+            <KakaoLoginBtn />
           </InnerContainer>
         </ModalView>
       </ModalBackdrop>

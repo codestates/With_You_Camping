@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import LoginModal from "../modals/LoginModal";
 import SignupModal from "../modals/SignupModal";
+// import Search from "./Search";
+import { TwoBtnModal } from "./TwoBtnModal";
 
 const Container = styled.header`
   font-family: "Stylish", sans-serif;
@@ -14,7 +16,7 @@ const Container = styled.header`
   width: 100%;
   min-width: 1200px;
   height: 50px;
-
+  margin: 20px;
   font-size: 1.2rem;
 
   @media screen and (max-width: 500px) {
@@ -38,7 +40,6 @@ const Logo = styled.div`
     font-size: 2.8rem;
   }
 `;
-
 const Page = styled.div`
   display: flex;
 
@@ -46,26 +47,18 @@ const Page = styled.div`
     margin-right: 0px;
   }
 `;
-
 const Div = styled.div`
   margin: 40px 30px;
   cursor: pointer;
   &:hover {
     color: red;
   }
-  .login {
-    &:hover {
-      color: red;
-    }
-  }
 `;
-
-function Navber() {
-  const [onLogin, setLogin] = useState(false);
-
+function Navber({ isLogin, setIsLogin }) {
   const [openModal, setOpenModal] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openSignupModal, setOpenSignupModal] = useState(false);
+  const [openTwoBtnModal, setOpenTwoBtnModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -76,15 +69,28 @@ function Navber() {
       openLoginModal ? setOpenLoginModal(false) : setOpenLoginModal(true);
     } else if (modal === "signup") {
       openSignupModal ? setOpenSignupModal(false) : setOpenSignupModal(true);
+    } else if (modal === "logout") {
+      openTwoBtnModal ? setOpenTwoBtnModal(false) : setOpenTwoBtnModal(true);
     }
   };
 
-  const onClick = () => {
-    setLogin(!onLogin);
+  // 로그아웃 시 실행
+  const handleLogout = () => {
+    sessionStorage.clear();
+    window.location.reload();
   };
 
   return (
     <div>
+      {/* 로그아웃 확인 모달 */}
+      {openTwoBtnModal ? (
+        <TwoBtnModal
+          main={"로그아웃 하시겠습니까?"}
+          close={() => modalHandler("logout")}
+          action={() => handleLogout()}
+          navigate={"/"}
+        />
+      ) : null}
       {openLoginModal ? (
         <LoginModal
           closeFn={() => modalHandler("login")}
@@ -99,46 +105,48 @@ function Navber() {
           setOpenSignupModal={setOpenSignupModal}
         />
       ) : null}
-      <button type="button" onClick={onClick}>
-        버튼
-      </button>
       <Container>
         <Logo onClick={() => navigate("/")}>
           WYC<span>.</span>
         </Logo>
-        {onLogin ? (
+        {isLogin ? (
           <Page>
             <Div>
               <NavLink
-                style={{ textDecoration: "none", color: "inherit" }}
                 to="/postlist"
+                style={{ textDecoration: "none", color: "inherit" }}
               >
                 게시물 목록
               </NavLink>
             </Div>
             <Div>
               <NavLink
-                style={{ textDecoration: "none", color: "inherit" }}
                 to="/add_post"
+                style={{ textDecoration: "none", color: "inherit" }}
               >
                 게시물 작성
               </NavLink>
             </Div>
             <Div>
               <NavLink
-                style={{ textDecoration: "none", color: "inherit" }}
                 to="/mypage"
+                style={{ textDecoration: "none", color: "inherit" }}
               >
                 마이페이지
               </NavLink>
+            </Div>
+            <Div>
+              <div className="logout" onClick={() => modalHandler("logout")}>
+                로그아웃
+              </div>
             </Div>
           </Page>
         ) : (
           <Page>
             <Div>
               <NavLink
-                style={{ textDecoration: "none", color: "inherit" }}
                 to="/postlist"
+                style={{ textDecoration: "none", color: "inherit" }}
               >
                 게시물 목록
               </NavLink>
@@ -152,6 +160,7 @@ function Navber() {
               </NavLink>
             </Div>
             <Div
+              className="login"
               style={{ textDecoration: "none", color: "inherit" }}
               onClick={() => modalHandler("login")}
             >
