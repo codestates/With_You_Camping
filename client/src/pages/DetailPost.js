@@ -2,13 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import {
-  BsPencilSquare,
-  BsGeoAltFill,
-  BsMapFill,
-  BsFillChatDotsFill,
-  BsQuestionLg,
-} from "react-icons/bs";
+import { BsGeoAltFill, BsMapFill } from "react-icons/bs";
 import { FaSearchLocation, FaCommentDots } from "react-icons/fa";
 import { MdPersonPin } from "react-icons/md";
 import { DetailBtnComponent as Btn } from "../components/DetailBtnComponent";
@@ -20,7 +14,7 @@ import CommentInput from "../components/CommentInput";
 import CommentList from "../components/CommentList";
 import LikeComponent from "../components/LikeComponent";
 import { TwoBtnModal } from "../components/TwoBtnModal";
-
+ 
 import { useParams } from "react-router-dom";
 
 import {
@@ -426,10 +420,6 @@ export default function DetailPost({ isLogin }) {
     getWeather();
   }, [coords.latitude, coords.roadAdd]);
 
-
-
-  
-
   async function getWeather() {
     const params = {
       lon: coords.longitude,
@@ -443,13 +433,12 @@ export default function DetailPost({ isLogin }) {
         const data = res.data;
         console.log(weather);
         setWeather(data.daily.slice(0, 7));
-
       });
   }
 
   useEffect(() => {
     setCoords({
-      latitude: postMapData.latitude ,
+      latitude: postMapData.latitude,
       longitude: postMapData.longtitude,
       roadAdd: postMapData.roadAdd,
     });
@@ -502,7 +491,6 @@ export default function DetailPost({ isLogin }) {
 
   // console.log(postMapData);
   // 지도 데이터 세팅
-
 
   const kakaoMap = useRef();
 
@@ -583,7 +571,6 @@ export default function DetailPost({ isLogin }) {
       });
   };
 
-
   return (
     <Container>
       {openDeleteModal ? (
@@ -655,10 +642,8 @@ export default function DetailPost({ isLogin }) {
           <div className="title_wrapper">
             <FaSearchLocation />
             <h3 className="nickname">이 지역의 날씨는?</h3>
-       
             &nbsp; &nbsp;
             <span style={{ fontSize: "1.1rem" }}> {postMapData.lotAdd}</span>
-        
           </div>
           <hr />
           <ShowWeather>
