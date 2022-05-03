@@ -195,6 +195,7 @@ const InnerContainer = styled.div`
 
 
 function Landing() {
+  console.log(process.env.REACT_APP_SERVER_PATH);
   return (
     <Container>
       <Picture>

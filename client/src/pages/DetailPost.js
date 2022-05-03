@@ -37,17 +37,14 @@ const Container = styled.section`
   grid-template-columns: repeat(12, 1fr);
   width: 1200px;
   height: max-content;
-
   section {
     margin-bottom: 20px;
   }
-
   .wrapper {
     position: relative;
     display: flex;
     justify-content: space-between;
   }
-
   .category {
     font-size: 1.5rem;
     margin-bottom: 10px;
@@ -92,18 +89,14 @@ const TagContainer = styled.section`
   row-gap: 10px;
   font-size: 0.8rem;
   justify-content: space-between;
-
   width: 100%;
   min-height: 50px;
   height: max-content;
   margin-top: 50px;
-
   .tag_none {
     position: absolute;
     top: calc(50% - 15px);
-
     width: 160px;
-
     color: #888;
     text-align: center;
   }
@@ -113,31 +106,23 @@ const ModifyBtn = styled.div`
   position: absolute;
   right: 0;
   top: -31px;
-
   display: flex;
   align-items: center;
-
   width: max-content;
   height: 30px;
-
   transition: 0.1s;
-
   cursor: pointer;
-
   font-size: 0.9rem;
   color: #777;
-
   span {
     position: relative;
     top: 1px;
     margin-right: 6px;
   }
-
   &:hover {
     transform: translateY(-2px);
     color: #000;
   }
-
   @media screen and (max-width: 500px) {
     top: -60px;
   }
@@ -146,20 +131,15 @@ const ModifyBtn = styled.div`
 const ImgContainer = styled.section`
   display: grid;
   place-items: center;
-
   aspect-ratio: 1.5 / 1;
   width: 50%;
   /* float: left; */
-
   background: ${(props) => `url(${props.img})`};
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
-
   border-radius: 10px;
-
   @media screen and (max-width: 500px) {
     aspect-ratio: 1 / 1;
   }
@@ -167,41 +147,29 @@ const ImgContainer = styled.section`
 
 const LocationLink = styled.div`
   position: absolute;
-
   right: 20px;
   bottom: 20px;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   width: max-content;
   height: 1.5rem;
   padding: 0 6px;
-
   background-color: #fff;
   border-radius: 1.5rem;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
-
   color: #666;
-
   z-index: 2;
-
   cursor: pointer;
-
   .wrapper span {
     position: relative;
     top: 2px;
-
     font-size: 0.9rem;
   }
-
   .wrapper svg {
     margin-right: 5px;
   }
-
   transition: 0.1s;
-
   &:hover {
     background-color: #ffd600;
     color: #000;
@@ -213,23 +181,17 @@ const DescContainer = styled.section`
   width: 100%;
   min-height: 50px;
   max-height: 500px;
-
   box-sizing: border-box;
-
   font-family: sans-serif;
-
   .title_wrapper {
     color: #333;
     font-size: 1.4rem;
     display: flex;
-
     margin-top: 30px;
     margin-bottom: 10px;
-
     svg {
       position: relative;
       top: -2px;
-
       margin-right: 5px;
       color: #333;
     }
@@ -240,7 +202,6 @@ const DescContainer = styled.section`
       font-size: 0.7rem;
     }
   }
-
   pre {
     min-height: 20px;
     padding: 10px;
@@ -255,16 +216,13 @@ const DescContainer = styled.section`
 const MapContainer = styled.section`
   .title_wrapper {
     color: #333;
-
     display: flex;
-
     margin-top: 30px;
     margin-bottom: 10px;
     font-size: 1.2rem;
     svg {
       position: relative;
       top: -2px;
-
       margin-right: 5px;
       color: #333;
     }
@@ -273,11 +231,8 @@ const MapContainer = styled.section`
 const KakaoMap = styled.section`
   width: 70%;
   aspect-ratio: 2 / 1;
-
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
-
   border-radius: 10px;
-
   @media screen and (max-width: 500px) {
     height: 150px;
   }
@@ -287,25 +242,19 @@ const CommentContainer = styled.section`
   width: 100%;
   min-height: 300px;
   height: max-content;
-
   .title_wrapper {
     color: #333;
-
     display: flex;
-
     margin-top: 30px;
     margin-bottom: 10px;
     font-size: 1.2rem;
-
     svg {
       position: relative;
       top: -2px;
-
       margin-right: 5px;
       color: #333;
     }
   }
-
   @media screen and (max-width: 500px) {
     .title_wrapper {
       margin-bottom: 0px;
@@ -318,16 +267,11 @@ const WeatherContainer = styled.section`
   width: 100%;
   min-height: 50px;
   max-height: 500px;
-
   box-sizing: border-box;
-
   font-family: sans-serif;
-
   .title_wrapper {
     color: #333;
-
     display: flex;
-
     margin-top: 30px;
     margin-bottom: 10px;
     font-size: 1.2rem;

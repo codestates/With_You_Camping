@@ -25,23 +25,19 @@ margin-top: -30px;
   grid-template-columns: repeat(12, 1fr);
   width: 1200px;
   height: max-content;
-
   section {
     margin-bottom: 20px;
   }
-
   .category {
     font-size: 1.4rem;
     margin-top: 50px;
     margin-bottom: 5px;
   }
-
   .position {
     font-size: 1rem;
     margin-bottom: 20px;
     justify-content: space-between;
   }
-
   input,
   textarea {
     border-radius: 3px;
@@ -57,40 +53,29 @@ const InnerContainer = styled.div`
 const UploadImageBox = styled.section`
   display: grid;
   place-items: center;
-
   width: calc(35% - 5px);
   aspect-ratio: 2 / 1.5;
-
   background-color: ${(props) => (props.img ? "#000" : "#fff")};
   background-image: ${(props) => (props.img ? `url(${props.img})` : null)};
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
-
   border-radius: 10px;
-
   transition: 0.2s;
-
   color: #aaa;
-
   &:hover {
     background-color: ${(props) => (props.img ? "#000" : "#FFEA7C")};
     color: #555;
   }
-
   .click_for_upload {
     text-align: center;
-
     user-select: none;
-
     svg {
       font-size: 3rem;
     }
   }
   cursor: pointer;
-
   @media screen and (max-width: 500px) {
     width: 100%;
   }
@@ -102,9 +87,7 @@ const KakaoMapBox = styled.section`
   aspect-ratio: 1.5 / 1;
   background-color: #aaa;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
-
   border-radius: 10px;
-
   @media screen and (max-width: 500px) {
     width: 100%;
     aspect-ratio: 1.5 / 1;
@@ -113,39 +96,28 @@ const KakaoMapBox = styled.section`
 
 const BtnOnMap = styled.div`
   position: absolute;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   width: max-content;
   height: 1.5rem;
   padding: 0 6px;
-
   /* background-color: #ffd600; */
   background-color: #f5deb3;
   border-radius: 1.5rem;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.5);
-
   color: #000;
-
   z-index: 2;
-
   cursor: pointer;
-
   span {
     position: relative;
     top: 1px;
-
     font-size: 0.9rem;
   }
-
   svg {
     margin-left: 5px;
   }
-
   transition: 0.1s;
-
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
@@ -165,12 +137,9 @@ const TitleContainer = styled.section`
   input {
     width: 100%;
     height: 35px;
-
     box-sizing: border-box;
-
     padding-left: 10px;
     font-size: 1.2rem;
-
     outline: none;
     &:focus {
       /* outline: 3px solid #FFD600; */
@@ -189,10 +158,8 @@ const DescContainer = styled.section`
     margin-bottom: 30px;
     font-family: sans-serif;
     font-size: 1.1rem;
-
     resize: none;
     overflow: hidden;
-
     &:focus {
       outline: 3px solid #a7aaad;
       border: #a7aaad;
@@ -202,23 +169,18 @@ const DescContainer = styled.section`
 
 const BtnContainer = styled.section`
   height: 100px;
-
   .requires_wrapper {
     position: relative;
     height: 32px;
-
     .requires {
       position: absolute;
       right: 0;
       display: flex;
-
       svg {
         position: relative;
         top: 2px;
-
         margin-left: 4px;
       }
-
       .msg {
         margin-left: 10px;
         svg {

@@ -17,7 +17,7 @@ const Container = styled.header`
   width: 100%;
   min-width: 1200px;
   height: 50px;
-
+  margin: 20px;
   font-size: 1.2rem;
 
   @media screen and (max-width: 500px) {
@@ -72,11 +72,6 @@ const Div = styled.div`
   cursor: pointer;
   &:hover {
     color: red;
-  }
-  .login {
-    &:hover {
-      color: red;
-    }
   }
 `;
 function Navber({ isLogin, setIsLogin }) {
