@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import image from "../img/camping.jpeg";
@@ -8,13 +8,14 @@ import image4 from "../img/camping4.jpeg";
 import image5 from "../img/campingMedia.jpg";
 
 const Container = styled.section`
+
   font-family: "Stylish", sans-serif;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   width: 1200px;
   /* width: 100vw; */
   height: max-content;
-  display: flex;
+  display: flex; 
   flex-direction: column;
   align-items: center;
   border-bottom: 1px solid rgba(1, 0, 0, 0.5);
@@ -190,6 +191,8 @@ const InnerContainer = styled.div`
     }
   }
 `;
+
+
 
 function Landing() {
   console.log(process.env.REACT_APP_SERVER_PATH);

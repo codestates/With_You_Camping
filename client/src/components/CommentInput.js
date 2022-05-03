@@ -3,6 +3,7 @@ import React, { useState } from "react";
 // import { useDispatch } from 'react-redux';
 // import { setLoginModal, setMessageModal } from '../actions';
 import styled from "styled-components";
+import Confirm from "./Confirm"
 
 const CommentInputArea = styled.section`
   margin: {
@@ -37,59 +38,101 @@ const CommentInputArea = styled.section`
     background-color: #ccf3cb;
     /* color: #c7c4ba;  */
     &:hover {
-      transform:  translateY(-2px);
-      box-shadow: 0px 5px 4px rgba(0,0,0,0.1);
+      transform: translateY(-2px);
+      box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.1);
     }
   }
 `;
 
-const CommentInput = ({ getCommentList, post, isLogin }) => {
+const SignContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const ModalBackdrop = styled.div`
+  position: fixed;
+  z-index: 809;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+`; 
+
+const CommentInput = ({ getCommentList, id, comments, isLogin }) => {
   const [comment, setComment] = useState("");
   //   const dispatch = useDispatch();
 
-  //   const sendCommentToServer = () => {
-  //     if (!isLogin) {
-  //       dispatch(setLoginModal(true));
-  //       return;
-  //     } else if (comment === '') {
-  //       dispatch(setMessageModal(true, '댓글을 입력해주세요.'));
-  //       return;
-  //     }
+  const serverPath = process.env.REACT_APP_SERVER_PATH;
+  const loginToken = window.sessionStorage.getItem("loginToken");
+  const userId = parseInt(window.sessionStorage.getItem("userId"));
 
-  //     axios
-  //       .post(
-  //         `${process.env.REACT_APP_API_URL}/comments/${post.id}`,
-  //         {
-  //           comment: comment,
-  //         },
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${localStorage.accessToken}`,
-  //             'Content-Type': 'application/json',
-  //           },
-  //         },
-  //       )
-  //       .then(() => {
-  //         dispatch(setMessageModal(true, '댓글을 등록했습니다.'));
-  //         getCommentList();
-  //         setComment('');
-  //       })
-  //       .catch((err) => {
-  //         if (err) throw err;
-  //       });
-  //   };
+  const sendCommentToServer = () => {
+    if (!isLogin) { 
+      setMessage("login_check");
+    return;
+    } else if (comment === '') {
+      setMessage("comment_full")
+    return;
+    }
+    axios
+      .post(
+        `${serverPath}/comments/${id}`,
+        {
+          comment: comment,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${loginToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(() => {
+        setMessage("comment_post_message")
+        getCommentList();
+        setComment("");
+      })
+      .catch((err) => {
+        if (err) throw err;
+      });
+  };
+
+  // console.log(comment)
+
+  const [message, setMessage] = useState("");
+
+  const resetMessage = () => {
+    setMessage("");
+  };
+
 
   return (
+    <div>
+      {message ? (
+        <SignContainer>
+          <ModalBackdrop>
+            <Confirm message={message} handleMessage={resetMessage} />
+          </ModalBackdrop>
+        </SignContainer>
+      ) : null}
+
     <CommentInputArea>
+      
       <textarea
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         placeholder="댓글을 입력해주세요"
         maxLength="300"
       ></textarea>
-      {/* <button className="btn" onClick={sendCommentToServer}> */}
-      <button className="btn">등록하기</button>
+      <button className="btn" onClick={sendCommentToServer}>
+        등록
+      </button>
     </CommentInputArea>
+    </div>
   );
 };
 

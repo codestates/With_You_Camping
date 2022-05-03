@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import Confirm from "./Confirm"
+import Confirm from "./Confirm";
 
 const LikeButton = styled.div`
   text-align: right;
@@ -29,7 +29,7 @@ const ModalBackdrop = styled.div`
   height: 100%;
   top: 0;
   left: 0;
-  right: 0;     
+  right: 0;
   bottom: 0;
   margin: auto;
   background-color: rgba(0, 0, 0, 0.5);
@@ -40,17 +40,16 @@ export default function LikeComponent({ isLogin, id }) {
   const serverPath = process.env.REACT_APP_SERVER_PATH;
   const loginToken = window.sessionStorage.getItem("loginToken");
   const userId = window.sessionStorage.getItem("userId");
-  
+
   const [message, setMessage] = useState("");
 
   const [interestIconColor, setInterestIconColor] = useState("#cccccc");
- 
+
   useEffect(() => {
     if (isLogin) {
-      console.log('ss')
-        getInterestInfo();
-    }    
-  }, [isLogin]); 
+      getInterestInfo();
+    }
+  }, [isLogin]);
 
   async function getInterestInfo() {
     await axios
@@ -60,7 +59,6 @@ export default function LikeComponent({ isLogin, id }) {
         },
       })
       .then((res) => {
-        console.log(res.data);
         if (res.data.like) {
           setInterestIconColor("#e8b791");
         }
@@ -73,9 +71,8 @@ export default function LikeComponent({ isLogin, id }) {
   const checkLoginStatus = (callback) => {
     if (isLogin) {
       callback();
-    }
-       else {
-        setMessage("login_feature");
+    } else {
+      setMessage("login_feature");
     }
     return;
   };
@@ -121,10 +118,9 @@ export default function LikeComponent({ isLogin, id }) {
     setMessage("");
   };
 
-
   return (
     <LikeButton>
-        {message ? (
+      {message ? (
         <SignContainer>
           <ModalBackdrop>
             <Confirm message={message} handleMessage={resetMessage} />

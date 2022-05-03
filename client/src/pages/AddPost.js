@@ -20,6 +20,7 @@ import Confirm from "../components/Confirm";
 import markerImg from "../img/marker.png";
 
 const Container = styled.section`
+  margin-top: -30px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   width: 1200px;
@@ -363,7 +364,8 @@ function AddPost() {
   useEffect(() => {
     const container = kakaoMap.current;
     let options = {
-      center: new kakao.maps.LatLng(37.5666805, 126.9784147), //지도의 중심좌표, 추후에 위치 지정하기.
+      // 지도의 중심좌표, 경기도 가평 지라섬 캠핑장
+      center: new kakao.maps.LatLng(37.8208779060263, 127.52105620613229),
       level: 3,
     };
 
@@ -471,7 +473,6 @@ function AddPost() {
     }
   }, [title, content, imgHostUrl, location, checkDetail, checkRating]);
 
-
   const uploadPost = async () => {
     if (isFull) {
       const headers = {
@@ -501,10 +502,10 @@ function AddPost() {
         const res = await axios.post(`${serverPath}/boards`, body, headers);
         if (res.status === 203) {
           // 상세 게시글 id
-          const boardId = res.data.boardId
+          const boardId = res.data.boardId;
           // 정상적으로 등록되었다면 내가 작성한 상세 게시글로 이동한다.
           navigate(`/post/${boardId}`);
-        } 
+        }
       } catch (err) {
         //err
       }

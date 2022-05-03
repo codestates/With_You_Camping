@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { 
+import {
   BsPencilSquare,
   BsGeoAltFill,
   BsMapFill,
@@ -22,6 +22,15 @@ import LikeComponent from "../components/LikeComponent";
 import { TwoBtnModal } from "../components/TwoBtnModal";
 
 import { useParams } from "react-router-dom";
+
+import {
+  TiWeatherShower,
+  TiWeatherSnow,
+  TiWeatherStormy,
+  TiWeatherCloudy,
+  TiWeatherSunny,
+} from "react-icons/ti";
+import { WiRain, WiDust } from "react-icons/wi";
 
 const Container = styled.section`
   display: grid;
@@ -325,6 +334,16 @@ const WeatherContainer = styled.section`
   }
 `;
 
+const ShowWeather = styled.div`
+  margin-top: 10px;
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  color: #192b4d;
+  font-family: sans-serif;
+`;
+
 const ModifyBtnContainer = styled.div`
   margin-top: 150px;
   display: flex;
@@ -346,6 +365,7 @@ export default function DetailPost({ isLogin }) {
   const loginToken = window.sessionStorage.getItem("loginToken");
   const userId = parseInt(window.sessionStorage.getItem("userId"));
 
+  const [weather, setWeather] = useState([]);
   // console.log(userId)
 
   // 게시글 id
@@ -380,8 +400,75 @@ export default function DetailPost({ isLogin }) {
     window.scrollTo(0, 0);
     getPostDetail();
     getCommentList();
-    
   }, []);
+
+  // function position() {
+  //   const params = {
+  //     // q: coords.enroad,
+  //     q: 'seoul',
+  //     appid: "72416c6d7bdd54253c2dd2797dc436b4",
+  //   };
+  //    axios
+  //     .get("https://api.openweathermap.org/data/2.5/weather", { params })
+  //     .then((res) => {
+  //       const data = res.data;
+  //       coords = {
+  //         latitude: data.coord.lat,
+  //         longitude: data.coord.lon,
+  //         roadAdd: coords.roadAdd,
+  //         enroad: coords.enload,
+  //       };
+  //       getWeather();
+  //     });
+  // }
+
+  useEffect(() => {
+    getWeather();
+  }, [coords.latitude, coords.roadAdd]);
+
+  async function getWeather() {
+    const params = {
+      lon: coords.longitude,
+      lat: coords.latitude,
+      exclude: "minutely,hourly",
+      appid: "72416c6d7bdd54253c2dd2797dc436b4",
+    };
+    await axios
+      .get("https://api.openweathermap.org/data/2.5/onecall", { params })
+      .then((res) => {
+        const data = res.data;
+        console.log(weather);
+        setWeather(data.daily.slice(0, 7));
+      });
+  }
+
+  useEffect(() => {
+    setCoords({
+      latitude: postMapData.latitude,
+      longitude: postMapData.longtitude,
+      roadAdd: postMapData.roadAdd,
+    });
+  }, [postMapData]);
+
+  function show(item) {
+    if (item === "Clouds") {
+      return <TiWeatherCloudy size={"4rem"} color={"#1E90FF"} />;
+    } else if (item === "Rain") {
+      return <WiRain size={"4rem"} color={"#2F4F4F"} />;
+    } else if (item === "Snow") {
+      return <TiWeatherSnow size={"4rem"} color={"#87CEEB"} />;
+    } else if (item === "Thunderstorm") {
+      return <TiWeatherStormy size={"4rem"} color={"#000000"} />;
+      // return <img src={image2} width="70%" />;
+    } else if (item === "Drizzle") {
+      return <TiWeatherShower size={"4rem"} color={"#696969"} />;
+    } else if (item === "Atmosphere") {
+      return <WiDust size={"4rem"} color={"#708090"} />;
+    } else {
+      return <TiWeatherSunny size={"4rem"} color={"#FF6347"} />;
+      // return <img src={image} width="70%" />;
+    }
+  }
 
   // console.log(postData)
 
@@ -409,20 +496,7 @@ export default function DetailPost({ isLogin }) {
   }
 
   // console.log(postMapData);
-
-  async function getCommentList() {}
-
-  // {latitude: '38.090059123185654', longitude: '128.65646297602729'}
-  // {roadAdd: '강원도 양양군 손양면 동명로 321-20', lotAdd: '강원 양양군 손양면 송전리 산 1-5'}
-
   // 지도 데이터 세팅
-  useEffect(() => {
-    setCoords({
-      latitude: postMapData.latitude,
-      longitude: postMapData.longtitude,
-      roadAdd: postMapData.roadAdd,
-    });
-  }, [postMapData]);
 
   const kakaoMap = useRef();
 
@@ -487,8 +561,21 @@ export default function DetailPost({ isLogin }) {
   };
 
   const navigateToModify = () => {
-    navigate('modify')
-  }
+    navigate("modify");
+  };
+
+  const [comments, setComments] = useState([]);
+
+  const getCommentList = () => {
+    axios
+      .get(`${serverPath}/comments/${id}`)
+      .then((res) => {
+        setComments(res.data.comment);
+      })
+      .catch((err) => {
+        if (err) throw err;
+      });
+  };
 
   return (
     <Container>
@@ -500,7 +587,7 @@ export default function DetailPost({ isLogin }) {
         />
       ) : null}
       <InnerContainer>
-        <TitleContainer> 
+        <TitleContainer>
           <LikeComponent userId={userId} id={id} isLogin={isLogin} />
           <div className="title">{postData.title}</div>
           <div className="wrapper">
@@ -562,9 +649,60 @@ export default function DetailPost({ isLogin }) {
             <FaSearchLocation />
             <h3 className="nickname">이 지역의 날씨는?</h3>
             &nbsp; &nbsp;
-            <span style={{ fontSize: "1.1rem" }}> {coords.roadAdd}</span>
+            <span style={{ fontSize: "1.1rem" }}> {postMapData.lotAdd}</span>
           </div>
           <hr />
+          <ShowWeather>
+            <>
+              {weather.map((item, i) => (
+                <div key={i}>
+                  <div>
+                    <div
+                      style={{
+                        fontSize: "medium",
+                        margin: "12px 15px",
+                      }}
+                    >
+                      {new Date(weather[i].dt * 1000).toLocaleDateString(
+                        "ko-KR",
+                        { weekday: "long" }
+                      )}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "15px",
+                        margin: "12px 23px",
+                      }}
+                    >
+                      {new Date(weather[i].dt * 1000)
+                        .toLocaleDateString("ko-KR")
+                        .slice(6, 10)}
+                    </div>
+
+                    {/* <div style={{ margin: "15px" }}>
+                      {now.getDay() + i > 6 ? (
+                        <div>{week[7 - now.getDay() - i]}</div>
+                      ) : (
+                        <div>{week[now.getDay() + i]}</div>
+                      )}
+                    </div> */}
+                    <div style={{ margin: "10px 3% 10px", height: "70px" }}>
+                      {show(item.weather[0].main)}
+                    </div>
+                    <div style={{ fontSize: "15px", margin: "9px 8px" }}>
+                      <span style={{ color: "#4169E1" }}>
+                        {Math.floor(weather[i].temp.min - 273.15)}℃
+                      </span>
+                      &nbsp;/&nbsp;
+                      <span style={{ color: "#DC143C" }}>
+                        {Math.floor(weather[i].temp.max - 273.15)}℃
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </>
+          </ShowWeather>
         </WeatherContainer>
 
         <CommentContainer>
@@ -573,8 +711,19 @@ export default function DetailPost({ isLogin }) {
             <h3>댓글</h3>
           </div>
           <hr />
-          <CommentList />
-          <CommentInput />
+          <CommentList
+            getCommentList={getCommentList}
+            id={id}
+            comments={comments}
+            isLogin={isLogin}
+          />
+          <CommentInput
+            getCommentList={getCommentList}
+            userId={userId}
+            id={id}
+            comments={comments}
+            isLogin={isLogin}
+          />
         </CommentContainer>
 
         {postData.userId === userId ? (
