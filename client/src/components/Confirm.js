@@ -110,6 +110,14 @@ function Confirm({ message, handleMessage }) {
       setCurMessage('로그인 후 사용해 주세요.')
       setBtnInfo('닫 기');
     }
+    else if ( message === "comment_full") {
+      setCurMessage('댓글을 입력해 주세요')
+      setBtnInfo('닫 기');
+    }
+    else if ( message === "comment_post_message") {
+      setCurMessage('댓글이 등록 되었습니다.')
+      setBtnInfo('닫 기');
+    }
   }, []);
 
 

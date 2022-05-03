@@ -6,6 +6,8 @@ import axios from "axios";
 import { IoClose } from "react-icons/io5";
 import Confirm from "../components/Confirm";
 import KakaoLoginBtn from "../components/KakaoLoginBtn";
+import GoogleLoginBtn from "../components/GoogleLoginBtn";
+import NaverLoginBtn from "../components/NaverLoginBtn";
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -157,7 +159,22 @@ const Nofify = styled.div`
   font-size: 0.8rem;
 `;
 
-function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal, confirmSignupModal, setConfirmSignupModal }) {
+const BtnContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  float: left;
+
+  margin-bottom: 35px;
+`;
+
+function LoginModal({
+  closeFn,
+  setOpenSignupModal,
+  setOpenLoginModal,
+  confirmSignupModal,
+  setConfirmSignupModal,
+}) {
   const sessionStorage = window.sessionStorage;
 
   const serverPath = process.env.REACT_APP_SERVER_PATH;
@@ -168,6 +185,7 @@ function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal, confirmSig
     password: "",
   });
   // console.log(loginInfo);
+
 
   const [isFull, setIsFull] = useState(false);
   const [message, setMessage] = useState("");
@@ -182,8 +200,6 @@ function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal, confirmSig
       /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     return emailRegex.test(value);
   };
-  console.log(isFull)
-  console.log(loginInfo)
 
   useEffect(() => {
     if (loginInfo.email && loginInfo.password) {
@@ -195,10 +211,10 @@ function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal, confirmSig
 
   useEffect(() => {
     if (confirmSignupModal === true) {
-      setMessage("signup_success") 
-      setConfirmSignupModal(false)
+      setMessage("signup_success");
+      setConfirmSignupModal(false);
     }
-  },[])
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -285,8 +301,11 @@ function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal, confirmSig
                 </div>
               </form>
             </InputContainer>
-            {/* 카카오 로그인 */}
-            <KakaoLoginBtn />
+            <BtnContainer>
+              <KakaoLoginBtn />
+              <GoogleLoginBtn />
+              <NaverLoginBtn />
+            </BtnContainer>
           </InnerContainer>
         </ModalView>
       </ModalBackdrop>
