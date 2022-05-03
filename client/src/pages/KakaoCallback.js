@@ -26,7 +26,7 @@ export default function KakaoLogin({ setIsLogin, isLogin }) {
             //이후의 모든 요청에 이 헤더 적용된다.
             // axios.defaults.headers.common[
             //   'Authorization'
-            // ] = `Bearer ${res.data.accToken}`;
+            // ] = `Bearer ${res.data.accToken}`; 
         console.log('카카오톡 로그인 성공!')
         sessionStorage.setItem("userId", res.data.userId);
         sessionStorage.setItem("loginToken", res.data.accessToken);

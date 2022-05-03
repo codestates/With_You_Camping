@@ -44,24 +44,31 @@ const CommmentAreaContainer = styled.section`
       top: 1rem;
       bottom: 1rem;
     }
-  }
+  } 
 `;
 
-const CommentListEntry = ({ comment, getCommentList, userId }) => {
+const CommentListEntry = ({ comment, getCommentList, id }) => {
+
+  const serverPath = process.env.REACT_APP_SERVER_PATH;
+  const loginToken = window.sessionStorage.getItem("loginToken");
+  const userId = parseInt(window.sessionStorage.getItem("userId"));
+
+  const commentData = comment.createdAt.slice(0,10)
+
   const [isEdit, setIsEdit] = useState(false);
   const [commentValue, setCommentValue] = useState(comment.comment);
 
   const editComment = () => {
     axios
-      .patch(
-        `${process.env.REACT_APP_API_URL}/comments/${comment.id}`,
+      .put(
+        `${serverPath}/comments/${comment.id}`,
         {
           comment: commentValue,
         },
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.accessToken}`,
+            Authorization: `Bearer ${loginToken}`,
           },
         }
       )
@@ -74,11 +81,12 @@ const CommentListEntry = ({ comment, getCommentList, userId }) => {
       });
   };
 
+
   const deleteComment = () => {
     axios
-      .delete(`${process.env.REACT_APP_API_URL}/comments/${comment.id}`, {
+      .delete(`${serverPath}/comments/${comment.id}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.accessToken}`,
+          Authorization: `Bearer ${loginToken}`,
         },
       })
       .then(() => {
@@ -92,8 +100,8 @@ const CommentListEntry = ({ comment, getCommentList, userId }) => {
   return (
     <CommmentAreaContainer>
       <div className="header">
-        <div className="nickname">{comment.User.nickname}</div>
-        {comment.UserId === userId ? (
+        <div className="nickname">{comment.nickname}</div>
+        {comment.userId === userId ? (
           <React.Fragment>
             <div className={isEdit ? null : "hide"}>
               <i className="fas fa-check" onClick={editComment}></i>
@@ -113,7 +121,7 @@ const CommentListEntry = ({ comment, getCommentList, userId }) => {
         ) : null}
       </div>
 
-      <div className="date">{"2022-01-03"}</div>
+      <div className="date">{commentData}</div>
       <textarea
         className={isEdit ? null : "hide"}
         type="text"

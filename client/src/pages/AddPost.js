@@ -9,7 +9,7 @@ import { GiCheckMark } from "react-icons/gi";
 import { IoLocateSharp as LocationPin, IoSearch } from "react-icons/io5";
 
 import { PageTitle } from "../components/pageTitle";
-
+ 
 import { LoadingIndicator } from "../components/loadingIndicator";
 import { AddBtnComponent as Btn } from "../components/AddBtnComponent";
 import { PlaceSearch } from "../modals/placeSearch";
@@ -20,6 +20,7 @@ import Confirm from "../components/Confirm";
 import markerImg from "../img/marker.png";
 
 const Container = styled.section`
+margin-top: -30px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   width: 1200px;
@@ -363,7 +364,8 @@ function AddPost() {
   useEffect(() => {
     const container = kakaoMap.current;
     let options = {
-      center: new kakao.maps.LatLng(37.5666805, 126.9784147), //지도의 중심좌표, 추후에 위치 지정하기.
+      // 지도의 중심좌표, 경기도 가평 지라섬 캠핑장
+      center: new kakao.maps.LatLng(37.8208779060263, 127.52105620613229),
       level: 3,
     };
 

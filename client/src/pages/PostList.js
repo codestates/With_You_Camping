@@ -1,15 +1,22 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import PostListComponent from "../components/PostListComponent"
 
-function PostList() {
+
+const Container= styled.section`
+   margin-top: -30px;
+   /* width: 1292px; */
+` 
+
+
+const PostList = () => {
   return (
-    <>
-      <div>게시글 목록 페이지</div>
-      <div>
-        <NavLink to="/postdetail">게시글 상세페이지</NavLink>
-      </div>
-    </>
-  );
-}
+    <Container>
+      <PostListComponent />
+    </Container>
+  );  
+};
+
 
 export default PostList;

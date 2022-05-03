@@ -47,7 +47,6 @@ export default function LikeComponent({ isLogin, id }) {
  
   useEffect(() => {
     if (isLogin) {
-      console.log('ss')
         getInterestInfo();
     }    
   }, [isLogin]); 
@@ -60,7 +59,6 @@ export default function LikeComponent({ isLogin, id }) {
         },
       })
       .then((res) => {
-        console.log(res.data);
         if (res.data.like) {
           setInterestIconColor("#e8b791");
         }

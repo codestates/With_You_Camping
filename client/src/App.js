@@ -15,6 +15,7 @@ import AddPost from "./pages/AddPost";
 import PostList from "./pages/PostList";
 import ModifyMyinfo from "./pages/ModifyMyinfo";
 import KakaoCallback from "./pages/KakaoCallback"
+import NaverCallback from "./pages/NaverCallback"
 import Footer from "./components/Footer";
 
 const GlobalStyles = createGlobalStyle`
@@ -39,6 +40,7 @@ const Container = styled.div`
   position: relative;
   width: 100vw;
   min-height: 100vh;
+
 `;
 
 const InnerContainer = styled.div`
@@ -108,7 +110,7 @@ function Router() {
     <Container>
       <GlobalStyles />
       <Navbar isLogin={isLogin} setIsLogin={setIsLogin} />
-      <InnerContainer>
+      <InnerContainer> 
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/posts" element={<PostList />} />
@@ -120,8 +122,9 @@ function Router() {
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/modifymyinfo" element={<ModifyMyinfo />} />
 
-          {/* <Route path="callback/naver" element={<NaverCallback />} /> */}
+
           <Route path="callback/kakao" element={<KakaoCallback isLogin={isLogin} setIsLogin={setIsLogin} />} />
+          <Route path="callback/naver" element={<NaverCallback />} />
         </Routes>
       </InnerContainer>
       <Footer />
