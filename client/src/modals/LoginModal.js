@@ -19,7 +19,6 @@ const ModalContainer = styled.div`
   right: 0;
   width: 100vw;
   height: 100vh;
-
   z-index: 800;
 `;
 
@@ -30,7 +29,6 @@ const ModalBackdrop = styled.div`
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.3);
-
   z-index: 800;
 `;
 
@@ -45,7 +43,6 @@ const ModalView = styled.div`
   height: 550px;
   border-radius: 15px;
   z-index: 800;
-
   span {
     color: black;
     outline: none;
@@ -154,7 +151,6 @@ const BtnContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   float: left;
-
   margin-bottom: 35px;
 `;
 
@@ -175,6 +171,7 @@ function LoginModal({
     password: "",
   });
   // console.log(loginInfo);
+
 
   const [isFull, setIsFull] = useState(false);
   const [message, setMessage] = useState("");
