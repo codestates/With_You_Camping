@@ -9,7 +9,7 @@ import axios from "axios";
 import Navbar from "./components/Navbar";
 import Landing from "./pages/Landing";
 import Mypage from "./pages/Mypage";
-import EditPost from "./pages/editPost";
+import ModifyPost from "./pages/ModifyPost";
 import DetailPost from "./pages/DetailPost";
 import AddPost from "./pages/AddPost";
 import PostList from "./pages/PostList";
@@ -110,11 +110,11 @@ function Router() {
       <InnerContainer>
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/postlist" element={<PostList />} />
+          <Route path="/posts" element={<PostList />} />
 
           <Route path="/add_post" element={<AddPost />} />
-          <Route path="/post" element={<DetailPost />} />
-          <Route path="/edit_post" element={<EditPost />} />
+          <Route path="/post/:id" element={<DetailPost isLogin={isLogin} />} />
+          <Route path="/post/:id/modify" element={<ModifyPost />} />
 
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/modifymyinfo" element={<ModifyMyinfo />} />

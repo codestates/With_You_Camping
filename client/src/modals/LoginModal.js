@@ -17,7 +17,8 @@ const ModalContainer = styled.div`
   right: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 998;
+
+  z-index: 800;
 `;
 
 const ModalBackdrop = styled.div`
@@ -27,7 +28,8 @@ const ModalBackdrop = styled.div`
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 998;
+
+  z-index: 800;
 `;
 
 const ModalView = styled.div`
@@ -40,7 +42,8 @@ const ModalView = styled.div`
   width: 400px;
   height: 550px;
   border-radius: 15px;
-  z-index: 999;
+  z-index: 800;
+
   span {
     color: black;
     outline: none;
@@ -64,7 +67,7 @@ const ModalView = styled.div`
 
 const InnerContainer = styled.div`
   position: relative;
-  top: 120px;
+  top: 50px;
   height: max-content;
 `;
 
@@ -111,6 +114,7 @@ const InputContainer = styled.div`
         border-radius: 10px;
         color: white;
         cursor: pointer;
+        /* margin-bottom: 5px; */
       }
     }
   }
@@ -143,23 +147,23 @@ const Nofify = styled.div`
   font-size: 0.8rem;
 `;
 
-function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal }) {
+function LoginModal({
+  closeFn,
+  setOpenSignupModal,
+  setOpenLoginModal,
+  confirmSignupModal,
+  setConfirmSignupModal,
+}) {
   const sessionStorage = window.sessionStorage;
 
   const serverPath = process.env.REACT_APP_SERVER_PATH;
-  const kakaoClientID = process.env.REACT_APP_KAKAO_CLIENTID;
-  const kakaoCallbackURI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
-
-  console.log(serverPath);
-  console.log(kakaoClientID);
-  console.log(kakaoCallbackURI);
 
   const navigate = useNavigate();
   const [loginInfo, setloginInfo] = useState({
     email: "",
     password: "",
   });
-  console.log(loginInfo);
+  // console.log(loginInfo);
 
   const [isFull, setIsFull] = useState(false);
   const [message, setMessage] = useState("");
@@ -174,6 +178,8 @@ function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal }) {
       /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     return emailRegex.test(value);
   };
+  console.log(isFull);
+  console.log(loginInfo);
 
   useEffect(() => {
     if (loginInfo.email && loginInfo.password) {
@@ -182,6 +188,13 @@ function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal }) {
       setIsFull(false);
     }
   }, [loginInfo]);
+
+  useEffect(() => {
+    if (confirmSignupModal === true) {
+      setMessage("signup_success");
+      setConfirmSignupModal(false);
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -206,7 +219,7 @@ function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal }) {
           // setMessage("login_success");
           setOpenSignupModal(false);
           setOpenLoginModal(false);
-          // setMessage("login_success");
+          setMessage("login_success");
           sessionStorage.setItem("userId", res.data.userId);
           sessionStorage.setItem("loginToken", res.data.accessToken);
           sessionStorage.setItem("loginMethod", "common");
@@ -228,25 +241,6 @@ function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal }) {
     setOpenSignupModal(true);
   };
 
-  // 카카오 로그인
-  // useEffect(() => {
-  //   kakaoInit();
-  // }, []);
-
-  // const kakao = window.Kakao;
-  // const kakaoInit = () => {
-  //   if (kakao.isInitialized() === false) {
-  //     kakao.init(kakaoClientID);
-  //   }
-  // };
-  // console.log(kakao)
-
-  // const kakaoSignIn = () => {
-  //   kakao.Auth.authorize({
-  //     redirectUri: kakaoCallbackURI,
-  //   });
-  // };
-
   return (
     <ModalContainer>
       <ModalBackdrop>
@@ -259,20 +253,26 @@ function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal }) {
           </CloseBtn>
           <InnerContainer>
             <InputContainer>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <Nofication>WYC.</Nofication>
                 <label htmlFor="user-email" />
-                <input id="user-email" type="email" placeholder="email" />
+                <input
+                  id="user-email"
+                  type="email"
+                  placeholder="email"
+                  onChange={handleInputValue("email")}
+                />
 
                 <label htmlFor="user-password" />
                 <input
                   id="user-password"
                   type="password"
                   placeholder="password"
+                  onChange={handleInputValue("password")}
                 />
                 <Nofify>이메일과 비밀번호를 확인해주세요</Nofify>
                 <div className="button-container">
-                  <button className="login_button" type="button">
+                  <button className="login_button" type="submit">
                     Login
                   </button>
                   <div className="signup-button" onClick={openSignup}>
@@ -280,8 +280,8 @@ function LoginModal({ closeFn, setOpenSignupModal, setOpenLoginModal }) {
                   </div>
                 </div>
               </form>
-              {/* 카카오 로그인 버튼 */}
             </InputContainer>
+            {/* 카카오 로그인 */}
             <KakaoLoginBtn />
           </InnerContainer>
         </ModalView>

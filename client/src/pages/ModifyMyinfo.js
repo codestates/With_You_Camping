@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { OneBtnModal } from "../components/oneBtnModal";
 import { PageTitle } from "../components/pageTitle";
 import { TwoBtnModal } from "../components/TwoBtnModal";
 
@@ -122,25 +124,26 @@ const Nofication = styled.div`
 `;
 
 function ModifyMyinfo() {
-  const localPath = process.env.REACT_APP_SERVER_PATH;
+  const navigate = useNavigate();
+  const serverPath = process.env.REACT_APP_SERVER_PATH;
+  const userId = window.sessionStorage.getItem("userId");
+  const accessToken = window.sessionStorage.getItem("loginToken");
 
   const [currPassword, setCurrPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [retypePassword, setRetypePassword] = useState("");
   const [newNickname, setNewNickname] = useState("");
-
-  const [passwordCheck, setPasswordCheck] = useState(false);
-  const [signoutModal, setSignoutModal] = useState(false);
 
   const [nicknameCheck, setNicknameCheck] = useState(true);
 
+  const [signoutModal, setSignoutModal] = useState(false);
+  const [okModalOpen, setOkModalOpen] = useState(false);
+  const [invaildModalOpen, setInvaildModalOpen] = useState(false);
+
   useEffect(() => {
-    if (newPassword === retypePassword) {
-      setPasswordCheck(true);
-    } else {
-      setPasswordCheck(false);
+    if (!userId) {
+      navigate("/");
     }
-  }, [newPassword, retypePassword]);
+  }, []);
 
   const nicknameValidCheck = (value) => {
     let nicknameReg = /^[가-힣a-zA-Z0-9_]{2,12}$/;
@@ -151,22 +154,65 @@ function ModifyMyinfo() {
     setNewNickname(e.target.value);
   };
 
-  useEffect(() => {
+  const clickModifyNicknameBtn = async () => {
     (async () => {
+      const headers = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
       if (newNickname && nicknameValidCheck(newNickname)) {
         try {
-          const res = await axios.post(`${localPath}/api/users/nickname`, {
-            nickname: newNickname,
-          });
+          const res = await axios.put(
+            `${serverPath}/users/`,
+            {
+              nickname: newNickname,
+            },
+            headers
+          );
+          console.log(res);
           if (res.status === 200) {
             setNicknameCheck(true);
+            setOkModalOpen(true);
           }
         } catch (err) {
           setNicknameCheck(false);
         }
       }
     })();
-  }, [newNickname, localPath]);
+  };
+
+  const clickModifyPasswordBtn = async () => {
+    (async () => {
+      const headers = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      if (newPassword && currPassword) {
+        try {
+          const res = await axios.put(
+            `${serverPath}/users/`,
+            {
+              nowPassword: currPassword,
+              newPassword,
+            },
+            headers
+          );
+
+          if (res.status === 200) {
+            setOkModalOpen(true);
+            console.log(res);
+          }
+        } catch (err) {
+          console.log(err);
+          setInvaildModalOpen(true);
+        }
+      }
+    })();
+  };
 
   const NicknameNofication = () => {
     if (
@@ -183,31 +229,35 @@ function ModifyMyinfo() {
   };
 
   const PasswordNofication = () => {
-    if (newPassword && newPassword.length < 8) {
-      return <Nofication>8자 이상이어야 합니다</Nofication>;
+    if (newPassword && newPassword.length < 6) {
+      return <Nofication>6자 이상이어야 합니다</Nofication>;
     } else {
       return null;
     }
-  };
-
-  const RetypePasswordNofication = () => {
-    if (!passwordCheck && retypePassword) {
-      return <Nofication>비밀번호가 서로 다릅니다!</Nofication>;
-    }
-    if (!passwordCheck && !retypePassword) {
-      return <Nofication>비밀번호를 재입력해주세요!</Nofication>;
-    }
-    return null;
   };
 
   const clickSignoutBtn = async () => {
     setSignoutModal(true);
   };
 
+  const deleteAccount = async () => {
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+
+    axios.delete(`${serverPath}/users`, headers);
+
+    sessionStorage.clear();
+    window.location.reload();
+    navigate("/");
+  };
+
   const NickNameBtn = () => {
     if (newNickname) {
       return (
-        <ConfirmBtn>
+        <ConfirmBtn onClick={clickModifyNicknameBtn}>
           <span>닉네임 변경</span>
         </ConfirmBtn>
       );
@@ -223,7 +273,7 @@ function ModifyMyinfo() {
   const PasswordBtn = () => {
     if (currPassword && newPassword) {
       return (
-        <ConfirmBtn>
+        <ConfirmBtn onClick={clickModifyPasswordBtn}>
           <span>비밀번호 변경</span>
         </ConfirmBtn>
       );
@@ -244,6 +294,12 @@ function ModifyMyinfo() {
     );
   };
   const modalHandler = (modal) => {
+    if (modal === "ok") {
+      okModalOpen ? setOkModalOpen(false) : setOkModalOpen(true);
+    }
+    if (modal === "invalid") {
+      invaildModalOpen ? setInvaildModalOpen(false) : setInvaildModalOpen(true);
+    }
     if (modal === "signout") {
       signoutModal ? setSignoutModal(false) : setSignoutModal(true);
     }
@@ -251,9 +307,23 @@ function ModifyMyinfo() {
 
   return (
     <Container>
+      {okModalOpen ? (
+        <OneBtnModal
+          close={() => modalHandler("ok")}
+          main={"회원정보 변경이 완료되었습니다"}
+          nav={-1}
+        />
+      ) : null}
+      {invaildModalOpen ? (
+        <OneBtnModal
+          close={() => modalHandler("invalid")}
+          main={"비밀번호가 다릅니다."}
+        />
+      ) : null}
       {signoutModal ? (
         <TwoBtnModal
           close={() => modalHandler("signout")}
+          action={deleteAccount}
           main={
             "정말로 회원탈퇴 하시겠습니다?\n삭제된 정보는 복구 할 수 없습니다."
           }

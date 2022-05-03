@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Container = styled.section`
   position: relative;
@@ -66,11 +67,44 @@ const ImageList = styled.div`
 
 function Mypage() {
   const navigate = useNavigate();
+
+  const serverPath = process.env.REACT_APP_SERVER_PATH;
+  const userId = window.sessionStorage.getItem("userId");
+  const accessToken = window.sessionStorage.getItem("loginToken");
+
+  const [user, setUser] = useState([]);
+  console.log(userId);
+
+  useEffect(() => {
+    if (!userId) {
+      navigator("/");
+    }
+  }, []);
+
+  useEffect(() => {
+    const getUserinfo = async () => {
+      const headers = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+      const res = await axios.get(`${serverPath}/users/${userId}`, headers);
+      console.log(res);
+
+      setUser(res.data);
+    };
+    getUserinfo();
+  }, []);
+
+  console.log(user);
+  const { nickname } = user;
+  console.log(nickname);
+
   return (
     <Container>
       <InnerContainer>
         <UserInfo>
-          <Nickname>방구석</Nickname>
+          <Nickname>{nickname}</Nickname>
           <EmailInfo>dlfwnd@gmail.com</EmailInfo>
           <ModifyInfo onClick={() => navigate("/modifymyinfo")}>
             회원정보 수정

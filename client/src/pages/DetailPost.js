@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import {
+import { useNavigate } from "react-router-dom";
+import { 
   BsPencilSquare,
   BsGeoAltFill,
   BsMapFill,
@@ -12,12 +13,15 @@ import { FaSearchLocation, FaCommentDots } from "react-icons/fa";
 import { MdPersonPin } from "react-icons/md";
 import { DetailBtnComponent as Btn } from "../components/DetailBtnComponent";
 
-import sample from "../img/sample.jpeg";
 import StarRating from "../components/StarRating";
 import markerImg from "../img/marker.png";
 import TagComponent from "../components/TagComponent";
 import CommentInput from "../components/CommentInput";
 import CommentList from "../components/CommentList";
+import LikeComponent from "../components/LikeComponent";
+import { TwoBtnModal } from "../components/TwoBtnModal";
+
+import { useParams } from "react-router-dom";
 
 const Container = styled.section`
   display: grid;
@@ -57,7 +61,7 @@ const TitleContainer = styled.div`
   font-size: 1.9rem;
 `;
 
-const HeartButton = styled.div`
+const LikeButton = styled.div`
   text-align: right;
   margin-bottom: 50px;
   font-size: 1.7rem;
@@ -333,22 +337,37 @@ const DeleteBtnContainer = styled.div`
   /* margin-top: 5px; */
 `;
 
-export default function DetailPost() {
+export default function DetailPost({ isLogin }) {
   const kakao = window.kakao;
 
-  const [interestIconColor, setInterestIconColor] = useState("#cccccc");
-  // const serverPath = process.env.REACT_APP_SERVER_PATH;
-  // const loginToken = window.sessionStorage.getItem('loginToken')
-  // const userId = window.sessionStorage.getItem('userId')
+  const navigate = useNavigate();
 
-  const [tags, setTags] = useState([
-    "서울",
-    "인터넷가능",
-    "주차장협소",
-    "전기사용",
-    "화장실청결",
-  ]);
-  const [description, setDesctription] = useState("가족끼리 갔다오기 좋아요");
+  const serverPath = process.env.REACT_APP_SERVER_PATH;
+  const loginToken = window.sessionStorage.getItem("loginToken");
+  const userId = parseInt(window.sessionStorage.getItem("userId"));
+
+  // console.log(userId)
+
+  // 게시글 id
+  const { id } = useParams();
+
+  // console.log(serverPath)
+  // console.log(loginToken)
+  // console.log(userId)
+  // console.log(id)
+
+  const [interestIconColor, setInterestIconColor] = useState("#cccccc");
+
+  // 게시글 정보
+  const [postData, setPostData] = useState({});
+  // 게시글 별점
+  const [postRating, setPostRating] = useState(0);
+  // 게시글 작성 시간
+  const [boardCreated, setBoardCreated] = useState("");
+  // 게시글 태그 정보
+  const [postTagData, setPostTagData] = useState([]);
+  // 게시글 위치 정보
+  const [postMapData, setPostMapData] = useState({});
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -356,38 +375,56 @@ export default function DetailPost() {
 
   const [showOnMap, setShowOnMap] = useState(false);
 
+  // 상세 페이지 데이터 세팅
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    getPostDetail();
+    getCommentList();
+    
+  }, []);
+
+  // console.log(postData)
+
+  async function getPostDetail() {
+    await axios
+      .get(`${serverPath}/boards/${id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          setPostData(res.data.board);
+          setBoardCreated(res.data.board.createdAt.slice(0, 10));
+          setPostRating(res.data.board.rating);
+          setPostTagData([
+            `${res.data.boardData.area}`,
+            `인터넷 ${res.data.boardData.wifi}`,
+            `주차장 ${res.data.boardData.parking}`,
+            `전기사용 ${res.data.boardData.electricity}`,
+            `화장실 ${res.data.boardData.toiletType}`,
+          ]);
+          setPostMapData(res.data.locate);
+        }
+      })
+      .catch((err) => {
+        if (err) throw err;
+      });
+  }
+
+  // console.log(postMapData);
+
+  async function getCommentList() {}
+
   // {latitude: '38.090059123185654', longitude: '128.65646297602729'}
   // {roadAdd: '강원도 양양군 손양면 동명로 321-20', lotAdd: '강원 양양군 손양면 송전리 산 1-5'}
 
   // 지도 데이터 세팅
   useEffect(() => {
     setCoords({
-      latitude: "38.090059123185654",
-      longitude: "128.65646297602729",
-      roadAdd: "강원도 양양군 손양면 동명로 321-20",
+      latitude: postMapData.latitude,
+      longitude: postMapData.longtitude,
+      roadAdd: postMapData.roadAdd,
     });
-  }, []);
+  }, [postMapData]);
 
   const kakaoMap = useRef();
-  // useEffect(() => {
-  //   (async () => {
-  //     setIsLoading(true)
-  //     try {
-  //       const res = await axios.get(`${serverPath}/api/posts/${params.id}`)
-  //       const post = res.data.post
-
-  //       setPostData(post)
-  //       setCoords(post.location)
-  //       setTags(
-  //         [...post.hashtags.keywords, ...post.hashtags.myTags]
-  //           .sort((a, b) => a < b ? - 1 : (a === b) ? 0 : 1)
-  //       )
-  //     } catch (err) {
-  //       //err
-  //     }
-  //     setIsLoading(false)
-  //   })()
-  // }, [])
 
   useEffect(() => {
     if (coords.latitude && coords.longitude) {
@@ -426,77 +463,50 @@ export default function DetailPost() {
     );
   };
 
-  const checkLoginStatus = (callback) => {
-    callback();
-    // if (isLogin) {
-    //   callback();
-    // } else {
-    //   dispatch(setLoginModal(true));
-    // }
-    // return;
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
+  const modalHandler = (modal) => {
+    if (modal === "delete") {
+      openDeleteModal ? setOpenDeleteModal(false) : setOpenDeleteModal(true);
+    }
   };
 
-  const interestPost = () => {
-    if (interestIconColor === "#cccccc") {
-      setInterestIconColor("#e8b791");
-    } else {
-      setInterestIconColor("#cccccc");
+  const deletePost = async () => {
+    try {
+      const res = await axios.delete(`${serverPath}/boards/${id}`, {
+        headers: {
+          Authorization: `Bearer ${loginToken}`,
+        },
+      });
+      if (res.status === 200) {
+        navigate("/posts");
+      }
+    } catch (err) {
+      // err
     }
-    /* if (interestIconColor === "#cccccc") {
-      axios
-        .post(
-          `${process.env.REACT_APP_API_URL}/interests`,
-          {
-            // id: post.id,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.accessToken}`,
-            },
-          }
-        )
-        .then(() => {
-          setInterestIconColor("#d62d20");
-        })
-        .catch((err) => {
-          if (err) throw err;
-        });
-    } else {
-      axios
-        .delete(`${process.env.REACT_APP_API_URL}/interests`, {
-          data: {
-            // id: post.id,
-          },
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.accessToken}`,
-          },
-        })
-        .then(() => {
-          setInterestIconColor("#cccccc");
-        });
-    } */
   };
+
+  const navigateToModify = () => {
+    navigate('modify')
+  }
 
   return (
     <Container>
+      {openDeleteModal ? (
+        <TwoBtnModal
+          main={"정말로 게시글을 삭제하시겠습니까?"}
+          close={() => modalHandler("delete")}
+          action={deletePost}
+        />
+      ) : null}
       <InnerContainer>
-        <TitleContainer>
-          <HeartButton>
-            <i
-              className="fas fa-heart fa-lg"
-              style={{
-                color: `${interestIconColor}`,
-              }}
-              onClick={() => checkLoginStatus(interestPost)}
-            />
-          </HeartButton>
-
-          <div className="title">양양 오토 캠핑장 괜찮네요~</div>
+        <TitleContainer> 
+          <LikeComponent userId={userId} id={id} isLogin={isLogin} />
+          <div className="title">{postData.title}</div>
           <div className="wrapper">
             <TagContainer>
-              {tags.length ? (
-                tags.map((tag, idx) => (
+              {postTagData.length ? (
+                postTagData.map((tag, idx) => (
                   <TagComponent key={idx}>{tag}</TagComponent>
                 ))
               ) : (
@@ -506,21 +516,19 @@ export default function DetailPost() {
 
             {/* <ToggleLikeBtn likeStat={likeStat} /> */}
           </div>
-          <StarRating />
+          <StarRating postRating={postRating} />
         </TitleContainer>
-        <ImgContainer img={sample}></ImgContainer>
+        <ImgContainer img={postData.picture}></ImgContainer>
 
-        {description && (
-          <DescContainer>
-            <div className="title_wrapper">
-              <MdPersonPin />
-              <h3 className="nickname"> 캠핑사랑 님의 게시글</h3>
-            </div>
-            <hr />
-            <div className="createdAt"> (2022-02-03) </div>
-            <pre>{description}</pre>
-          </DescContainer>
-        )}
+        <DescContainer>
+          <div className="title_wrapper">
+            <MdPersonPin />
+            <h3 className="nickname"> {postData.nickname} 님의 게시글</h3>
+          </div>
+          <hr />
+          <div className="createdAt"> ({boardCreated}) </div>
+          <pre>{postData.content}</pre>
+        </DescContainer>
 
         <MapContainer>
           <div className="title_wrapper">
@@ -569,19 +577,26 @@ export default function DetailPost() {
           <CommentInput />
         </CommentContainer>
 
-        <ModifyBtnContainer>
-          <Btn width={"100%"} color={"#ddd"} hover={"#bde0bc"}>
-            수정하기
-          </Btn>
-          <Btn width={"100%"} color={"#ddd"} hover={"#e99358"}>
-            삭제하기
-          </Btn>
-        </ModifyBtnContainer>
-
-        {/* <ModifyBtn >
-        <span>게시글 수정하기</span>
-              <BsPencilSquare />
-        </ModifyBtn> */}
+        {postData.userId === userId ? (
+          <ModifyBtnContainer>
+            <Btn
+              width={"100%"}
+              color={"#ddd"}
+              hover={"#bde0bc"}
+              action={navigateToModify}
+            >
+              수정하기
+            </Btn>
+            <Btn
+              width={"100%"}
+              color={"#ddd"}
+              hover={"#e99358"}
+              action={() => modalHandler("delete")}
+            >
+              삭제하기
+            </Btn>
+          </ModifyBtnContainer>
+        ) : null}
       </InnerContainer>
     </Container>
   );
