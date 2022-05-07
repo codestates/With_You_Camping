@@ -45,59 +45,59 @@ function MyPost() {
       }
     } catch (err) {}
   }
-  console.log(userPost);
-  console.log(page);
-  const getPage = async (page) => {
-    const headers = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-    try {
-      const res = await axios.get(
-        `${serverPath}/users/boards?pages=${page}&limit=12`,
-        headers
-      );
-      if (res.status === 200 && res.data.boards.rows.length > 0) {
-        console.log(page);
-        setUserPost([...userPost, ...res.data.boards.rows]);
-      }
-      if (res.data.posts.length === 0) {
-        setPostEnd(true);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // console.log(userPost);
+  // console.log(page);
+  // const getPage = async (page) => {
+  //   const headers = {
+  //     headers: {
+  //       Authorization: `Bearer ${accessToken}`,
+  //     },
+  //   };
+  //   try {
+  //     const res = await axios.get(
+  //       `${serverPath}/users/boards?pages=${page}&limit=12`,
+  //       headers
+  //     );
+  //     if (res.status === 200 && res.data.boards.rows.length > 0) {
+  //       console.log(page);
+  //       setUserPost([...userPost, ...res.data.boards.rows]);
+  //     }
+  //     if (res.data.posts.length === 0) {
+  //       setPostEnd(true);
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
-  const loadMore = () => {
-    setPage(page + 1);
-  };
+  // const loadMore = () => {
+  //   setPage(page + 1);
+  // };
 
-  useEffect(() => {
-    getPage();
-  }, [page]);
+  // useEffect(() => {
+  //   getPage();
+  // }, [page]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && viewmore.current) {
-          viewmore.current.click();
-        }
-      },
-      { threshold: 1 }
-    );
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       if (entries[0].isIntersecting && viewmore.current) {
+  //         viewmore.current.click();
+  //       }
+  //     },
+  //     { threshold: 1 }
+  //   );
 
-    if (viewmore.current) {
-      observer.observe(viewmore.current);
-    }
-  }, [userPost]);
+  //   if (viewmore.current) {
+  //     observer.observe(viewmore.current);
+  //   }
+  // }, [userPost]);
 
   return (
     <React.Fragment>
       {userPost ? <Card post={userPost} /> : null}
 
-      <div ref={viewmore} onClick={loadMore} />
+      {/* <div ref={viewmore} onClick={loadMore} /> */}
     </React.Fragment>
   );
 }

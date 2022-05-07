@@ -118,21 +118,22 @@ function Mypage(page) {
     "/mypage/modifymyinfo",
   ];
 
-  useEffect(() => {
-    getUserPost();
-  }, []);
+  // useEffect(() => {
+  //   getUserPost();
+  // }, []);
 
-  async function getUserPost() {
-    const headers = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-    const res = await axios.get(
-      `${serverPath}/users/boards?pages=1&limit=10`,
-      headers
-    );
-  }
+  // async function getUserPost() {
+  //   const headers = {
+  //   headers: {
+  //     Authorization: `Bearer ${accessToken}`,
+  //   },
+  // };
+  // const res = await axios.get(
+  //   `${serverPath}/users/boards?pages=1&limit=12`,
+  //   headers
+  // );
+  // console.log(res);
+  //}
 
   return (
     <MyPageContainer>
@@ -148,7 +149,7 @@ function Mypage(page) {
                 onClick={() => {
                   navigate(pageName[idx]);
                 }}
-                className={page["page"] === idx + "" && "active"}
+                className={page["page"] === idx + "" ? "active" : null}
               >
                 {e}
               </li>

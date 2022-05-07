@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Search from "./Search";
 import SelectList from "./SelectList";
 import Card from "./Card";
+import axios from "axios";
 
 const HLine = styled.div`
   display: grid;
@@ -68,8 +69,30 @@ const CardContainer = styled.div`
 `;
 
 export default function PostListComponent() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    ReceiveCardList();
+  }, []);
+
+  const ReceiveCardList = () => {
+    const serverPath = process.env.REACT_APP_SERVER_PATH;
+    axios({
+      method: "GET",
+      url: `${serverPath}/main`,
+      params: {
+        pages: 1,
+        limit: 12,
+      },
+    }).then((res) => {
+      //const data = res.data.boards;
+      //console.log(res);
+      // console.log(data);
+      setPosts(res.data.boards.rows);
+    });
+  };
   return (
-    <Container> 
+    <Container>
       <TitleContainer>
         게시글 목록 <HLine />
       </TitleContainer>
@@ -78,7 +101,7 @@ export default function PostListComponent() {
         <Search />
       </InnerContainer>
       <CardContainer>
-        <Card />
+        <Card post={posts} />
       </CardContainer>
     </Container>
   );
