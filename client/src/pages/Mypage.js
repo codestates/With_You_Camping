@@ -101,7 +101,13 @@ const SignContainer = styled.div`
 function Mypage(page) {
   const navigate = useNavigate();
 
-  const tabContents = ["게시글", "좋아요", "회원 정보수정"];
+
+  
+
+  const tabContents = [
+    "게시글",
+    "좋아요",
+    "회원 정보수정"];
   const serverPath = process.env.REACT_APP_SERVER_PATH;
   const userId = window.sessionStorage.getItem("userId");
   const nickname = window.sessionStorage.getItem("nickname");
@@ -118,21 +124,25 @@ function Mypage(page) {
     "/mypage/modifymyinfo",
   ];
 
-  useEffect(() => {
-    getUserPost();
-  }, []);
+  // useEffect(() => {
+  //   getUserPost();
+  // }, []);
 
-  async function getUserPost() {
-    const headers = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-    const res = await axios.get(
-      `${serverPath}/users/boards?pages=1&limit=10`,
-      headers
-    );
-  }
+  // async function getUserPost() {
+  //   const headers = {
+  //     headers: {
+  //       Authorization: `Bearer ${accessToken}`,
+  //     },
+  //   };
+  //   const res = await axios.get(
+  //     `${serverPath}/users/boards?pages=1&limit=10`,
+  //     headers
+  //   );
+
+  //   console.log(res.data);
+  // }
+
+  console.log(page)
 
   return (
     <MyPageContainer>
@@ -148,7 +158,7 @@ function Mypage(page) {
                 onClick={() => {
                   navigate(pageName[idx]);
                 }}
-                className={page["page"] === idx + "" && "active"}
+                className={page["page"] === idx + "" ? "active" : null}
               >
                 {e}
               </li>

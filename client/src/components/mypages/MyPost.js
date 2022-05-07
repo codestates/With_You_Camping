@@ -33,8 +33,8 @@ function MyPost() {
         Authorization: `Bearer ${accessToken}`,
       },
     };
-    setUserPost([]);
-    setPage(1);
+    // setUserPost([]);
+    // setPage(1);
     try {
       const res = await axios.get(
         `${serverPath}/users/boards?pages=${page}&limit=12`,
@@ -45,8 +45,8 @@ function MyPost() {
       }
     } catch (err) {}
   }
-  console.log(userPost);
-  console.log(page);
+  // console.log(userPost);
+  // console.log(page);
   const getPage = async (page) => {
     const headers = {
       headers: {
