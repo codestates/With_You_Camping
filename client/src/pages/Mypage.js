@@ -104,6 +104,7 @@ function Mypage(page) {
   const tabContents = ["게시글", "좋아요", "회원 정보수정"];
   const serverPath = process.env.REACT_APP_SERVER_PATH;
   const userId = window.sessionStorage.getItem("userId");
+  const nickname = window.sessionStorage.getItem("nickname");
   const accessToken = window.sessionStorage.getItem("loginToken");
 
   useEffect(() => {

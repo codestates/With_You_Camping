@@ -30,6 +30,7 @@ export default function KakaoLogin({ setIsLogin, isLogin }) {
         console.log('카카오톡 로그인 성공!')
         sessionStorage.setItem("userId", res.data.userId);
         sessionStorage.setItem("loginToken", res.data.accessToken);
+        sessionStorage.setItem("nickname", res.data.nickname);
         sessionStorage.setItem("loginMethod", "kakao");
         navigate('/');
         window.location.reload()

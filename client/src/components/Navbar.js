@@ -178,6 +178,7 @@ function Navber({ isLogin, setIsLogin }) {
                 마이페이지
               </NavLink>
             </Div>
+            
             <Div>
               <div className="logout" onClick={() => modalHandler("logout")}>
                 로그아웃

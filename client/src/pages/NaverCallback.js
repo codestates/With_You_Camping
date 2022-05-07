@@ -41,6 +41,7 @@ export default function NaverCallback() {
         if (res.status === 200) {
             sessionStorage.setItem("userId", res.data.userId);
             sessionStorage.setItem("loginToken", res.data.accessToken);
+            sessionStorage.setItem("nickname", res.data.nickname);
             sessionStorage.setItem("loginMethod", "naver");
             navigate("/");
             window.location.reload();

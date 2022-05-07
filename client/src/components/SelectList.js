@@ -134,7 +134,7 @@ function SelectList() {
     
   const [LocationList, setLocationList] = useState(list.location);
   const [CategoryList, setCategoryList] = useState(list.category);
-
+ 
   const TagOnClick = (e) => {
     const { name } = e.target;
     LocationList.map((x, index) => {
@@ -188,7 +188,7 @@ function SelectList() {
     <Container>
       <ListBox>
         {LocationMap}
-        <CategoryBox>{CategoryMap}</CategoryBox>{" "}
+        <CategoryBox>{CategoryMap}</CategoryBox>
       </ListBox>
     </Container>
   );
