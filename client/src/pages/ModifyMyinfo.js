@@ -329,14 +329,9 @@ function ModifyMyinfo() {
           }
         />
       ) : null}
-      <Header>
-        <PageTitle>회원 정보수정</PageTitle>
-      </Header>
+
       <UserInfoBox>
         <div className="fields">
-          <div className="form">
-            <div>이메일 dlfwnd@gmail.com</div>
-          </div>
           <div className="form">
             <div>새로운 닉네임</div>
             <input

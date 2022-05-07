@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { postArray } from "./data/data";
-
+import { useNavigate } from "react-router-dom";
 import comment from "../img/svg/comment.svg";
 import Heart from "../img/svg/Heart.svg";
 import testIMG from "../img/d.png";
@@ -119,54 +119,72 @@ const CampingElementEmojiText = styled.p`
   margin-top: 1px;
 `;
 
-const Card = () => {
-  const [Dummy, setDummy] = useState(postArray);
-  const TestMap = Dummy.map((x, index) => {
-    return (
-      <Container key={index}>
-        <InnerContainer>
-          <CampingElement>
-            <CampingElementImg src={testIMG} />
-            <CampingElementDesignLine />
-            <CampingElementTextBox>
-              <CampingElementTitle>{x.title}</CampingElementTitle>
-              <CampingElementEmojiAria>
-                <CampingElementName>{x.userId}</CampingElementName>
-                <CampingElementIcon src={Heart} />
-                <CampingElementEmojiText>{x.totalLike}</CampingElementEmojiText>
-                <CampingElementIcon src={comment} />
-                <CampingElementEmojiText>
-                  {x.totalcomment}
-                </CampingElementEmojiText>
-              </CampingElementEmojiAria>
-            </CampingElementTextBox>
-          </CampingElement>
-        </InnerContainer>
-      </Container>
-    );
-  });
+const Card = ({ post, LikePost }) => {
+  const navigate = useNavigate();
 
-  // console.log(postArray);
-
-  return (
-    <>
-      {TestMap}
-      {/* <CampingElement>
-        <CampingElementImg src={testIMG} />
-        <CampingElementDesignLine />
-        <CampingElementTextBox>
-          <CampingElementTitle>난천 캠핑장</CampingElementTitle>
-          <CampingElementEmojiAria>
-            <CampingElementName>홍길동</CampingElementName>
-            <CampingElementIcon src={Heart} />
-            <CampingElementEmojiText>309</CampingElementEmojiText>
-            <CampingElementIcon src={comment} />
-            <CampingElementEmojiText>25</CampingElementEmojiText>
-          </CampingElementEmojiAria>
-        </CampingElementTextBox>
-      </CampingElement> */}
-    </>
-  );
+  if (post) {
+    return post.map((x, index) => {
+      return (
+        <Container key={index}>
+          <InnerContainer>
+            <CampingElement
+              onClick={() => {
+                navigate(`/post/${x.id}`);
+              }}
+            >
+              <CampingElementImg src={x.picture} />
+              <CampingElementDesignLine />
+              <CampingElementTextBox>
+                <CampingElementTitle>{x.title}</CampingElementTitle>
+                <CampingElementEmojiAria>
+                  <CampingElementName>{x.User.nickname}</CampingElementName>
+                  <CampingElementIcon src={Heart} />
+                  <CampingElementEmojiText>
+                    {x.totalLike}
+                  </CampingElementEmojiText>
+                  <CampingElementIcon src={comment} />
+                  <CampingElementEmojiText>
+                    {x.Comments.length}
+                  </CampingElementEmojiText>
+                </CampingElementEmojiAria>
+              </CampingElementTextBox>
+            </CampingElement>
+          </InnerContainer>
+        </Container>
+      );
+    });
+  } else {
+    return LikePost.map((x, index) => {
+      return (
+        <Container key={index}>
+          <InnerContainer>
+            <CampingElement
+              onClick={() => {
+                navigate(`/post/${x.Board.id}`);
+              }}
+            >
+              <CampingElementImg src={x.Board.picture} />
+              <CampingElementDesignLine />
+              <CampingElementTextBox>
+                <CampingElementTitle>{x.Board.title}</CampingElementTitle>
+                <CampingElementEmojiAria>
+                  <CampingElementName>{x.User.nickname}</CampingElementName>
+                  <CampingElementIcon src={Heart} />
+                  <CampingElementEmojiText>
+                    {x.totalLike}
+                  </CampingElementEmojiText>
+                  <CampingElementIcon src={comment} />
+                  <CampingElementEmojiText>
+                    {x.Board.Comments.length}
+                  </CampingElementEmojiText>
+                </CampingElementEmojiAria>
+              </CampingElementTextBox>
+            </CampingElement>
+          </InnerContainer>
+        </Container>
+      );
+    });
+  }
 };
 
 export default Card;

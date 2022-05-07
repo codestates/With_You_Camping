@@ -7,7 +7,6 @@ import styled from "styled-components";
 import { BsCameraFill } from "react-icons/bs";
 import { GiCheckMark } from "react-icons/gi";
 import { IoLocateSharp as LocationPin, IoSearch } from "react-icons/io5";
-
 import { PageTitle } from "../components/pageTitle";
 
 import { LoadingIndicator } from "../components/loadingIndicator";

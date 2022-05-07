@@ -117,8 +117,9 @@ function Router() {
           <Route path="/post/:id" element={<DetailPost isLogin={isLogin} />} />
           <Route path="/post/:id/modify" element={<ModifyPost />} />
 
-          <Route path="/mypage" element={<Mypage />} />
-          <Route path="/modifymyinfo" element={<ModifyMyinfo />} />
+          <Route path="/mypage/mypost" element={<Mypage page="0" />} />
+          <Route path="/mypage/likepost" element={<Mypage page="1" />} />
+          <Route path="/mypage/modifymyinfo" element={<Mypage page="2" />} />
 
           <Route
             path="callback/kakao"

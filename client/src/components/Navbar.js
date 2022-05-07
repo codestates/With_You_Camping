@@ -172,7 +172,7 @@ function Navber({ isLogin, setIsLogin }) {
             </Div>
             <Div>
               <NavLink
-                to="/mypage"
+                to="/mypage/mypost"
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 마이페이지
