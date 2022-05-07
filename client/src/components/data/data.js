@@ -148,3 +148,46 @@ export const postArray = [
     totalcomment: 12,
   },
 ];
+
+export const areaData = [
+  {
+    id: 1,
+    name: "전체",
+    onOff: true,
+  },
+  {
+    id: 2,
+    name: "서울",
+    onOff: false,
+  },
+  {
+    id: 3,
+    name: "경기도",
+    onOff: false,
+  },
+  {
+    id: 4,
+    name: "강원도",
+    onOff: false,
+  },
+  {
+    id: 5,
+    name: "충청도",
+    onOff: false,
+  },
+  {
+    id: 6,
+    name: "경상도",
+    onOff: false,
+  },
+  {
+    id: 7,
+    name: "전라도",
+    onOff: false,
+  },
+  {
+    id: 8,
+    name: "제주도",
+    onOff: false,
+  },
+]

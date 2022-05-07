@@ -195,6 +195,7 @@ const InnerContainer = styled.div`
 
 
 function Landing() {
+
   return (
     <Container>
       <Picture>

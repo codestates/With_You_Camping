@@ -6,9 +6,7 @@ const Container = styled.div`
   img {
   border-radius: 5px;
   box-shadow: rgb(0 0 0 / 24%) 0px 2px 2px 0px, rgb(0 0 0 / 24%) 0px 0px 1px 0px;
-
   cursor: pointer;
-
   transition: 0.1s;
   
   &:hover{

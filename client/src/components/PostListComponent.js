@@ -69,7 +69,7 @@ const CardContainer = styled.div`
 
 export default function PostListComponent() {
   return (
-    <Container>
+    <Container> 
       <TitleContainer>
         게시글 목록 <HLine />
       </TitleContainer>

@@ -38,7 +38,9 @@ export default function GoogleLoginBtn() {
     if (getToken.status === 200) {
       sessionStorage.setItem("userId", getToken.data.userId);
       sessionStorage.setItem("loginToken", getToken.data.accessToken);
+      sessionStorage.setItem("nickname", getToken.data.nickname);
       sessionStorage.setItem("loginMethod", "google");
+      
       navigate("/");
       window.location.reload();
     }

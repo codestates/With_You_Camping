@@ -13,15 +13,12 @@ const ModalContainer = styled.div`
   position: fixed;
   display: grid;
   place-items: center;
-
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-
   width: 100vw;
   height: 100vh;
-
   z-index: 800;
 `;
 
@@ -31,9 +28,7 @@ const ModalBackdrop = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
-
   background-color: rgba(0, 0, 0, 0.3);
-
   z-index: 800;
 `;
 
@@ -48,7 +43,6 @@ const ModalView = styled.div`
   height: 550px;
   border-radius: 15px;
   z-index: 800;
-
   span {
     color: black;
     outline: none;
@@ -78,14 +72,11 @@ const InnerContainer = styled.div`
 
 const InputContainer = styled.div`
   margin-bottom: 25px;
-
   form {
     position: relative;
     top: -25%;
-
     display: grid;
     place-items: center;
-
     input {
       position: relative;
       top: -60%;
@@ -100,7 +91,6 @@ const InputContainer = styled.div`
     .button-container {
       display: flex;
       flex-direction: column;
-
       .login_button {
         margin-top: -30px;
         outline: none;
@@ -113,7 +103,6 @@ const InputContainer = styled.div`
         color: white;
         margin-bottom: 5px;
       }
-
       .signup-button {
         display: flex;
         justify-content: center;
@@ -134,10 +123,8 @@ const CloseBtn = styled.div`
   position: absolute;
   top: 30px;
   right: 30px;
-
   transition: 0.1s;
   cursor: pointer;
-
   &:hover {
     transform: translateY(-2px);
   }
@@ -164,7 +151,6 @@ const BtnContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   float: left;
-
   margin-bottom: 35px;
 `;
 
@@ -242,6 +228,7 @@ function LoginModal({
           setMessage("login_success");
           sessionStorage.setItem("userId", res.data.userId);
           sessionStorage.setItem("loginToken", res.data.accessToken);
+          sessionStorage.setItem("nickname", res.data.nickname);
           sessionStorage.setItem("loginMethod", "common");
           // navigate('/');
           window.location.reload();

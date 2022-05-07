@@ -146,7 +146,8 @@ const Card = () => {
     );
   });
 
-  // console.log(postArray);
+
+  
 
   return (
     <>
