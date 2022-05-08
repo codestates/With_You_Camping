@@ -104,20 +104,6 @@ function Confirm({ message, handleMessage }) {
     }
   }, []);
 
-  // const handleConfirm = () => {
-  //   if (message === 'success_signup') {
-  //     navigate('/login');
-  //   } else if (
-  //     message === 'error_signup' ||
-  //     message === 'password_check_fail' ||
-  //     message === 'login_fail' ||
-  //     message === 'info_dit_fail' ||
-  //     message === 'info_edit_success'
-  //   ) {
-  //     handleMessage('');
-  //   }
-  // };
-
   const handleCancel = () => {
     handleMessage("");
   };
