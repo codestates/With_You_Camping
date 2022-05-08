@@ -14,7 +14,7 @@ import CommentInput from "../components/CommentInput";
 import CommentList from "../components/CommentList";
 import LikeComponent from "../components/LikeComponent";
 import { TwoBtnModal } from "../components/TwoBtnModal";
- 
+
 import { useParams } from "react-router-dom";
 
 import {
@@ -303,14 +303,14 @@ export default function DetailPost({ isLogin }) {
   const serverPath = process.env.REACT_APP_SERVER_PATH;
   const loginToken = window.sessionStorage.getItem("loginToken");
   const userId = parseInt(window.sessionStorage.getItem("userId"));
-  const weatherAppID = process.env.REACT_APP_WEATHER_ID
+  const weatherAppID = process.env.REACT_APP_WEATHER_ID;
 
   const [weather, setWeather] = useState([]);
   // console.log(userId)
 
   // 게시글 id
   const { id } = useParams();
- 
+
   // console.log(serverPath)
   // console.log(loginToken)
   // console.log(userId)
