@@ -6,6 +6,7 @@ import image1 from "../img/camping1.jpeg";
 import image3 from "../img/camping3.jpeg";
 import image4 from "../img/camping4.jpeg";
 import image5 from "../img/campingMedia.jpg";
+import image6 from "../img/camping6.jpg";
 
 const Container = styled.section`
   font-family: "Stylish", sans-serif;
@@ -192,7 +193,6 @@ const InnerContainer = styled.div`
 `;
 
 function Landing() {
-
   return (
     <Container>
       <Picture>
@@ -211,8 +211,8 @@ function Landing() {
             <img src={image1} alt="1" />
           </div>
           <div className="text">
-            <p>가족과 함께 재밌는 여행을 떠나</p>
-            <p>추억을 남겨요</p>
+            <p> 나만 알기 아쉬웠던 장소를 </p>
+            <p>정확하게 공유 할 수 있어요</p>
           </div>
         </section>
         <section>
@@ -220,8 +220,8 @@ function Landing() {
             <img src={image3} alt="3" />
           </div>
           <div className="text">
-            <p>친구, 연인 사랑하는 이들에게</p>
-            <p></p>
+            <p>일주일 간의 날씨 동향을 파악해 </p>
+            <p> 구체적인 캠핑 계획을 세울 수 있어요</p>
           </div>
         </section>
         <section>
@@ -229,8 +229,19 @@ function Landing() {
             <img src={image4} alt="4" />
           </div>
           <div className="text">
+            <p> 생생한 후기와 소통을 통해 </p>
+            <p> 최근 가장 반응이 좋은 캠핑장소를 </p>
+            <p> 한 눈에 볼 수 있어요</p>
+          </div>
+        </section>
+        <section>
+          <div className="image">
+            <img src={image6} alt="6" />
+          </div>
+          <div className="text">
             <p>반복되는 일상, WYC로</p>
             <p>사람들과 가슴 설레는 순간을 공유해보세요.</p>
+            <p> </p>
           </div>
         </section>
       </InnerContainer>

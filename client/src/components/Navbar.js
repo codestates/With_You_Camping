@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import LoginModal from "../modals/LoginModal";
@@ -77,6 +77,7 @@ const Page = styled.div`
     margin-right: 10px;
   }
 `;
+
 const Div = styled.div`
   margin: 40px 30px;
   cursor: pointer;
@@ -84,7 +85,28 @@ const Div = styled.div`
     color: red;
   }
 `;
-function Navber({ isLogin, setIsLogin }) {
+
+const ImgDiv = styled.div`
+  margin-top: 33px;
+  right: 100%;
+  margin-left: 20px;
+  margin-right: -22px;
+  border-radius: 50%;
+  /* margin: 40px 5px; */
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
+`;
+
+const UserDiv = styled.div`
+  margin: 42px 30px;
+  font-family: 'Malgun Gothic';
+  font-size: 80%;
+  color: #622556;
+  font-weight: 500;
+`;
+function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
   const [openModal, setOpenModal] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openSignupModal, setOpenSignupModal] = useState(false);
@@ -108,6 +130,8 @@ function Navber({ isLogin, setIsLogin }) {
     }
   };
 
+  // const [newNickname, setNewNickname] = useState("");
+
   // 로그아웃 시 실행
   const handleLogout = () => {
     sessionStorage.clear();
@@ -121,7 +145,10 @@ function Navber({ isLogin, setIsLogin }) {
   const resetMessage = () => {
     setMessage("");
   };
-  const nickname = window.sessionStorage.getItem("nickname");
+
+  // console.log(userInfo);
+  // const nickname = window.sessionStorage.getItem("nickname");
+
   return (
     <div>
       {/* 로그인 X, 게시물 작성 버튼 클릭 시 모달 */}
@@ -196,11 +223,18 @@ function Navber({ isLogin, setIsLogin }) {
                 로그아웃
               </div>
             </Div>
-            <Div>
-              <div className="user-profile" style={{ color: "#C428BF" }}>
-                {nickname}님 안녕하세요
-              </div>
-            </Div>
+            <ImgDiv>
+              <img
+                alt="profile"
+                src={userInfo.profile}
+                width="32"
+                style={{ borderRadius: "50%" }}
+              />
+            </ImgDiv>
+
+            <UserDiv className="user-profile" style={{}}>
+              {userInfo.nickname} 님 안녕하세요
+            </UserDiv>
           </Page>
         ) : (
           <Page>
