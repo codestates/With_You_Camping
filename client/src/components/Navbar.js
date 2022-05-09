@@ -77,6 +77,7 @@ const Page = styled.div`
     margin-right: 10px;
   }
 `;
+
 const Div = styled.div`
   margin: 40px 30px;
   cursor: pointer;
@@ -84,7 +85,20 @@ const Div = styled.div`
     color: red;
   }
 `;
-function Navber({ isLogin, setIsLogin }) {
+
+const ImgDiv = styled.div`
+margin-top: 33px;
+right: 100%;
+margin-left: 20px;
+margin-right: -22px;
+border-radius: 50%;
+  /* margin: 40px 5px; */
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
+`;
+function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
   const [openModal, setOpenModal] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openSignupModal, setOpenSignupModal] = useState(false);
@@ -121,7 +135,10 @@ function Navber({ isLogin, setIsLogin }) {
   const resetMessage = () => {
     setMessage("");
   };
-  const nickname = window.sessionStorage.getItem("nickname");
+
+  // console.log(userInfo);
+  // const nickname = window.sessionStorage.getItem("nickname");
+
   return (
     <div>
       {/* 로그인 X, 게시물 작성 버튼 클릭 시 모달 */}
@@ -175,7 +192,7 @@ function Navber({ isLogin, setIsLogin }) {
               </NavLink>
             </Div>
             <Div>
-              <NavLink
+              <NavLink 
                 to="/add_post"
                 style={{ textDecoration: "none", color: "inherit" }}
               >
@@ -196,9 +213,12 @@ function Navber({ isLogin, setIsLogin }) {
                 로그아웃
               </div>
             </Div>
+            <ImgDiv>
+              <img alt="profile" src={userInfo.profile} width="32" style={{borderRadius: '50%' }}/>
+            </ImgDiv>
             <Div>
               <div className="user-profile" style={{ color: "#C428BF" }}>
-                {nickname}님 안녕하세요
+                {userInfo.nickname}님 안녕하세요
               </div>
             </Div>
           </Page>

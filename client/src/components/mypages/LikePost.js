@@ -2,6 +2,17 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "../Card";
+
+const TitleContainer = styled.div`
+  display: grid;
+
+  grid-template-rows: 1fr;
+
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: 100%;
+  height: max-content;
+`;
+
 function LikePost() {
   const serverPath = process.env.REACT_APP_SERVER_PATH;
   const userId = window.sessionStorage.getItem("userId");
@@ -30,7 +41,9 @@ function LikePost() {
   console.log(likePost);
   return (
     <React.Fragment>
-      <Card LikePost={likePost} />
+      <TitleContainer>
+        <Card LikePost={likePost} />
+      </TitleContainer>
     </React.Fragment>
   );
 }

@@ -4,7 +4,25 @@ import styled from "styled-components";
 import Card from "../Card";
 import { PageTitle } from "../pageTitle";
 
-const TitleContainer = styled.div``;
+const TitleContainer = styled.div`
+  display: grid;
+
+  grid-template-rows: 1fr;
+
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: 100%;
+  height: max-content;
+
+  @media screen and (max-width: 500px) {
+    display: grid;
+
+    grid-template-rows: 1fr;
+
+    grid-template-columns: 1fr;
+    width: 1px;
+    height: max-content;
+  }
+`;
 
 const Title = styled.span`
   position: relative;
@@ -22,13 +40,13 @@ function MyPost() {
   const [postEnd, setPostEnd] = useState(false);
 
   const viewmore = useRef();
-
+  
   useEffect(() => {
     getUserPost();
   }, []);
 
   async function getUserPost() {
-    console.log(page);
+    console.log("초기값");
     const headers = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -38,7 +56,7 @@ function MyPost() {
     // setPage(1);
     try {
       const res = await axios.get(
-        `${serverPath}/users/boards?pages=${page}&limit=12`,
+        `${serverPath}/users/boards?pages=${1}&limit=12`,
         headers
       );
       if (res.status === 200) {
@@ -46,38 +64,33 @@ function MyPost() {
       }
     } catch (err) {}
   }
-  // console.log(userPost);
-  // console.log(page);
-  // const getPage = async (page) => {
-  //   const headers = {
-  //     headers: {
-  //       Authorization: `Bearer ${accessToken}`,
-  //     },
-  //   };
-  //   try {
-  //     const res = await axios.get(
-  //       `${serverPath}/users/boards?pages=${page}&limit=12`,
-  //       headers
-  //     );
-  //     if (res.status === 200 && res.data.boards.rows.length > 0) {
-  //       console.log(page);
-  //       setUserPost([...userPost, ...res.data.boards.rows]);
-  //     }
-  //     if (res.data.posts.length === 0) {
-  //       setPostEnd(true);
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+
+  const getPage = async (page) => {
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+    try {
+      const res = await axios.get(
+        `${serverPath}/users/boards?pages=${page}&limit=12`,
+        headers
+      );
+      if (res.status === 200 && res.data.boards.rows.length > 0) {
+        setUserPost([...userPost, ...res.data.boards.rows]);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // const loadMore = () => {
   //   setPage(page + 1);
   // };
 
-  // useEffect(() => {
-  //   getPage();
-  // }, [page]);
+  useEffect(() => {
+    getPage(page);
+  }, [page]);
 
   // useEffect(() => {
   //   const observer = new IntersectionObserver(
@@ -96,9 +109,10 @@ function MyPost() {
 
   return (
     <React.Fragment>
-      {userPost ? <Card post={userPost} /> : null}
-
-      {/* <div ref={viewmore} onClick={loadMore} /> */}
+      <TitleContainer>
+        <Card post={userPost} />
+        <div ref={viewmore} />
+      </TitleContainer>
     </React.Fragment>
   );
 }
