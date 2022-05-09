@@ -6,6 +6,7 @@ import SignupModal from "../modals/SignupModal";
 // import Search from "./Search";
 import { TwoBtnModal } from "./TwoBtnModal";
 import Confirm from "./Confirm";
+import image from "../img/logo3.jpg";
 
 const Container = styled.header`
   font-family: "Stylish", sans-serif;
@@ -54,9 +55,18 @@ const Logo = styled.div`
 
   text-align: center;
   cursor: pointer;
+  img {
+    margin-top: 6px;
+    margin-right: 0px;
+    margin-left: 70px;
+    height: 80px;
+    width: 100%;
+    object-fit: contain;
+  }
 
   @media screen and (max-width: 500px) {
-    margin-left: 0px;
+    margin-left: -50px;
+    margin-right: 80px;
     font-size: 2.8rem;
   }
 `;
@@ -64,7 +74,7 @@ const Page = styled.div`
   display: flex;
 
   @media screen and (max-width: 500px) {
-    margin-right: 0px;
+    margin-right: 10px;
   }
 `;
 const Div = styled.div`
@@ -111,7 +121,7 @@ function Navber({ isLogin, setIsLogin }) {
   const resetMessage = () => {
     setMessage("");
   };
-
+  const nickname = window.sessionStorage.getItem("nickname");
   return (
     <div>
       {/* 로그인 X, 게시물 작성 버튼 클릭 시 모달 */}
@@ -150,8 +160,10 @@ function Navber({ isLogin, setIsLogin }) {
       ) : null}
       <Container>
         <Logo onClick={() => navigate("/")}>
-          WYC<span>.</span>
+          <img src={image} alt="logo" />
+          <span></span>
         </Logo>
+
         {isLogin ? (
           <Page>
             <Div>
@@ -178,10 +190,15 @@ function Navber({ isLogin, setIsLogin }) {
                 마이페이지
               </NavLink>
             </Div>
-            
+
             <Div>
               <div className="logout" onClick={() => modalHandler("logout")}>
                 로그아웃
+              </div>
+            </Div>
+            <Div>
+              <div className="user-profile" style={{ color: "#C428BF" }}>
+                {nickname}님 안녕하세요
               </div>
             </Div>
           </Page>

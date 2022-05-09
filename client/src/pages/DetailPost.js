@@ -616,7 +616,7 @@ export default function DetailPost({ isLogin }) {
                     >
                       {new Date(weather[i].dt * 1000)
                         .toLocaleDateString("ko-KR")
-                        .slice(6, 10)}
+                        .slice(6, -1)}
                     </div>
 
                     {/* <div style={{ margin: "15px" }}>
