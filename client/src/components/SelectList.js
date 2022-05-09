@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { list } from "./data/data";
+
 
 const Container = styled.div`
   position: relative;
@@ -130,11 +130,10 @@ const CategoryAfter = styled.button`
   margin-right: 5px;
 `;
 
-function SelectList() {
+function SelectList({LocationList, CategoryList, setLocationList, setCategoryList}) {
     
-  const [LocationList, setLocationList] = useState(list.location);
-  const [CategoryList, setCategoryList] = useState(list.category);
- 
+
+  
   const TagOnClick = (e) => {
     const { name } = e.target;
     LocationList.map((x, index) => {
@@ -156,9 +155,6 @@ function SelectList() {
       }
     });
   };
-
-    // console.log(LocationList);
-    // console.log(CategoryList);
 
   const LocationMap = LocationList.map((x, index) => {
     return x.onOff ? (

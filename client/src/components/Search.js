@@ -79,17 +79,17 @@ const Container = styled.section`
   }
 `;
 
-export default function Search() {
-  const [queryString, setQueryString] = useState("");
+export default function Search({setInputSearch, setTypeSearch}) {
+  const [input, setInput] = useState("");
   const [searchType, setSearchType] = useState("title");
 
-  async function getSearchPosts(type, query) {
-    console.log(type)
-    console.log(query)
+  function getSearchPosts(type, input) {
+    setTypeSearch(type)
+    setInputSearch(input)
   }
 
   const changeQueryString = (e) => {
-    setQueryString(e.target.value);
+    setInput(e.target.value);
   };
 
   const changeSearchType = (e) => {
@@ -103,8 +103,8 @@ export default function Search() {
   };
 
   const getSearchResult = () => {
-    getSearchPosts(searchType, queryString);
-    setQueryString("");
+    getSearchPosts(searchType, input);
+    setInput("");
   };
 
   return (
@@ -118,7 +118,7 @@ export default function Search() {
         <input
           className="search-input"
           type="text"
-          value={queryString}
+          value={input}
           onChange={changeQueryString}
           onKeyDown={checkKeycode}
           placeholder="검색어를 입력해주세요"

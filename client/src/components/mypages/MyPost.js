@@ -28,6 +28,7 @@ function MyPost() {
   }, []);
 
   async function getUserPost() {
+    console.log(page);
     const headers = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
