@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { OneBtnModal } from "../components/oneBtnModal";
@@ -83,20 +83,20 @@ const Btn = styled.button`
   width: 305px;
   height: 38px;
 
-  background-color: ${(props) => (props.disabled ? "#DDDDDD" : "#12b886")};
+  background-color: ${(user) => (user.disabled ? "#DDDDDD" : "#12b886")};
   color: white;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
 
-  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
+  cursor: ${(user) => (user.disabled ? "default" : "pointer")};
 
   transition: 0.1s;
 
   &:hover {
-    transform: ${(props) => (props.disabled ? "null" : "translateY(-2px)")};
-    box-shadow: ${(props) =>
-      props.disabled ? "null" : "0px 5px 4px rgba(0,0,0,0.1)"};
+    transform: ${(user) => (user.disabled ? "null" : "translateY(-2px)")};
+    box-shadow: ${(user) =>
+      user.disabled ? "null" : "0px 5px 4px rgba(0,0,0,0.1)"};
   }
   span {
     position: relative;
@@ -111,7 +111,7 @@ const ConfirmBtn = styled(Btn)`
 `;
 
 const SignoutBtn = styled(Btn)`
-  background-color: ${(props) => (props.disabled ? "#DDDDDD" : "#ff796b")};
+  background-color: ${(user) => (user.disabled ? "#DDDDDD" : "#ff796b")};
   margin-left: 10px;
   margin-top: 0px;
 `;
@@ -125,7 +125,14 @@ const Nofication = styled.div`
   font-size: 0.8rem;
 `;
 
-function ModifyMyinfo() {
+const ImgContainer = styled.div`
+  cursor: pointer;
+  margin-top: -20px;
+  margin-bottom: 5px;
+  /* margin-right: 50px; */
+`;
+
+function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
   const navigate = useNavigate();
   const serverPath = process.env.REACT_APP_SERVER_PATH;
   const userId = window.sessionStorage.getItem("userId");
@@ -134,6 +141,7 @@ function ModifyMyinfo() {
   const [currPassword, setCurrPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newNickname, setNewNickname] = useState("");
+  const [nick, setNick] = useState("");
 
   const [nicknameCheck, setNicknameCheck] = useState(true);
 
@@ -141,11 +149,30 @@ function ModifyMyinfo() {
   const [okModalOpen, setOkModalOpen] = useState(false);
   const [invaildModalOpen, setInvaildModalOpen] = useState(false);
 
+  const [userInfo, setUserInfo] = useState({});
   useEffect(() => {
+    getUserInfo();
     if (!userId) {
       navigate("/");
     }
-  }, []);
+  }, [setUserInfo]);
+
+  async function getUserInfo() {
+    const res = await axios.post(`${serverPath}/auth/token/validate`, {
+      token: sessionStorage.getItem("loginToken"),
+    });
+
+    if (res.status === 200) {
+      // console.log(res.data.userInfo);
+      setUserInfo(res.data.userInfo);
+    }
+  }
+
+  const nicknameValue = (e) => {
+    setNick(e.target.value);
+  };
+
+  console.log(nick);
 
   const nicknameValidCheck = (value) => {
     let nicknameReg = /^[가-힣a-zA-Z0-9_]{2,12}$/;
@@ -155,6 +182,7 @@ function ModifyMyinfo() {
   const nicknameCheckHandler = (e) => {
     setNewNickname(e.target.value);
   };
+  // console.log(newNickname)
 
   const clickModifyNicknameBtn = async () => {
     (async () => {
@@ -173,10 +201,14 @@ function ModifyMyinfo() {
             },
             headers
           );
-          console.log(res);
+
           if (res.status === 200) {
+            // nicknameValue('')
             setNicknameCheck(true);
             setOkModalOpen(true);
+            setAppUserInfo(res.data.userInfo);
+            navigate("/mypage/modifymyinfo");
+            setNick("");
           }
         } catch (err) {
           setNicknameCheck(false);
@@ -184,6 +216,8 @@ function ModifyMyinfo() {
       }
     })();
   };
+
+  // console.log(AppuserInfo)
 
   const clickModifyPasswordBtn = async () => {
     (async () => {
@@ -196,7 +230,7 @@ function ModifyMyinfo() {
       if (newPassword && currPassword) {
         try {
           const res = await axios.put(
-            `${serverPath}/users/`,
+            `${serverPath}/users`,
             {
               nowPassword: currPassword,
               newPassword,
@@ -206,17 +240,20 @@ function ModifyMyinfo() {
 
           if (res.status === 200) {
             setOkModalOpen(true);
+            navigate("/mypage/modifymyinfo");
             console.log(res);
           }
         } catch (err) {
           console.log(err);
           setInvaildModalOpen(true);
+          navigate("/mypage/modifymyinfo");
         }
       }
     })();
   };
 
   const NicknameNofication = () => {
+    console.log("???");
     if (
       !nicknameValidCheck(newNickname) &&
       newNickname.length < 2 &&
@@ -257,35 +294,35 @@ function ModifyMyinfo() {
   };
 
   const NickNameBtn = () => {
-    if (newNickname) {
-      return (
-        <ConfirmBtn onClick={clickModifyNicknameBtn}>
-          <span>닉네임 변경</span>
-        </ConfirmBtn>
-      );
-    } else {
-      return (
-        <ConfirmBtn disabled={true}>
-          <span>닉네임 변경</span>
-        </ConfirmBtn>
-      );
-    }
+    // if (newNickname) {
+    return (
+      <ConfirmBtn onClick={clickModifyNicknameBtn}>
+        <span>닉네임 변경</span>
+      </ConfirmBtn>
+    );
+    // } else {
+    // return (
+    // <ConfirmBtn disabled={true}>
+    // <span>닉네/임 변경</span>
+    // </ConfirmBtn>
+    // );
+    // }
   };
 
   const PasswordBtn = () => {
-    if (currPassword && newPassword) {
-      return (
-        <ConfirmBtn onClick={clickModifyPasswordBtn}>
-          <span>비밀번호 변경</span>
-        </ConfirmBtn>
-      );
-    } else {
-      return (
-        <ConfirmBtn disabled={true}>
-          <span>비밀번호 변경</span>
-        </ConfirmBtn>
-      );
-    }
+    // if (currPassword && newPassword) {
+    return (
+      <ConfirmBtn onClick={clickModifyPasswordBtn}>
+        <span>비밀번호 변경</span>
+      </ConfirmBtn>
+      // );
+      // } else {
+      // return (
+      // <ConfirmBtn disabled={true}>
+      // <span>비밀번호 변경</span>
+      // </ConfirmBtn>
+    );
+    // }
   };
 
   const SignoutBtnBy = () => {
@@ -307,6 +344,35 @@ function ModifyMyinfo() {
     }
   };
 
+  const imgInput = useRef();
+  // const [imgHostUrl, setImgHostUrl] = useState(userInfo.profile)
+
+  const uploadImage = async (e) => {
+    e.preventDefault();
+    const img = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", img);
+
+    const headers = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+
+    const res = await axios.post(
+      `${serverPath}/boards/profile`,
+      formData,
+      headers
+    );
+    // console.log(res.data.profile)
+    setUserInfo(res.data.userInfo);
+    setAppUserInfo(res.data.userInfo);
+    // setImgHostUrl(res.data.userInfo.profile);
+    console.log(res.data.userInfo);
+  };
+
+  // console.log(userInfo)
+  // // console.log(setUserInfo)
   return (
     <Container>
       {okModalOpen ? (
@@ -334,6 +400,26 @@ function ModifyMyinfo() {
 
       <UserInfoBox>
         <PageTitle>회원정보 수정</PageTitle>
+        <ImgContainer>
+          <input
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            ref={imgInput}
+            id="img"
+            onChange={uploadImage}
+          />
+
+          <img
+            alt="profile"
+            onClick={() => imgInput.current.click()}
+            src={userInfo.profile}
+            width="100"
+            height="100"
+            style={{ borderRadius: "50%" }}
+          ></img>
+        </ImgContainer>
+
         <div className="fields">
           <div className="form">
             <div>새로운 닉네임</div>
@@ -341,6 +427,8 @@ function ModifyMyinfo() {
               type="text"
               placeholder="변경할 닉네임을 입력합니다"
               onBlur={nicknameCheckHandler}
+              onChange={nicknameValue}
+              value={nick}
             />
             <NicknameNofication />
             <NickNameBtn className="btn-location" />

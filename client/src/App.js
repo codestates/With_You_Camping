@@ -65,6 +65,9 @@ function Router() {
   const sessionStorage = window.sessionStorage;
 
   const [isLogin, setIsLogin] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
+
+  console.log(userInfo)
 
   useEffect(() => {
     // 로그인을 정상적으로 했다면 세션 스토리지에 loginToken, userId 존재
@@ -84,6 +87,7 @@ function Router() {
             sessionStorage.getItem("userId")
           ) {
             setIsLogin(true);
+            setUserInfo(res.data.userInfo);
           }
           // 배포 후 쿠키 설정 필요, 그게 아니라면 쿠키에 저장된 리프레쉬 토큰을 통해 새로운 Access토큰 발급받는다.
         } else if (res.data.valid === false) {
@@ -102,24 +106,26 @@ function Router() {
         }
       })();
     }
-  }, []);
+  }, [setUserInfo]);
+
+  // console.log(userInfo);
 
   return (
     <Container>
       <GlobalStyles />
-      <Navbar isLogin={isLogin} setIsLogin={setIsLogin} />
+      <Navbar isLogin={isLogin} setIsLogin={setIsLogin} userInfo={userInfo} setUserInfo={setUserInfo} />
       <InnerContainer>
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/posts" element={<PostList />} />
 
           <Route path="/add_post" element={<AddPost />} />
-          <Route path="/post/:id" element={<DetailPost isLogin={isLogin} />} />
+          <Route path="/post/:id" element={<DetailPost isLogin={isLogin} userInfo={userInfo} />} />
           <Route path="/post/:id/modify" element={<ModifyPost />} />
 
           <Route path="/mypage/mypost" element={<Mypage page="0" />} />
           <Route path="/mypage/likepost" element={<Mypage page="1" />} />
-          <Route path="/mypage/modifymyinfo" element={<Mypage page="2" />} />
+          <Route path="/mypage/modifymyinfo" element={<Mypage page="2" userInfo={userInfo} setUserInfo={setUserInfo}  />} />
 
           <Route
             path="callback/kakao"

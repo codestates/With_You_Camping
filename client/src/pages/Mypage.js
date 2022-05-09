@@ -64,7 +64,7 @@ const ContentsContainer = styled.div`
 
 const SignContainer = styled.div``;
 
-function Mypage(page) {
+function Mypage(page, userInfo) {
   const navigate = useNavigate();
 
   const tabContents = ["게시글", "좋아요", "회원 정보수정"];
@@ -72,6 +72,8 @@ function Mypage(page) {
   const userId = window.sessionStorage.getItem("userId");
   const nickname = window.sessionStorage.getItem("nickname");
   const accessToken = window.sessionStorage.getItem("loginToken");
+
+  // console.log(userInfo)
 
   useEffect(() => {
     if (!userId) {
@@ -84,6 +86,9 @@ function Mypage(page) {
     "/mypage/likepost",
     "/mypage/modifymyinfo",
   ];
+
+  // console.log(userInfo)
+  // console.log(page.userInfo)
 
   return (
     <MyPageContainer>
@@ -111,8 +116,8 @@ function Mypage(page) {
         {page["page"] === "0" && <MyPost />}
         {page["page"] === "1" && <LikePost />}
       </ContentsContainer>
-
-      <SignContainer>{page["page"] === "2" && <ModifyMyinfo />}</SignContainer>
+ 
+      <SignContainer>{page["page"] === "2" && <ModifyMyinfo AppuserInfo={page.userInfo} setAppUserInfo={page.setUserInfo} />}</SignContainer>
     </MyPageContainer>
   );
 }

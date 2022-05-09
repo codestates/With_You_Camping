@@ -295,7 +295,12 @@ const DeleteBtnContainer = styled.div`
   /* margin-top: 5px; */
 `;
 
-export default function DetailPost({ isLogin }) {
+const ProfileContainer = styled.div`
+  margin-top: -8px;
+  margin-right: 6px;
+`
+
+export default function DetailPost({ isLogin, userInfo }) {
   const kakao = window.kakao;
 
   const navigate = useNavigate();
@@ -377,7 +382,6 @@ export default function DetailPost({ isLogin }) {
       .get("https://api.openweathermap.org/data/2.5/onecall", { params })
       .then((res) => {
         const data = res.data;
-        console.log(weather);
         setWeather(data.daily.slice(0, 7));
       });
   }
@@ -517,6 +521,8 @@ export default function DetailPost({ isLogin }) {
       });
   };
 
+  console.log(userInfo.profile);
+
   return (
     <Container>
       {openDeleteModal ? (
@@ -540,8 +546,6 @@ export default function DetailPost({ isLogin }) {
                 <p className="tag_none">설정된 태그가 없습니다.</p>
               )}
             </TagContainer>
-
-            {/* <ToggleLikeBtn likeStat={likeStat} /> */}
           </div>
           <StarRating postRating={postRating} />
         </TitleContainer>
@@ -549,7 +553,14 @@ export default function DetailPost({ isLogin }) {
 
         <DescContainer>
           <div className="title_wrapper">
-            <MdPersonPin />
+            <ProfileContainer>
+              <img
+                alt="profile"
+                src={userInfo.profile}
+                width="32"
+                style={{ borderRadius: "50%" }}
+              />
+            </ProfileContainer>
             <h3 className="nickname"> {postData.nickname} 님의 게시글</h3>
           </div>
           <hr />
