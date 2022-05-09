@@ -30,17 +30,18 @@ const UserInfoBox = styled.div`
   flex-direction: column;
 
   min-height: max-content;
-
+  justify-content: center;
   align-items: center;
-
+  height: 70vh;
   .fields {
     display: grid;
     justify-content: center;
+    align-items: center;
 
     width: 305px;
     min-height: 50px;
-
-    margin-top: 50px;
+    margin-left: 10px;
+    margin-top: 20px;
   }
 
   .fields > div {
@@ -111,6 +112,7 @@ const ConfirmBtn = styled(Btn)`
 
 const SignoutBtn = styled(Btn)`
   background-color: ${(props) => (props.disabled ? "#DDDDDD" : "#ff796b")};
+  margin-left: 10px;
   margin-top: 0px;
 `;
 
@@ -331,6 +333,7 @@ function ModifyMyinfo() {
       ) : null}
 
       <UserInfoBox>
+        <PageTitle>회원정보 수정</PageTitle>
         <div className="fields">
           <div className="form">
             <div>새로운 닉네임</div>

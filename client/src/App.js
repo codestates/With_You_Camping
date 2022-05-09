@@ -119,7 +119,7 @@ function Router() {
 
           <Route path="/mypage/mypost" element={<Mypage page="0" />} />
           <Route path="/mypage/likepost" element={<Mypage page="1" />} />
-          <Route path="/mypage/modifymyinfo" element={<Mypage page="2" />} />
+          <Route path="/mypage/modifymyinfo" element={<ModifyMyinfo />} />
 
           <Route
             path="callback/kakao"

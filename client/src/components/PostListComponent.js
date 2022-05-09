@@ -56,11 +56,11 @@ const CardContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
 
   justify-content: space-between;
-  float: left;
+
   margin-top: 40px;
   width: 1px;
 
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     right: 5%;
     bottom: 5%;
     transform: scale(0.8);
@@ -69,7 +69,7 @@ const CardContainer = styled.div`
 
 export default function PostListComponent() {
   return (
-    <Container> 
+    <Container>
       <TitleContainer>
         게시글 목록 <HLine />
       </TitleContainer>
