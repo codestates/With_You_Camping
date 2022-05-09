@@ -304,7 +304,7 @@ function LoginModal({
                 <Nofify>이메일과 비밀번호를 확인해주세요</Nofify>
                 <div className="button-container">
                   <button className="login_button" type="submit">
-                    로그인 해주세요
+                    로그인 하기
                   </button>
                   <div className="signup-select-area">
                     <label>회원이 아니신가요?</label>

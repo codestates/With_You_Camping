@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import LoginModal from "../modals/LoginModal";
@@ -84,6 +84,11 @@ const Div = styled.div`
     color: red;
   }
 `;
+const Name = styled.div`
+  margin: 40px 20px 0px 50px;
+  font-family: "Malgun Gothic";
+  font-size: 0.9rem;
+`;
 function Navber({ isLogin, setIsLogin }) {
   const [openModal, setOpenModal] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
@@ -108,6 +113,8 @@ function Navber({ isLogin, setIsLogin }) {
     }
   };
 
+  // const [newNickname, setNewNickname] = useState("");
+
   // 로그아웃 시 실행
   const handleLogout = () => {
     sessionStorage.clear();
@@ -121,7 +128,9 @@ function Navber({ isLogin, setIsLogin }) {
   const resetMessage = () => {
     setMessage("");
   };
+
   const nickname = window.sessionStorage.getItem("nickname");
+  // console.log(nickname);
   return (
     <div>
       {/* 로그인 X, 게시물 작성 버튼 클릭 시 모달 */}
@@ -196,11 +205,16 @@ function Navber({ isLogin, setIsLogin }) {
                 로그아웃
               </div>
             </Div>
-            <Div>
-              <div className="user-profile" style={{ color: "#C428BF" }}>
+            <Name>
+              <div
+                className="user-profile"
+                style={{
+                  color: "#C428BF",
+                }}
+              >
                 {nickname}님 안녕하세요
               </div>
-            </Div>
+            </Name>
           </Page>
         ) : (
           <Page>
