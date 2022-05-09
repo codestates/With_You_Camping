@@ -12,14 +12,12 @@ const TabContainer = styled.div`
   right: 500px;
   top: 50px;
   flex-direction: column;
-
   div {
     margin-bottom: 70px;
     padding-bottom: 2em;
     border-bottom: #c0c0c0 solid 2px;
     font-size: 1.5rem;
   }
-
   ul,
   li {
     font-weight: 300;
@@ -50,9 +48,7 @@ const MyPageContainer = styled.div`
   .container {
     font-family: "Stylish", sans-serif;
     position: relative;
-
     text-align: center;
-
     margin: 0 auto;
     max-width: 1130px;
     height: max-content;
@@ -74,7 +70,6 @@ const ContentsContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   grid-auto-rows: 350px;
   word-break: break-all;
-
   padding-bottom: 2rem;
   border-bottom: 1px solid $color-grey-border;
   @media screen and (max-width: 500px) {
@@ -88,9 +83,7 @@ const SignContainer = styled.div`
   position: relative;
   left: 100%;
   bottom: 30%;
-
   width: 1px;
-
   @media screen and (max-width: 500px) {
     right: 5%;
     bottom: 5%;
@@ -101,13 +94,7 @@ const SignContainer = styled.div`
 function Mypage(page) {
   const navigate = useNavigate();
 
-
-  
-
-  const tabContents = [
-    "게시글",
-    "좋아요",
-    "회원 정보수정"];
+  const tabContents = ["게시글", "좋아요", "회원 정보수정"];
   const serverPath = process.env.REACT_APP_SERVER_PATH;
   const userId = window.sessionStorage.getItem("userId");
   const nickname = window.sessionStorage.getItem("nickname");

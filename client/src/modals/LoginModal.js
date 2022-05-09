@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { IoClose } from "react-icons/io5";
 import Confirm from "../components/Confirm";
@@ -97,23 +97,51 @@ const InputContainer = styled.div`
         border: none;
         border-radius: 10px;
         cursor: pointer;
-        font-size: 20px;
-        padding: 0.45rem 1rem;
+        font-size: 22px;
+        font-family: "Stylish", sans-serif;
+        padding: 0.2rem 3rem;
         background: #12b886;
         color: white;
         margin-bottom: 5px;
       }
-      .signup-button {
+      /* .signup-button {
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #12b886;
-        font-size: 20px;
-        padding: 0.45rem 1rem;
+        background: #ffff;
+        size: 30%
+        font-size: 15px;
+        font-family: "Stylish", sans-serif;
+        padding: 0.2rem 1rem;
         border-radius: 10px;
         color: white;
         cursor: pointer;
         /* margin-bottom: 5px; */
+      // } */
+      .signup-select-area {
+        margin-top: 0.4rem;
+        margin-left: 1rem;
+        font-size: 0.9rem;
+        font-family: sans-serif;
+        /* font-family: "Stylish", sans-serif; */
+        span {
+          cursor: pointer;
+          margin-left: 1rem;
+          font-weight: 500;
+          /* color: $color-main-middle; */
+          text-decoration: underline;
+          text-underline-position: under
+        }
+      }
+      //버튼
+      .signup-button {
+        background-color: $color-main-middle;
+        color: white;
+        padding: 15px 30px;
+        font-family: "Stylish", sans-serif;
+        font-size: 15px;
+        margin: 0.5rem;
+        margin-top: 1.5rem;
       }
     }
   }
@@ -171,7 +199,6 @@ function LoginModal({
     password: "",
   });
   // console.log(loginInfo);
-
 
   const [isFull, setIsFull] = useState(false);
   const [message, setMessage] = useState("");
@@ -280,10 +307,11 @@ function LoginModal({
                 <Nofify>이메일과 비밀번호를 확인해주세요</Nofify>
                 <div className="button-container">
                   <button className="login_button" type="submit">
-                    Login
+                    로그인
                   </button>
-                  <div className="signup-button" onClick={openSignup}>
-                    Signup
+                  <div className="signup-select-area">
+                    <label>회원이 아니신가요?</label>
+                    <span onClick={openSignup}>회원가입 하러 가기</span>
                   </div>
                 </div>
               </form>
