@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import LoginModal from "../modals/LoginModal";
@@ -98,6 +98,14 @@ const ImgDiv = styled.div`
     color: red;
   }
 `;
+
+const UserDiv = styled.div`
+  margin: 42px 30px;
+  font-family: 'Malgun Gothic';
+  font-size: 80%;
+  color: #622556;
+  font-weight: 500;
+`;
 function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
   const [openModal, setOpenModal] = useState(false);
   const [openLoginModal, setOpenLoginModal] = useState(false);
@@ -121,6 +129,8 @@ function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
       openTwoBtnModal ? setOpenTwoBtnModal(false) : setOpenTwoBtnModal(true);
     }
   };
+
+  // const [newNickname, setNewNickname] = useState("");
 
   // 로그아웃 시 실행
   const handleLogout = () => {
@@ -221,11 +231,10 @@ function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
                 style={{ borderRadius: "50%" }}
               />
             </ImgDiv>
-            <Div>
-              <div className="user-profile" style={{ color: "#C428BF" }}>
-                {userInfo.nickname}님 안녕하세요
-              </div>
-            </Div>
+
+            <UserDiv className="user-profile" style={{}}>
+              {userInfo.nickname} 님 안녕하세요
+            </UserDiv>
           </Page>
         ) : (
           <Page>
