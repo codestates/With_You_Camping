@@ -176,6 +176,7 @@ export default function PostListComponent() {
     );
 
     setPosts(res.data.boards.rows);
+
     let pageArray = [];
     if (res.data.boards.count) {
       if (res.data.boards.count <= 12) {

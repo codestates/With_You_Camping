@@ -4,13 +4,14 @@ import styled from "styled-components";
 import Card from "../Card";
 import { PageTitle } from "../pageTitle";
 
-const TitleContainer = styled.div`
-  display: grid;
+const TitleContainer = styled.div``;
+/**
+ * display: grid;
 
   grid-template-rows: 1fr;
 
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  width: 100%;
+  width: 70%;
   height: max-content;
 
   @media screen and (max-width: 500px) {
@@ -22,8 +23,8 @@ const TitleContainer = styled.div`
     width: 1px;
     height: max-content;
   }
-`;
-
+ * 
+ */
 const Title = styled.span`
   position: relative;
   right: -100%;
@@ -109,10 +110,8 @@ function MyPost() {
 
   return (
     <React.Fragment>
-      <TitleContainer>
-        <Card post={userPost} />
-        <div ref={viewmore} />
-      </TitleContainer>
+      <Card post={userPost} />
+      <div ref={viewmore} />
     </React.Fragment>
   );
 }
