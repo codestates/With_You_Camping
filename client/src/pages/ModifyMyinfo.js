@@ -117,7 +117,7 @@ const SignoutBtn = styled(Btn)`
 `;
 
 const Nofication = styled.div`
-  position:absolute:
+  position:absolute;
   top:2px;
   right : 0;
   margin-top:5px;

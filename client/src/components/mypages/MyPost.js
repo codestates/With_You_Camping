@@ -52,8 +52,8 @@ function MyPost() {
         Authorization: `Bearer ${accessToken}`,
       },
     };
-    setUserPost([]);
-    setPage(1);
+    // setUserPost([]);
+    // setPage(1);
     try {
       const res = await axios.get(
         `${serverPath}/users/boards?pages=${2}&limit=12`,
@@ -84,34 +84,34 @@ function MyPost() {
     }
   };
 
-  const loadMore = () => {
-    setPage(page + 1);
-  };
+  // const loadMore = () => {
+  //   setPage(page + 1);
+  // };
 
   useEffect(() => {
     getPage(page);
   }, [page]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && viewmore.current) {
-          viewmore.current.click();
-        }
-      },
-      { threshold: 1 }
-    );
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       if (entries[0].isIntersecting && viewmore.current) {
+  //         viewmore.current.click();
+  //       }
+  //     },
+  //     { threshold: 1 }
+  //   );
 
-    if (viewmore.current) {
-      observer.observe(viewmore.current);
-    }
-  }, [userPost]);
+  //   if (viewmore.current) {
+  //     observer.observe(viewmore.current);
+  //   }
+  // }, [userPost]);
 
   return (
     <React.Fragment>
       <TitleContainer>
         <Card post={userPost} />
-        <div ref={viewmore} onClick={loadMore} />
+        <div ref={viewmore} />
       </TitleContainer>
     </React.Fragment>
   );

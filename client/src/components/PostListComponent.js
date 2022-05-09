@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Search from "./Search";
 import SelectList from "./SelectList";
-import Card from "./Card";
+import CardList from "./CardList";
+import axios from "axios";
+import { list } from "./data/data";
 
 const HLine = styled.div`
   display: grid;
@@ -67,19 +69,159 @@ const CardContainer = styled.div`
   }
 `;
 
+const DownContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  justify-content: center;
+  float: left;
+`;
+
+const ButtonContainer = styled.div`
+  margin-top: 30px;
+  margin-right: 30px;
+`;
+
+const ClickButton = styled.button`
+  cursor: pointer;
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 26px;
+  color: #605c59;
+
+  background: #f1f3ef;
+  border: none;
+  border: 1px solid none;
+  box-sizing: border-box;
+  border-radius: 100px;
+  width: auto;
+  height: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+`;
+
 export default function PostListComponent() {
+  const serverPath = process.env.REACT_APP_SERVER_PATH;
+  const userId = window.sessionStorage.getItem("userId");
+  const nickname = window.sessionStorage.getItem("nickname");
+  const accessToken = window.sessionStorage.getItem("loginToken");
+
+  const navigate = useNavigate();
+
+  const [LocationList, setLocationList] = useState(list.location);
+  const [CategoryList, setCategoryList] = useState(list.category);
+  // 현재 클릭된 카테고리 리스트
+  const listStatus = [...LocationList, ...CategoryList];
+  // console.log(LocationList)
+  // console.log(CategoryList)
+  // console.log(listStatus)
+
+  const [inputSearch, setInputSearch] = useState("");
+  const [typeSearch, setTypeSearch] = useState("");
+
+  // console.log(inputSearch.length);
+  // console.log(typeSearch.length);
+
+  const [posts, setPosts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pageNumber, setPageNumber] = useState([]);
+
+  useEffect(() => {
+    categoryPost();
+  }, [page, LocationList, CategoryList]);
+
+  useEffect(() => {
+    searchPost();
+    window.scroll(0, 0);
+  }, [inputSearch, typeSearch]);
+
+  async function searchPost() {
+    if (inputSearch.length !== 0 && typeSearch.length !== 0) {
+      const res = await axios.get(
+        `${serverPath}/main/search?searchType=${typeSearch}&input=${inputSearch}&pages=${page}&limit=12`
+      );
+      setPosts(res.data.boards.rows);
+      let pageArray = [];
+      if (res.data.boards.count) {
+        if (res.data.boards.count <= 12) {
+          pageArray.push(1);
+        } else {
+          for (let i = 1; i <= res.data.boards.count / 12; i++) {
+            pageArray.push(i);
+          }
+        }
+      }
+      setPageNumber(pageArray);
+      for (let i = 0; i < listStatus.length; i++) {
+        listStatus[i].onOff = false;
+      }
+      setInputSearch("");
+      setTypeSearch("");
+    }
+  }
+
+  useEffect(() => {
+    categoryPost();
+    window.scroll(0, 0);
+  }, [page, setLocationList, setCategoryList]);
+
+  async function categoryPost() {
+    let category =
+      listStatus[listStatus.findIndex((index) => index.onOff === true)].name;
+
+    const res = await axios.get(
+      `${serverPath}/main?&category=${category}&pages=${page}&limit=12`
+    );
+
+    setPosts(res.data.boards.rows);
+    let pageArray = [];
+    if (res.data.boards.count) {
+      if (res.data.boards.count <= 12) {
+        pageArray.push(1);
+      } else {
+        for (let i = 1; i <= res.data.boards.count / 12; i++) {
+          pageArray.push(i);
+        }
+      }
+    }
+    setPageNumber(pageArray);
+  }
+
+  console.log(posts);
+
+  const pageButton = pageNumber.map((page, i) => {
+    return (
+      <ButtonContainer key={i}>
+        <ClickButton onClick={() => setPage(page)}>{page}</ClickButton>
+      </ButtonContainer>
+    );
+  });
+
   return (
-    <Container>
-      <TitleContainer>
-        게시글 목록 <HLine />
-      </TitleContainer>
-      <InnerContainer>
-        <SelectList />
-        <Search />
-      </InnerContainer>
-      <CardContainer>
-        <Card />
-      </CardContainer>
-    </Container>
+    <>
+      <Container>
+        <TitleContainer>
+          게시글 목록 <HLine />
+        </TitleContainer>
+        <InnerContainer>
+          <SelectList
+            LocationList={LocationList}
+            CategoryList={CategoryList}
+            setLocationList={setLocationList}
+            setCategoryList={setCategoryList}
+          />
+          <Search
+            setInputSearch={setInputSearch}
+            setTypeSearch={setTypeSearch}
+          />
+        </InnerContainer>
+        <CardContainer>
+          <CardList posts={posts} />
+        </CardContainer>
+      </Container>
+      <DownContainer>{pageButton}</DownContainer>
+    </>
   );
 }

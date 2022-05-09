@@ -4,7 +4,6 @@ import { postArray } from "./data/data";
 import { useNavigate } from "react-router-dom";
 import comment from "../img/svg/comment.svg";
 import Heart from "../img/svg/Heart.svg";
-import testIMG from "../img/d.png";
 
 const Container = styled.div`
   display: grid;
@@ -29,8 +28,8 @@ const CampingElement = styled.div`
   flex-direction: column;
   align-items: center;
 
-  width: 280px;
-  height: 280px;
+  width: 270px;
+  height: 270px;
   background: #ffffff;
   border: 3px solid #f0f0f0;
   box-sizing: border-box;
@@ -43,7 +42,7 @@ const CampingElement = styled.div`
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.9);
   }
   @media screen and (max-width: 500px) {
-    width: 100%;
+    width: 90%;
     aspect-ratio: 1 / 1;
     display: block;
   }
@@ -52,12 +51,12 @@ const CampingElement = styled.div`
 const CampingElementImg = styled.img`
   border: none;
   outline: none;
-  width: 280px;
+  width: 270px;
   height: 198px;
 `;
 
 const CampingElementDesignLine = styled.div`
-  width: 280px;
+  width: 270px;
   height: 3px;
   background-color: #f0f0f0;
 `;
@@ -67,7 +66,7 @@ const CampingElementTextBox = styled.div`
   flex-direction: column;
   align-items: flex-start;
 
-  width: 280px;
+  width: 270px;
   height: 80px;
 `;
 
@@ -122,6 +121,8 @@ const CampingElementEmojiText = styled.p`
 const Card = ({ post, LikePost }) => {
   const navigate = useNavigate();
 
+
+  console.log(post)
   if (post) {
     return post.map((x, index) => {
       return (

@@ -67,8 +67,9 @@ const SignModalView = styled.div`
   .signup_button {
     cursor: pointer;
     background: #12b886;
-    padding: 0.45rem 1rem;
+    padding: 0.2rem 1rem;
     font-size: 20px;
+    font-family: "Stylish", sans-serif;
     margin-top: 40px;
     color: white;
     border: none;
@@ -107,7 +108,7 @@ const Nofication = styled.h1`
   font-family: "Stylish", sans-serif;
   position: absolute;
   top: 5%;
-  right: 40%;
+  right: 36%;
   font-size: 3rem; ;
 `;
 
