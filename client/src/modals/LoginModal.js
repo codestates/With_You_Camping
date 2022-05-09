@@ -275,7 +275,7 @@ function LoginModal({
   const openSignup = () => {
     setOpenLoginModal(false);
     setOpenSignupModal(true);
-  };
+  }; 
 
   return (
     <ModalContainer>

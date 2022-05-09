@@ -87,17 +87,24 @@ const Div = styled.div`
 `;
 
 const ImgDiv = styled.div`
-
-margin-top: 33px;
-right: 100%;
-margin-left: 20px;
-margin-right: -22px;
-border-radius: 50%;
+  margin-top: 33px;
+  right: 100%;
+  margin-left: 20px;
+  margin-right: -22px;
+  border-radius: 50%;
   /* margin: 40px 5px; */
   cursor: pointer;
   &:hover {
     color: red;
   }
+`;
+
+const UserDiv = styled.div`
+  margin: 42px 30px;
+  font-family: 'Malgun Gothic';
+  font-size: 80%;
+  color: #622556;
+  font-weight: 500;
 `;
 function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
   const [openModal, setOpenModal] = useState(false);
@@ -195,7 +202,7 @@ function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
               </NavLink>
             </Div>
             <Div>
-              <NavLink 
+              <NavLink
                 to="/add_post"
                 style={{ textDecoration: "none", color: "inherit" }}
               >
@@ -217,15 +224,17 @@ function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
               </div>
             </Div>
             <ImgDiv>
-
-              <img alt="profile" src={userInfo.profile} width="32" style={{borderRadius: '50%' }}/>
-
+              <img
+                alt="profile"
+                src={userInfo.profile}
+                width="32"
+                style={{ borderRadius: "50%" }}
+              />
             </ImgDiv>
-            <Div>
-              <div className="user-profile" style={{ color: "#C428BF" }}>
-                {userInfo.nickname}님 안녕하세요
-              </div>
-            </Div>
+
+            <UserDiv className="user-profile" style={{}}>
+              {userInfo.nickname} 님 안녕하세요
+            </UserDiv>
           </Page>
         ) : (
           <Page>
