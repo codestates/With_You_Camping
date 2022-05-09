@@ -97,7 +97,7 @@ const InputContainer = styled.div`
         border: none;
         border-radius: 10px;
         cursor: pointer;
-        font-size: 17px;
+        font-size: 22px;
         font-family: "Stylish", sans-serif;
         padding: 0.2rem 3rem;
         background: #12b886;
@@ -122,12 +122,15 @@ const InputContainer = styled.div`
         margin-top: 0.4rem;
         margin-left: 1rem;
         font-size: 0.9rem;
-        font-family: "Stylish", sans-serif;
+        font-family: sans-serif;
+        /* font-family: "Stylish", sans-serif; */
         span {
           cursor: pointer;
           margin-left: 1rem;
           font-weight: 500;
-          color: $color-main-middle;
+          /* color: $color-main-middle; */
+          text-decoration: underline;
+          text-underline-position: under
         }
       }
       //버튼
@@ -304,11 +307,11 @@ function LoginModal({
                 <Nofify>이메일과 비밀번호를 확인해주세요</Nofify>
                 <div className="button-container">
                   <button className="login_button" type="submit">
-                    로그인 해주세요
+                    로그인
                   </button>
                   <div className="signup-select-area">
                     <label>회원이 아니신가요?</label>
-                    <span onClick={openSignup}>Signup</span>
+                    <span onClick={openSignup}>회원가입 하러 가기</span>
                   </div>
                 </div>
               </form>

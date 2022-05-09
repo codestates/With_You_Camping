@@ -40,7 +40,7 @@ function MyPost() {
   const [postEnd, setPostEnd] = useState(false);
 
   const viewmore = useRef();
-
+  
   useEffect(() => {
     getUserPost();
   }, []);
@@ -56,7 +56,7 @@ function MyPost() {
     // setPage(1);
     try {
       const res = await axios.get(
-        `${serverPath}/users/boards?pages=${2}&limit=12`,
+        `${serverPath}/users/boards?pages=${1}&limit=12`,
         headers
       );
       if (res.status === 200) {
