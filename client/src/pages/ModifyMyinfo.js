@@ -117,12 +117,12 @@ const SignoutBtn = styled(Btn)`
 `;
 
 const Nofication = styled.div`
-  position:absolute;
-  top:2px;
-  right : 0;
-  margin-top:5px;
-  color:red;
-  font-size:0.8rem;
+  position: absolute;
+  top: 2px;
+  right: 0;
+  margin-top: 5px;
+  color: red;
+  font-size: 0.8rem;
 `;
 
 function ModifyMyinfo() {
