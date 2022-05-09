@@ -8,7 +8,7 @@ import { BsCameraFill } from "react-icons/bs";
 import { GiCheckMark } from "react-icons/gi";
 import { IoLocateSharp as LocationPin, IoSearch } from "react-icons/io5";
 import { PageTitle } from "../components/pageTitle";
- 
+
 import { LoadingIndicator } from "../components/loadingIndicator";
 import { AddBtnComponent as Btn } from "../components/AddBtnComponent";
 import { PlaceSearch } from "../modals/placeSearch";
@@ -19,7 +19,7 @@ import Confirm from "../components/Confirm";
 import markerImg from "../img/marker.png";
 
 const Container = styled.section`
-margin-top: -30px;
+  margin-top: -30px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   width: 1200px;
@@ -434,7 +434,6 @@ function AddPost() {
     }
   }, [title, content, imgHostUrl, location, checkDetail, checkRating]);
 
-
   const uploadPost = async () => {
     if (isFull) {
       const headers = {
@@ -464,10 +463,10 @@ function AddPost() {
         const res = await axios.post(`${serverPath}/boards`, body, headers);
         if (res.status === 203) {
           // 상세 게시글 id
-          const boardId = res.data.boardId
+          const boardId = res.data.boardId;
           // 정상적으로 등록되었다면 내가 작성한 상세 게시글로 이동한다.
           navigate(`/post/${boardId}`);
-        } 
+        }
       } catch (err) {
         //err
       }
