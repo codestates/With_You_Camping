@@ -119,7 +119,7 @@ function Mypage(page, userInfo) {
  
       <SignContainer>{page["page"] === "2" && <ModifyMyinfo AppuserInfo={page.userInfo} setAppUserInfo={page.setUserInfo} />}</SignContainer>
     </MyPageContainer>
-  );
+  ); 
 }
 
 export default Mypage;
