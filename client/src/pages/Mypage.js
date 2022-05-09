@@ -124,26 +124,6 @@ function Mypage(page) {
     "/mypage/modifymyinfo",
   ];
 
-  // useEffect(() => {
-  //   getUserPost();
-  // }, []);
-
-  // async function getUserPost() {
-  //   const headers = {
-  //     headers: {
-  //       Authorization: `Bearer ${accessToken}`,
-  //     },
-  //   };
-  //   const res = await axios.get(
-  //     `${serverPath}/users/boards?pages=1&limit=10`,
-  //     headers
-  //   );
-
-  //   console.log(res.data);
-  // }
-
-  console.log(page)
-
   return (
     <MyPageContainer>
       <TabContainer className="container">
