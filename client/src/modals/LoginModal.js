@@ -130,7 +130,9 @@ const InputContainer = styled.div`
           font-weight: 500;
           /* color: $color-main-middle; */
           text-decoration: underline;
-          text-underline-position: under
+
+          text-underline-position: under;
+
         }
       }
       //버튼

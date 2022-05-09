@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import LoginModal from "../modals/LoginModal";
@@ -87,6 +87,7 @@ const Div = styled.div`
 `;
 
 const ImgDiv = styled.div`
+
 margin-top: 33px;
 right: 100%;
 margin-left: 20px;
@@ -121,6 +122,8 @@ function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
       openTwoBtnModal ? setOpenTwoBtnModal(false) : setOpenTwoBtnModal(true);
     }
   };
+
+  // const [newNickname, setNewNickname] = useState("");
 
   // 로그아웃 시 실행
   const handleLogout = () => {
@@ -214,7 +217,9 @@ function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
               </div>
             </Div>
             <ImgDiv>
+
               <img alt="profile" src={userInfo.profile} width="32" style={{borderRadius: '50%' }}/>
+
             </ImgDiv>
             <Div>
               <div className="user-profile" style={{ color: "#C428BF" }}>
