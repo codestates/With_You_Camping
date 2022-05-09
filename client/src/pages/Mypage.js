@@ -74,6 +74,8 @@ function Mypage(page, userInfo) {
 
   // console.log(userInfo)
 
+  // console.log(userInfo)
+
   useEffect(() => {
     if (!userId) {
       navigate("/");
