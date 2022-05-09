@@ -87,11 +87,11 @@ const Div = styled.div`
 `;
 
 const ImgDiv = styled.div`
-margin-top: 33px;
-right: 100%;
-margin-left: 20px;
-margin-right: -22px;
-border-radius: 50%;
+  margin-top: 33px;
+  right: 100%;
+  margin-left: 20px;
+  margin-right: -22px;
+  border-radius: 50%;
   /* margin: 40px 5px; */
   cursor: pointer;
   &:hover {
@@ -192,7 +192,7 @@ function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
               </NavLink>
             </Div>
             <Div>
-              <NavLink 
+              <NavLink
                 to="/add_post"
                 style={{ textDecoration: "none", color: "inherit" }}
               >
@@ -214,7 +214,12 @@ function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
               </div>
             </Div>
             <ImgDiv>
-              <img alt="profile" src={userInfo.profile} width="32" style={{borderRadius: '50%' }}/>
+              <img
+                alt="profile"
+                src={userInfo.profile}
+                width="32"
+                style={{ borderRadius: "50%" }}
+              />
             </ImgDiv>
             <Div>
               <div className="user-profile" style={{ color: "#C428BF" }}>
