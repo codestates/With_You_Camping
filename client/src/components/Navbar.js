@@ -228,6 +228,7 @@ function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
                 alt="profile"
                 src={userInfo.profile}
                 width="32"
+                height="32"
                 style={{ borderRadius: "50%" }}
               />
             </ImgDiv>
