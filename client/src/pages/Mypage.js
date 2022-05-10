@@ -50,7 +50,7 @@ const TabContainer = styled.div`
 `;
 
 const MyPageContainer = styled.div`
-  font-family: "Stylish", sans-serif;
+  font-family: "Lato", sans-serif;
   display: flex;
 
   margin: 0 auto;
@@ -116,8 +116,15 @@ function Mypage(page, userInfo) {
         {page["page"] === "0" && <MyPost />}
         {page["page"] === "1" && <LikePost />}
       </ContentsContainer>
- 
-      <SignContainer>{page["page"] === "2" && <ModifyMyinfo AppuserInfo={page.userInfo} setAppUserInfo={page.setUserInfo} />}</SignContainer>
+
+      <SignContainer>
+        {page["page"] === "2" && (
+          <ModifyMyinfo
+            AppuserInfo={page.userInfo}
+            setAppUserInfo={page.setUserInfo}
+          />
+        )}
+      </SignContainer>
     </MyPageContainer>
   );
 }
