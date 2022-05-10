@@ -3,15 +3,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "../Card";
 
-const TitleContainer = styled.div`
-  display: grid;
-
-  grid-template-rows: 1fr;
-
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  width: 100%;
-  height: max-content;
-`;
+const TitleContainer = styled.div``;
 
 function LikePost() {
   const serverPath = process.env.REACT_APP_SERVER_PATH;
@@ -41,9 +33,7 @@ function LikePost() {
   console.log(likePost);
   return (
     <React.Fragment>
-      <TitleContainer>
-        <Card LikePost={likePost} />
-      </TitleContainer>
+      <Card LikePost={likePost} />
     </React.Fragment>
   );
 }

@@ -9,17 +9,16 @@ import LikePost from "../components/mypages/LikePost";
 
 const TabContainer = styled.div`
   display: flex;
-  position: sticky !important;
+  right: 50px;
   width: 20%;
-  height: 100vh;
+  height: 90vh;
   align-items: center;
   flex-direction: column;
   text-align: center;
-
   margin-top: 2em;
   margin-bottom: 2em;
 
-  span {
+  div {
     border-bottom: #c0c0c0 solid 1px;
     padding-top: 2em;
     padding-bottom: 2em;
@@ -28,38 +27,44 @@ const TabContainer = styled.div`
       height: 50%;
     }
   }
-
   ul {
-    @media (max-width: 500px) {
-      font-size: 0.7rem;
-    }
     display: flex;
     flex-direction: column;
     align-content: space-around;
     .active {
-      color: #12b886;
+      color: #fc9f77;
     }
     * {
       margin-top: 4em;
       :hover {
-        color: #12b886;
+        color: #fc9f77;
         cursor: pointer;
       }
     }
   }
 `;
 
-const MyPageContainer = styled.div`
-  font-family: "Lato", sans-serif;
-  display: flex;
+const ContentsContainer = styled.div`
+  display: grid;
 
-  margin: 0 auto;
-  max-width: 100%;
-  height: 90vh;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-left: 90px;
+  height: max-content;
+  .modify-user {
+    position: relative;
+    left: 100%;
+  }
 `;
 
-const ContentsContainer = styled.div`
-  margin-left: 10rem;
+const MyPageContainer = styled.div`
+
+  font-family: "Lato", sans-serif;
+
+  display: flex;
+
+  width: 100%;
+  height: 90vh;
 `;
 
 const SignContainer = styled.div``;
@@ -68,10 +73,9 @@ function Mypage(page, userInfo) {
   const navigate = useNavigate();
 
   const tabContents = ["게시글", "좋아요", "회원 정보수정"];
-  const serverPath = process.env.REACT_APP_SERVER_PATH;
   const userId = window.sessionStorage.getItem("userId");
-  const nickname = window.sessionStorage.getItem("nickname");
-  const accessToken = window.sessionStorage.getItem("loginToken");
+
+  // console.log(userInfo)
 
   // console.log(userInfo)
 
@@ -115,6 +119,14 @@ function Mypage(page, userInfo) {
       <ContentsContainer className="post-list">
         {page["page"] === "0" && <MyPost />}
         {page["page"] === "1" && <LikePost />}
+        <div className="modify-user">
+          {page["page"] === "2" && (
+            <ModifyMyinfo
+              AppuserInfo={page.userInfo}
+              setAppUserInfo={page.setUserInfo}
+            />
+          )}
+        </div>
       </ContentsContainer>
 
       <SignContainer>
@@ -125,6 +137,7 @@ function Mypage(page, userInfo) {
           />
         )}
       </SignContainer>
+
     </MyPageContainer>
   );
 }
