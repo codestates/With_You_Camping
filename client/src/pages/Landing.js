@@ -9,7 +9,7 @@ import image5 from "../img/campingMedia.jpg";
 import image6 from "../img/camping6.jpg";
 
 const Container = styled.section`
-  font-family: "Stylish", sans-serif;
+  font-family: "Lato", sans-serif;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   width: 1200px;
@@ -142,8 +142,9 @@ const InnerContainer = styled.div`
         display: flex;
       }
       p {
-        font-size: 2.5rem;
+        font-size: 1.8rem;
         margin-bottom: 20px;
+        margin-right: 20px;
       }
     }
   }
@@ -197,7 +198,10 @@ function Landing() {
     <Container>
       <Picture>
         <div className="wrapper">
-          <div className="intro">
+          <div
+            className="intro"
+            style={{ fontSize: "1.7rem", margin: "0px 0px 20px 0px" }}
+          >
             <p>오늘은 어디로 가볼까?</p>
             <p>지금 With You Camping</p>
             <p> 가슴 설레는</p>

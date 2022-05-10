@@ -58,6 +58,9 @@ const ContentsContainer = styled.div`
 `;
 
 const MyPageContainer = styled.div`
+
+  font-family: "Lato", sans-serif;
+
   display: flex;
 
   width: 100%;
@@ -125,6 +128,16 @@ function Mypage(page, userInfo) {
           )}
         </div>
       </ContentsContainer>
+
+      <SignContainer>
+        {page["page"] === "2" && (
+          <ModifyMyinfo
+            AppuserInfo={page.userInfo}
+            setAppUserInfo={page.setUserInfo}
+          />
+        )}
+      </SignContainer>
+
     </MyPageContainer>
   );
 }
