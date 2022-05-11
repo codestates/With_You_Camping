@@ -211,13 +211,15 @@ export default function PostListComponent() {
       } else {
         // console.log('zz')
         for (let i = 1; i <= res.data.boards.count / 12 + 1; i++) {
+
           console.log(i);
+
           pageArray.push(i);
         }
       }
     }
 
-    console.log(pageArray);
+
     setPageNumber(pageArray);
   }
 
