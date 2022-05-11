@@ -77,15 +77,52 @@ const Container = styled.section`
     /* padding-left: 1rem; */
     width: 100%;
   }
+  @media screen and (max-width: 500px) {
+    height: 2.5rem;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid;
+    border-color: lightgray;
+    padding-top: 3px;
+    padding-left: rem;
+    padding-right: 0.6rem;
+    padding-bottom: 0px;
+    margin-top: 13px;
+    margin-left: 6rem;
+    margin: {
+      left: 0.5rem;
+      right: 0.8rem;
+    }
+    select {
+      min-width: 2rem;
+      max-width: 4rem;
+      width: 20%;
+      border: none;
+      font-size: 0.9rem;
+    }
+
+    div {
+      display: flex;
+      width: 100%;
+      background-color: white;
+    }
+
+    .search-input {
+      border: none;
+      outline: none;
+      /* padding-left: 1rem; */
+      width: 100%;
+    }
+  }
 `;
 
-export default function Search({setInputSearch, setTypeSearch}) {
+export default function Search({ setInputSearch, setTypeSearch }) {
   const [input, setInput] = useState("");
   const [searchType, setSearchType] = useState("title");
 
   function getSearchPosts(type, input) {
-    setTypeSearch(type)
-    setInputSearch(input)
+    setTypeSearch(type);
+    setInputSearch(input);
   }
 
   const changeQueryString = (e) => {

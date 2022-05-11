@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { postArray } from "./data/data";
 import { useNavigate } from "react-router-dom";
 import comment from "../img/svg/comment.svg";
 import Heart from "../img/svg/Heart.svg";
@@ -23,18 +22,15 @@ const InnerContainer = styled.div`
 
 const CampingElement = styled.div`
   transition: all 300ms;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
   width: 270px;
   height: 270px;
   background: #ffffff;
   border: 3px solid #f0f0f0;
   box-sizing: border-box;
   border-radius: 8px;
-
   overflow: hidden;
   &&:hover {
     cursor: pointer;
@@ -42,9 +38,9 @@ const CampingElement = styled.div`
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.9);
   }
   @media screen and (max-width: 500px) {
-    width: 90%;
+    width: 100%;
     aspect-ratio: 1 / 1;
-    display: block;
+    /* display: block; */
   }
 `;
 
@@ -65,7 +61,6 @@ const CampingElementTextBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
   width: 270px;
   height: 80px;
 `;
@@ -77,7 +72,6 @@ const CampingElementTitle = styled.p`
   font-size: 20px;
   line-height: 27px;
   color: #343434;
-
   margin-left: 25px;
   margin-top: 8px;
 `;
@@ -94,7 +88,6 @@ const CampingElementName = styled.p`
   font-size: 18px;
   line-height: 25px;
   color: #878395;
-
   margin-top: 5px;
   margin-left: 25px;
   margin-right: 40px;

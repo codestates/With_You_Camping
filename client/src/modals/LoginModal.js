@@ -304,7 +304,7 @@ function LoginModal({
                     src={logo}
                     alt="icon"
                     style={{
-                      height: "100%",
+                      height: "120%",
                       width: "100%",
                       margin: "30px 0px -57px 28px",
                     }}

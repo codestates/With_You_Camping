@@ -271,16 +271,28 @@ const WeatherContainer = styled.section`
     margin-bottom: 10px;
     font-size: 1.2rem;
   }
+  @media screen and (max-width: 500px) {
+    .title_wrapper {
+      margin-bottom: 0px;
+    }
+  }
 `;
 
 const ShowWeather = styled.div`
   margin-top: 10px;
   width: 100%;
-  display: inline-flex;
+  display: flex;
   justify-content: space-between;
   font-size: 1.2rem;
   color: #192b4d;
   font-family: sans-serif;
+  @media screen and (max-width: 500px) {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    width: 20%;
+  }
 `;
 
 const ModifyBtnContainer = styled.div`
@@ -298,7 +310,7 @@ const DeleteBtnContainer = styled.div`
 const ProfileContainer = styled.div`
   margin-top: -8px;
   margin-right: 6px;
-`
+`;
 
 export default function DetailPost({ isLogin, userInfo }) {
   const kakao = window.kakao;

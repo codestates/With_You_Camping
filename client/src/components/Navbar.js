@@ -7,7 +7,6 @@ import SignupModal from "../modals/SignupModal";
 import { TwoBtnModal } from "./TwoBtnModal";
 import Confirm from "./Confirm";
 import image from "../img/logo3.jpg";
-import image1 from "../img/logo4.jpg";
 import image2 from "../img/logo5.jpg";
 import image3 from "../img/15logo.jpg";
 
@@ -31,6 +30,7 @@ const Container = styled.header`
     justify-content: center;
     min-width: 0;
     grid-gap: 0;
+    font-size: 0.8rem;
   }
 `;
 
@@ -105,12 +105,13 @@ const Page = styled.div`
 
 const Div = styled.div`
   margin: 40px 30px;
+
   cursor: pointer;
   &:hover {
     color: red;
   }
   @media screen and (max-width: 500px) {
-    display: none;
+    /* display: none; */
   }
 `;
 
@@ -140,7 +141,7 @@ const UserDiv = styled.div`
   color: #c428bf;
   font-weight: 500;
   @media screen and (max-width: 768px) {
-    margin-top: 50px;
+    margin-top: 40px;
     margin-left: 10px;
     margin-right: 10px;
     font-size: 0.7rem;

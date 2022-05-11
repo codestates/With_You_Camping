@@ -41,6 +41,7 @@ const SignModalView = styled.div`
   div {
     display: flex;
     justify-content: center;
+    margin-bottom: -130px;
 
     div {
       cursor: pointer;
@@ -68,7 +69,7 @@ const SignModalView = styled.div`
   .signup_button {
     cursor: pointer;
     background: #12b886;
-    padding: 0.15rem 1rem;
+    padding: 0.15rem 5rem;
     font-size: 20px;
     font-family: "Lato", sans-serif;
     margin-top: 40px;
@@ -220,9 +221,9 @@ function SignupModal({
                 src={logo}
                 alt="icon"
                 style={{
-                  height: "30%",
-                  width: "30%",
-                  margin: "0px 0px 0px 160px",
+                  height: "40%",
+                  width: "40%",
+                  margin: "20px 0px 0px 150px",
                 }}
               />
             </Nofication>
