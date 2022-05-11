@@ -140,7 +140,7 @@ export default function PostListComponent() {
   async function searchPost() {
     if (inputSearch.length !== 0 && typeSearch.length !== 0) {
       const res = await axios.get(
-        `${serverPath}/main/search?searchType=${typeSearch}&input=${inputSearch}&pages=${page}&limit=12`
+        `${serverPath}/main/search?searchType=${typeSearch}&input=${inputSearch}&pages=${page}&limit=12`,
       );
       setPosts(res.data.boards.rows);
       let pageArray = [];
