@@ -8,6 +8,8 @@ import Confirm from "../components/Confirm";
 import KakaoLoginBtn from "../components/KakaoLoginBtn";
 import GoogleLoginBtn from "../components/GoogleLoginBtn";
 import NaverLoginBtn from "../components/NaverLoginBtn";
+import Icon from "../img/icon_2.jpg";
+import logo from "../img/logo3.jpg";
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -101,9 +103,9 @@ const InputContainer = styled.div`
         border: none;
         border-radius: 10px;
         cursor: pointer;
-        font-size: 22px;
-        font-family: "Stylish", sans-serif;
-        padding: 0.2rem 3rem;
+        font-size: 18px;
+        font-family: "Lato", sans-serif;
+        padding: 0.1rem 1rem;
         background: #12b886;
         color: white;
         margin-bottom: 5px;
@@ -126,17 +128,16 @@ const InputContainer = styled.div`
         margin-top: 0.4rem;
         margin-left: 1rem;
         font-size: 0.9rem;
-        font-family: sans-serif;
-        /* font-family: "Stylish", sans-serif; */
+        font-family: "Lato", sans-serif;
         span {
           cursor: pointer;
+          font-family: "Lato", sans-serif;
+          font-size: 13px;
           margin-left: 1rem;
           font-weight: 500;
           /* color: $color-main-middle; */
           text-decoration: underline;
-
           text-underline-position: under;
-
         }
       }
       //버튼
@@ -144,7 +145,7 @@ const InputContainer = styled.div`
         background-color: $color-main-middle;
         color: white;
         padding: 15px 30px;
-        font-family: "Stylish", sans-serif;
+        font-family: "Lato", sans-serif;
         font-size: 15px;
         margin: 0.5rem;
         margin-top: 1.5rem;
@@ -178,6 +179,14 @@ const Nofify = styled.div`
   bottom: 500%;
   left: -12%;
   font-size: 0.8rem;
+`;
+const Logo = styled.div`
+  position: relative;
+  bottom: 80%;
+  left: -12%;
+  width: 110px;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const BtnContainer = styled.div`
@@ -279,7 +288,7 @@ function LoginModal({
   const openSignup = () => {
     setOpenLoginModal(false);
     setOpenSignupModal(true);
-  }; 
+  };
 
   return (
     <ModalContainer>
@@ -294,7 +303,18 @@ function LoginModal({
           <InnerContainer>
             <InputContainer>
               <form onSubmit={handleSubmit}>
-                <Nofication>WYC.</Nofication>
+                <Logo>
+                  <img
+                    src={logo}
+                    alt="icon"
+                    style={{
+                      height: "100%",
+                      width: "100%",
+                      margin: "30px 0px -57px 28px",
+                    }}
+                  />
+                </Logo>
+                {/* <Nofication></Nofication> */}
                 <label htmlFor="user-email" />
                 <input
                   id="user-email"
@@ -313,7 +333,7 @@ function LoginModal({
                 {/* <Nofify>이메일과 비밀번호를 확인해주세요</Nofify> */}
                 <div className="button-container">
                   <button className="login_button" type="submit">
-                    로그인
+                    로그인하기
                   </button>
                   <div className="signup-select-area">
                     <label>회원이 아니신가요?</label>

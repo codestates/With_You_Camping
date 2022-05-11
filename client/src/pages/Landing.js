@@ -9,7 +9,7 @@ import image5 from "../img/campingMedia.jpg";
 import image6 from "../img/camping6.jpg";
 
 const Container = styled.section`
-  font-family: "Stylish", sans-serif;
+  font-family: "Lato", sans-serif;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   width: 1200px;
@@ -145,6 +145,7 @@ const InnerContainer = styled.div`
       p {
         font-size: 1.9rem;
         margin-bottom: 20px;
+        margin-right: 20px;
       }
     }
   }

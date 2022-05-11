@@ -7,9 +7,12 @@ import SignupModal from "../modals/SignupModal";
 import { TwoBtnModal } from "./TwoBtnModal";
 import Confirm from "./Confirm";
 import image from "../img/logo3.jpg";
+import image1 from "../img/logo4.jpg";
+import image2 from "../img/logo5.jpg";
+import image3 from "../img/15logo.jpg";
 
 const Container = styled.header`
-  font-family: "Stylish", sans-serif;
+  font-family: "Comforter", cursive;
   position: relative;
   display: flex;
   align-items: center;
@@ -19,7 +22,7 @@ const Container = styled.header`
   min-width: 1200px;
   height: 50px;
   margin: 20px;
-  font-size: 1.2rem;
+  font-size: 1rem;
 
   @media screen and (max-width: 500px) {
     width: 100%;
@@ -56,18 +59,40 @@ const Logo = styled.div`
   text-align: center;
   cursor: pointer;
   img {
-    margin-top: 6px;
+    margin-top: 25px;
     margin-right: 0px;
-    margin-left: 70px;
-    height: 80px;
-    width: 100%;
+    margin-left: 100px;
+    height: 70px;
+    width: 200px;
     object-fit: contain;
+    /* float: left; */
   }
 
   @media screen and (max-width: 500px) {
-    margin-left: -50px;
-    margin-right: 80px;
+    display: none;
+  }
+`;
+const Logo2 = styled.div`
+  font-family: "Stylish", sans-serif;
+  font-size: 4.3rem;
+
+  text-align: center;
+  cursor: pointer;
+  img {
+    margin-top: 25px;
+    margin-right: 100px;
+    margin-left: -150px;
+    height: 70px;
+    width: 200px;
+    object-fit: contain;
+    float: left;
+  }
+
+  @media screen and (max-width: 500px) {
+    margin-left: 150px;
+    margin-right: 0px;
     font-size: 2.8rem;
+    width: 70%;
   }
 `;
 const Page = styled.div`
@@ -84,6 +109,9 @@ const Div = styled.div`
   &:hover {
     color: red;
   }
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
 `;
 
 const ImgDiv = styled.div`
@@ -97,14 +125,26 @@ const ImgDiv = styled.div`
   &:hover {
     color: red;
   }
+  @media screen and (max-width: 500px) {
+    margin-top: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 0.8rem;
+  }
 `;
 
 const UserDiv = styled.div`
   margin: 42px 30px;
-  font-family: 'Malgun Gothic';
+  font-family: "Malgun Gothic";
   font-size: 80%;
-  color: #622556;
+  color: #c428bf;
   font-weight: 500;
+  @media screen and (max-width: 768px) {
+    margin-top: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 0.7rem;
+  }
 `;
 function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
   const [openModal, setOpenModal] = useState(false);
@@ -187,9 +227,19 @@ function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
       ) : null}
       <Container>
         <Logo onClick={() => navigate("/")}>
-          <img src={image} alt="logo" />
-          <span></span>
+          {/* <img src={image1} alt="logo" style={{ margin: "20px 0px 0px 0px" }} /> */}
+          <img
+            src={image3}
+            alt="logo3"
+            style={{ margin: "20px 20px 0px 0px" }}
+          />
         </Logo>
+        {/* <Logo2 onClick={() => navigate("/")}>
+          <span style={{ margin: "30px 0px 0px 0px" }}>
+            <img src={image2} alt="logo1" />
+          </span> */}
+        {/* <img src={image2} alt="logo1" /> */}
+        {/* </Logo2> */}
 
         {isLogin ? (
           <Page>

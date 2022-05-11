@@ -557,7 +557,7 @@ export default function DetailPost({ isLogin, userInfo }) {
             <ProfileContainer>
               <img
                 alt="profile"
-                src={userInfo.profile}
+                src={postData.profile}
                 width="32"
                 style={{ borderRadius: "50%" }}
               />
