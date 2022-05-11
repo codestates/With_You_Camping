@@ -178,11 +178,12 @@ const DescContainer = styled.section`
   max-height: 500px;
   box-sizing: border-box;
   font-family: sans-serif;
+  /* margin-top: 10px; */
   .title_wrapper {
     color: #333;
     font-size: 1.4rem;
     display: flex;
-    margin-top: 30px;
+    margin-top: 80px;
     margin-bottom: 10px;
     svg {
       position: relative;
@@ -212,7 +213,7 @@ const MapContainer = styled.section`
   .title_wrapper {
     color: #333;
     display: flex;
-    margin-top: 30px;
+    margin-top: 80px;
     margin-bottom: 10px;
     font-size: 1.2rem;
     svg {
@@ -240,7 +241,7 @@ const CommentContainer = styled.section`
   .title_wrapper {
     color: #333;
     display: flex;
-    margin-top: 30px;
+    margin-top: 80px;
     margin-bottom: 10px;
     font-size: 1.2rem;
     svg {
@@ -267,7 +268,7 @@ const WeatherContainer = styled.section`
   .title_wrapper {
     color: #333;
     display: flex;
-    margin-top: 30px;
+    margin-top: 80px;
     margin-bottom: 10px;
     font-size: 1.2rem;
   }
@@ -568,7 +569,7 @@ export default function DetailPost({ isLogin, userInfo }) {
             <ProfileContainer>
               <img
                 alt="profile"
-                src={userInfo.profile}
+                src={postData.profile}
                 width="32"
                 style={{ borderRadius: "50%" }}
               />
@@ -641,14 +642,6 @@ export default function DetailPost({ isLogin, userInfo }) {
                         .toLocaleDateString("ko-KR")
                         .slice(6, -1)}
                     </div>
-
-                    {/* <div style={{ margin: "15px" }}>
-                      {now.getDay() + i > 6 ? (
-                        <div>{week[7 - now.getDay() - i]}</div>
-                      ) : (
-                        <div>{week[now.getDay() + i]}</div>
-                      )}
-                    </div> */}
                     <div style={{ margin: "10px 3% 10px", height: "70px" }}>
                       {show(item.weather[0].main)}
                     </div>
@@ -673,7 +666,7 @@ export default function DetailPost({ isLogin, userInfo }) {
             <FaCommentDots />
             <h3>댓글</h3>
           </div>
-          <hr />
+          <hr /> 
           <CommentList
             getCommentList={getCommentList}
             id={id}

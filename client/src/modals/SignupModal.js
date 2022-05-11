@@ -270,7 +270,7 @@ function SignupModal({
               />
 
               <button className="signup_button" type="submit">
-                Signup
+                회원가입
               </button>
             </form>
           </SignUpWrapper>

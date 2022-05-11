@@ -9,9 +9,12 @@ const CommmentAreaContainer = styled.section`
     display: flex;
     justify-content: space-between;
     .nickname {
+      display: flex;
+      /* margin-left: 5px; */
       font: {
         weight: 700;
         size: 1.2rem;
+        
       }
     }
     i {
@@ -21,7 +24,7 @@ const CommmentAreaContainer = styled.section`
   }
   .date {
     color: gray;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     margin-bottom: 0.5rem;
   }
   .hide {
@@ -37,6 +40,7 @@ const CommmentAreaContainer = styled.section`
   .content {
     padding-bottom: 0.8rem;
     margin-bottom: 0;
+    font-size: 1.2rem;
   }
 
   hr {
@@ -44,16 +48,15 @@ const CommmentAreaContainer = styled.section`
       top: 1rem;
       bottom: 1rem;
     }
-  } 
+  }
 `;
 
 const CommentListEntry = ({ comment, getCommentList, id }) => {
-
   const serverPath = process.env.REACT_APP_SERVER_PATH;
   const loginToken = window.sessionStorage.getItem("loginToken");
   const userId = parseInt(window.sessionStorage.getItem("userId"));
 
-  const commentData = comment.createdAt.slice(0,10)
+  const commentData = comment.createdAt.slice(0, 10);
 
   const [isEdit, setIsEdit] = useState(false);
   const [commentValue, setCommentValue] = useState(comment.comment);
@@ -81,7 +84,6 @@ const CommentListEntry = ({ comment, getCommentList, id }) => {
       });
   };
 
-
   const deleteComment = () => {
     axios
       .delete(`${serverPath}/comments/${comment.id}`, {
@@ -97,10 +99,22 @@ const CommentListEntry = ({ comment, getCommentList, id }) => {
       });
   };
 
+  console.log(comment);
+
   return (
     <CommmentAreaContainer>
       <div className="header">
-        <div className="nickname">{comment.nickname}</div>
+        <div className="nickname">
+          <img
+            alt="profile"
+            src={comment.profile}
+            width="30"
+            height="30"
+            style={{ borderRadius: "50%" ,marginRight: '8px', marginBottom: '9px'}}
+          ></img>
+          <div style={{ marginTop: '14px'}}>{comment.nickname}</div>
+            
+        </div>
         {comment.userId === userId ? (
           <React.Fragment>
             <div className={isEdit ? null : "hide"}>

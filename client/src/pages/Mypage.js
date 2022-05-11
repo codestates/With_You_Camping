@@ -128,7 +128,7 @@ function Mypage(page, userInfo) {
         </div>
       </ContentsContainer>
     </MyPageContainer>
-  );
+  ); 
 }
 
 export default Mypage;
