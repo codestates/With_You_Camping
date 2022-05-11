@@ -130,6 +130,7 @@ export default function Checkinfo({
   //   toilet: nowToilet,
   // })
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   let checkData = {
     area: nowArea,
     internet: nowInternet,
@@ -138,10 +139,17 @@ export default function Checkinfo({
     toilet: nowToilet,
   };
 
-
   useEffect(() => {
     setCheckDetail(checkData);
-  }, [checkData.area, checkData.internet, checkData.parking,checkData.electronic,checkData.toilet]);
+  }, [
+    checkData.area,
+    checkData.internet,
+    checkData.parking,
+    checkData.electronic,
+    checkData.toilet,
+    setCheckDetail,
+    checkData,
+  ]);
 
   const handleChange = (data) => {
     if (data.info === "area") {

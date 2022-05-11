@@ -1,28 +1,34 @@
-import { useState, useRef } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 import { IoSearch } from "react-icons/io5";
 
 const Container = styled.section`
-  position : fixed;
+  position: fixed;
   display: grid;
   place-items: center;
 
-  top:0; left: 0; bottom: 0; right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 
   width: 100vw;
   height: 100vh;
 
   z-index: 998;
-`
+`;
 
 const Backdrop = styled.div`
-  position : fixed;
-  top:0; left: 0; bottom: 0; right: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0, 0, 0, 0.3);
 
   z-index: 998;
-`
+`;
 
 const Modal = styled.div`
   position: relative;
@@ -32,7 +38,7 @@ const Modal = styled.div`
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
-  
+
   height: 600px;
   width: 600px;
 
@@ -52,15 +58,15 @@ const Modal = styled.div`
     position: absolute;
     top: 125px;
     left: 117px;
-    
+
     font-size: 0.8rem;
     color: #555;
   }
 
-  @media screen and (max-width : 500px) {
+  @media screen and (max-width: 500px) {
     width: 100%;
   }
-`
+`;
 
 const InnerContainer = styled.div`
   display: flex;
@@ -72,14 +78,14 @@ const InnerContainer = styled.div`
   margin: 50px;
 
   /* background-color: #ddd; */
-`
+`;
 
 const SearchContainer = styled.div`
   position: relative;
   background-color: #ddd;
   display: flex;
   justify-content: center;
-  
+
   width: 100%;
   height: 40px;
 
@@ -93,7 +99,7 @@ const SearchContainer = styled.div`
     border: 1px solid #aaa;
     border-radius: 3px;
 
-    &:focus{
+    &:focus {
       outline: 3px solid #ffd600;
       border: none;
     }
@@ -118,11 +124,11 @@ const SearchContainer = styled.div`
 
     cursor: pointer;
     transition: 0.05s;
-    &:active{
-      color : #ffd600;
+    &:active {
+      color: #ffd600;
       font-size: 1.1rem;
     }
-    
+
     span {
       position: relative;
       top: 1px;
@@ -131,7 +137,7 @@ const SearchContainer = styled.div`
       margin-left: 5px;
     }
   }
-`
+`;
 
 const PlaceContainer = styled.div`
   width: 100%;
@@ -140,7 +146,7 @@ const PlaceContainer = styled.div`
   overflow: auto;
 
   &:before {
-    content: '';
+    content: "";
     display: block;
     width: 100%;
     height: 1px;
@@ -148,7 +154,7 @@ const PlaceContainer = styled.div`
     margin-bottom: 3px;
     background-color: #ddd;
   }
-`
+`;
 
 const PlaceResult = styled.div`
   display: flex;
@@ -181,7 +187,7 @@ const PlaceResult = styled.div`
   }
 
   @keyframes up {
-    0%{
+    0% {
       transform: translateY(10px);
     }
     100% {
@@ -190,8 +196,8 @@ const PlaceResult = styled.div`
     }
   }
   animation: up 0.5s forwards;
-  /* animation-delay : ${props => `0.${props.idx}s`} */
-`
+  /* animation-delay : ${(props) => `0.${props.idx}s`} */
+`;
 
 const NoSearch = styled.div`
   display: grid;
@@ -200,84 +206,91 @@ const NoSearch = styled.div`
   width: 100%;
   height: 400px;
 
-  color : #888;
-`
+  color: #888;
+`;
 
 export const PlaceSearch = ({ setLocation, closeFn }) => {
-  const kakao = window.kakao
+  const kakao = window.kakao;
 
-  const [searchValue, setSearchValue] = useState('')
-  const [placeData, setPlaceData] = useState([])
+  const [searchValue, setSearchValue] = useState("");
+  const [placeData, setPlaceData] = useState([]);
 
   const inputHandler = (e) => {
-    setSearchValue(e.target.value)
+    setSearchValue(e.target.value);
 
-    if(e.keyCode === 13){
-      e.preventDefault()
-      getPlaces()
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      getPlaces();
     }
-  }
+  };
 
   const getPlaces = () => {
-    const ps = new kakao.maps.services.Places()
+    const ps = new kakao.maps.services.Places();
 
     const psCallback = (data, status, pagination) => {
       if (status === kakao.maps.services.Status.OK) {
-        setPlaceData([])
-        setPlaceData(data)
-      }
-      else setPlaceData([])
-    }
+        setPlaceData([]);
+        setPlaceData(data);
+      } else setPlaceData([]);
+    };
 
     if (searchValue) {
-      ps.keywordSearch(`${searchValue}`, psCallback)
+      ps.keywordSearch(`${searchValue}`, psCallback);
     }
-  }
+  };
 
   const getPlaceCoords = (lat, lng) => {
-    setLocation(
-      {
-        latitude: lat, //위도
-        longitude: lng //경도
-      }
-    )
-    closeFn()
-  }
+    setLocation({
+      latitude: lat, //위도
+      longitude: lng, //경도
+    });
+    closeFn();
+  };
 
   return (
     <Container>
-    <Backdrop onClick={closeFn} />
+      <Backdrop onClick={closeFn} />
       <Modal>
         <InnerContainer>
           <SearchContainer>
-            <input spellCheck={false} placeholder="찾으시는 장소를 입력해주세요! 예) 경기도 캠핑장" onKeyDown={e => inputHandler(e)} />
+            <input
+              spellCheck={false}
+              placeholder="찾으시는 장소를 입력해주세요! 예) 경기도 캠핑장"
+              onKeyDown={(e) => inputHandler(e)}
+            />
             <div className="searchBtn" onClick={getPlaces}>
               <span>검색</span>
               <IoSearch />
             </div>
           </SearchContainer>
           <h2>검색결과</h2>
-          <span className='result_length'>{placeData.length ? `${placeData.length}개의 결과가 있습니다.` : null}</span>
-          <PlaceContainer>
+          <span className="result_length">
             {placeData.length
-              ? (
-                placeData.map((place, idx) => {
-                  return (
-                    <PlaceResult key={idx} idx={idx} onClick={() => getPlaceCoords(place.y, place.x)}>
-                      <div className='place_name'> {place.place_name}</div>
-                      <div className='address_name'>{place.address_name}</div>
-                    </PlaceResult>
-                  )
-                })
-              )
-              : (
-                <NoSearch>
-                  <p>검색 결과가 없거나 검색하지 않으셨습니다.</p>
-                </NoSearch>
-              )}
+              ? `${placeData.length}개의 결과가 있습니다.`
+              : null}
+          </span>
+          <PlaceContainer>
+            {placeData.length ? (
+              placeData.map((place, idx) => {
+                return (
+                  <PlaceResult
+                    key={idx}
+                    idx={idx}
+                    onClick={() => getPlaceCoords(place.y, place.x)}
+                  >
+                    <div className="place_name"> {place.place_name}</div>
+                    <div className="address_name">{place.address_name}</div>
+                  </PlaceResult>
+                );
+              })
+            ) : (
+              <NoSearch>
+                <p>검색 결과가 없거나 검색하지 않으셨습니다.</p>
+              </NoSearch>
+            )}
           </PlaceContainer>
         </InnerContainer>
-      </Modal >
-    </Container >
+      </Modal>
+    </Container>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import image from "../img/camping.jpeg";
@@ -9,7 +9,8 @@ import image5 from "../img/campingMedia.jpg";
 import image6 from "../img/camping6.jpg";
 
 const Container = styled.section`
-  font-family: "Lato", sans-serif;
+  /* font-family: "Lato", sans-serif; */
+  font-family: "Stylish", sans-serif;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   width: 1200px;
@@ -205,6 +206,7 @@ function Landing() {
             <p>지금 With You Camping</p>
             <p> 가슴 설레는</p>
             <p>캠핑 여행을 떠나보아요</p> */}
+            &nbsp;
             <p>가족, 친구와 함께 떠나는 캠핑</p>
             <p>기억에 남는 캠핑 SITE</p>
             <p>지금 With You Camping 과 공유해요</p>

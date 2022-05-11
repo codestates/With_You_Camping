@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Search from "./Search";
 import SelectList from "./SelectList";
@@ -131,25 +130,16 @@ const ClickButton = styled.button`
 
 export default function PostListComponent() {
   const serverPath = process.env.REACT_APP_SERVER_PATH;
-  const userId = window.sessionStorage.getItem("userId");
-  const nickname = window.sessionStorage.getItem("nickname");
-  const accessToken = window.sessionStorage.getItem("loginToken");
-
-  const navigate = useNavigate();
 
   const [LocationList, setLocationList] = useState(list.location);
   const [CategoryList, setCategoryList] = useState(list.category);
   // 현재 클릭된 카테고리 리스트
   const listStatus = [...LocationList, ...CategoryList];
-  // console.log(LocationList)
-  // console.log(CategoryList)
-  // console.log(listStatus)
 
   const [inputSearch, setInputSearch] = useState("");
   const [typeSearch, setTypeSearch] = useState("");
 
-  // console.log(inputSearch.length);
-  // console.log(typeSearch.length);
+
 
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
@@ -157,13 +147,16 @@ export default function PostListComponent() {
 
   useEffect(() => {
     categoryPost();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, LocationList, CategoryList]);
 
   useEffect(() => {
     searchPost();
     window.scroll(0, 0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputSearch, typeSearch]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   async function searchPost() {
     if (inputSearch.length !== 0 && typeSearch.length !== 0) {
       const res = await axios.get(
@@ -192,6 +185,7 @@ export default function PostListComponent() {
   useEffect(() => {
     categoryPost();
     window.scroll(0, 0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, setLocationList, setCategoryList]);
 
   async function categoryPost() {
@@ -211,14 +205,12 @@ export default function PostListComponent() {
       } else {
         // console.log('zz')
         for (let i = 1; i <= res.data.boards.count / 12 + 1; i++) {
-
           console.log(i);
 
           pageArray.push(i);
         }
       }
     }
-
 
     setPageNumber(pageArray);
   }
@@ -245,7 +237,7 @@ export default function PostListComponent() {
             CategoryList={CategoryList}
             setLocationList={setLocationList}
             setCategoryList={setCategoryList}
-          />
+          /> 
           <Search
             setInputSearch={setInputSearch}
             setTypeSearch={setTypeSearch}
