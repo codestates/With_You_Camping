@@ -117,6 +117,8 @@ function Mypage(page) {
 
   // console.log(userInfo)
 
+  // console.log(userInfo)
+
   useEffect(() => {
     if (!userId) {
       navigate("/");
@@ -167,7 +169,7 @@ function Mypage(page) {
         </div>
       </ContentsContainer>
     </MyPageContainer>
-  );
+  ); 
 }
 
 export default Mypage;

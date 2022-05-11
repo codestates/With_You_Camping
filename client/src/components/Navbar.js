@@ -3,7 +3,6 @@ import { useNavigate, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import LoginModal from "../modals/LoginModal";
 import SignupModal from "../modals/SignupModal";
-// import Search from "./Search";
 import { TwoBtnModal } from "./TwoBtnModal";
 import Confirm from "./Confirm";
 import image3 from "../img/15logo.jpg";
