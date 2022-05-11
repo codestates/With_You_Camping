@@ -121,7 +121,7 @@ function Router() {
         setUserInfo={setUserInfo}
       />
       <InnerContainer>
-        <Routes>
+        <Routes> 
           <Route path="/" element={<Landing />} />
           <Route path="/posts" element={<PostList />} />
 
@@ -149,8 +149,11 @@ function Router() {
           />
           <Route path="callback/naver" element={<NaverCallback />} />
         </Routes>
+
       </InnerContainer>
+      
       <Footer />
+     
     </Container>
   );
 }

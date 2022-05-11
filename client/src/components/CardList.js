@@ -93,7 +93,7 @@ const CampingElementName = styled.p`
   font-weight: 500;
   font-size: 18px;
   line-height: 25px;
-  color: #b6b6b6;
+  color: #878395;
 
   margin-top: 5px;
   margin-left: 25px;
@@ -114,7 +114,7 @@ const CampingElementEmojiText = styled.p`
   font-weight: 400;
   font-size: 17px;
   line-height: 15px;
-  color: #c1c1c1;
+  color: #878395;
   margin-top: 1px;
 `;
 

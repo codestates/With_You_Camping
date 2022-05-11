@@ -9,7 +9,7 @@ import image5 from "../img/campingMedia.jpg";
 import image6 from "../img/camping6.jpg";
 
 const Container = styled.section`
-  font-family: "Stylish", sans-serif;
+  font-family: "Lato", sans-serif;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   width: 1200px;
@@ -54,7 +54,7 @@ const Picture = styled.div`
       width: 100%;
       padding: 70px;
       box-sizing: border-box;
-      font-size: 2.2rem;
+      font-size: 2.1rem;
       height: max-content;
 
       p {
@@ -135,6 +135,7 @@ const InnerContainer = styled.div`
       flex-direction: column;
       justify-content: center;
       align-items: flex-end;
+      /* font-size: 0.8rem; */
       width: 700px;
       height: 400px;
 
@@ -142,8 +143,10 @@ const InnerContainer = styled.div`
         display: flex;
       }
       p {
-        font-size: 2.5rem;
+        font-size: 1.8rem;
+
         margin-bottom: 20px;
+        margin-right: 20px;
       }
     }
   }
@@ -185,7 +188,7 @@ const InnerContainer = styled.div`
         }
 
         p {
-          font-size: 1.3rem;
+          font-size: 1.0rem;
         }
       }
     }
@@ -198,10 +201,14 @@ function Landing() {
       <Picture>
         <div className="wrapper">
           <div className="intro">
-            <p>오늘은 어디로 가볼까?</p>
+            {/* <p>오늘은 어디로 가볼까?</p>
             <p>지금 With You Camping</p>
             <p> 가슴 설레는</p>
-            <p>캠핑 여행을 떠나보아요</p>
+            <p>캠핑 여행을 떠나보아요</p> */}
+            <p>가족, 친구와 함께 떠나는 캠핑</p>
+            <p>기억에 남는 캠핑 SITE</p>
+            <p>지금 With You Camping 과 공유해요</p>
+            <p></p>
           </div>
         </div>
       </Picture>
@@ -211,8 +218,10 @@ function Landing() {
             <img src={image1} alt="1" />
           </div>
           <div className="text">
-            <p> 나만 알기 아쉬웠던 장소를 </p>
-            <p>정확하게 공유 할 수 있어요</p>
+            {/* <p> 나만 알기 아쉬웠던 장소를 </p>
+            <p>정확하게 공유 할 수 있어요</p> */}
+            <p>캠핑지의 위치, 조건, 평점 등</p>
+            <p>필요한 정보를 한 눈에 볼 수 있어요.</p>
           </div>
         </section>
         <section>
@@ -220,7 +229,7 @@ function Landing() {
             <img src={image3} alt="3" />
           </div>
           <div className="text">
-            <p>일주일 간의 날씨 동향을 파악해 </p>
+            <p> 캠핑지의 일주일 간 날씨 정보를 통해 </p>
             <p> 구체적인 캠핑 계획을 세울 수 있어요</p>
           </div>
         </section>
@@ -229,9 +238,9 @@ function Landing() {
             <img src={image4} alt="4" />
           </div>
           <div className="text">
-            <p> 생생한 후기와 소통을 통해 </p>
-            <p> 최근 가장 반응이 좋은 캠핑장소를 </p>
-            <p> 한 눈에 볼 수 있어요</p>
+            <p> 지역별 카테고리와 검색 기능을 통해</p>
+            <p> 원하는 캠핑 정보를 쉽게 얻어 갈 수 있어요</p>
+            <p> </p>
           </div>
         </section>
         <section>
@@ -239,9 +248,10 @@ function Landing() {
             <img src={image6} alt="6" />
           </div>
           <div className="text">
-            <p>반복되는 일상, WYC로</p>
-            <p>사람들과 가슴 설레는 순간을 공유해보세요.</p>
-            <p> </p>
+            {/* <p> 생생한 후기와 소통을 통해 </p> */}
+            <p> 등록된 게시글의 반응을 비교하고 </p>
+            <p> 나에게 유용한 정보를 얻어갈 수 있어요</p>
+            {/* <p> </p> */}
           </div>
         </section>
       </InnerContainer>

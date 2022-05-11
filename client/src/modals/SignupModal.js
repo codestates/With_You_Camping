@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { IoClose } from "react-icons/io5";
 import Confirm from "../components/Confirm";
+import logo from "../img/logo3.jpg";
 
 const SignContainer = styled.div`
   display: flex;
@@ -39,6 +40,7 @@ const SignModalView = styled.div`
   div {
     display: flex;
     justify-content: center;
+    margin-bottom: -130px;
 
     div {
       cursor: pointer;
@@ -66,9 +68,9 @@ const SignModalView = styled.div`
   .signup_button {
     cursor: pointer;
     background: #12b886;
-    padding: 0.2rem 1rem;
+    padding: 0.15rem 5rem;
     font-size: 20px;
-    font-family: "Stylish", sans-serif;
+    font-family: "Lato", sans-serif;
     margin-top: 40px;
     color: white;
     border: none;
@@ -211,7 +213,17 @@ function SignupModal({
             <IoClose size={"1.5rem"} />
           </CloseBtn>
           <SignUpWrapper>
-            <Nofication>WYC.</Nofication>
+            <Nofication>
+              <img
+                src={logo}
+                alt="icon"
+                style={{
+                  height: "40%",
+                  width: "40%",
+                  margin: "20px 0px 0px 150px",
+                }}
+              />
+            </Nofication>
             <form onSubmit={handleSubmit}>
               <label htmlFor="email-for">이메일</label>
               <input
@@ -255,7 +267,7 @@ function SignupModal({
               />
 
               <button className="signup_button" type="submit">
-                Signup
+                회원가입
               </button>
             </form>
           </SignUpWrapper>

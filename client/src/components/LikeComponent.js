@@ -48,6 +48,7 @@ export default function LikeComponent({ isLogin, id }) {
     if (isLogin) {
       getInterestInfo();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogin]);
 
   async function getInterestInfo() {

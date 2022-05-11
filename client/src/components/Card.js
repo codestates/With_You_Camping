@@ -22,18 +22,15 @@ const InnerContainer = styled.div`
 
 const CampingElement = styled.div`
   transition: all 300ms;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
   width: 270px;
   height: 270px;
   background: #ffffff;
   border: 3px solid #f0f0f0;
   box-sizing: border-box;
   border-radius: 8px;
-
   overflow: hidden;
   &&:hover {
     cursor: pointer;
@@ -41,9 +38,9 @@ const CampingElement = styled.div`
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.9);
   }
   @media screen and (max-width: 500px) {
-    width: 90%;
+    width: 100%;
     aspect-ratio: 1 / 1;
-    display: block;
+    /* display: block; */
   }
 `;
 
@@ -64,7 +61,6 @@ const CampingElementTextBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
   width: 270px;
   height: 80px;
 `;
@@ -76,7 +72,6 @@ const CampingElementTitle = styled.p`
   font-size: 20px;
   line-height: 27px;
   color: #343434;
-
   margin-left: 25px;
   margin-top: 8px;
 `;
@@ -92,8 +87,7 @@ const CampingElementName = styled.p`
   font-weight: 500;
   font-size: 18px;
   line-height: 25px;
-  color: #b6b6b6;
-
+  color: #878395;
   margin-top: 5px;
   margin-left: 25px;
   margin-right: 40px;
@@ -113,13 +107,14 @@ const CampingElementEmojiText = styled.p`
   font-weight: 400;
   font-size: 17px;
   line-height: 15px;
-  color: #c1c1c1;
+  color: #878395;
   margin-top: 1px;
 `;
 
 const Card = ({ post, LikePost }) => {
   const navigate = useNavigate();
 
+  console.log(post);
   if (post) {
     return post.map((x, index) => {
       return (

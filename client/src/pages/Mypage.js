@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import ModifyMyinfo from "./ModifyMyinfo";
@@ -93,6 +93,8 @@ const ContentsContainer = styled.div`
 `;
 
 const MyPageContainer = styled.div`
+  font-family: "Lato", sans-serif;
+
   display: flex;
 
   width: 100%;
@@ -108,16 +110,18 @@ const SignContainer = styled.div``;
 
 function Mypage(page) {
   const navigate = useNavigate();
-
+  const userId = window.sessionStorage.getItem("userId");
   const tabContents = ["게시글", "좋아요", "회원 정보수정"];
 
   // console.log(userInfo)
 
-  // useEffect(() => {
-  //   if (!userId) {
-  //     navigate("/");
-  //   }
-  // }, []);
+  // console.log(userInfo)
+
+  useEffect(() => {
+    if (!userId) {
+      navigate("/");
+    }
+  }, []);
 
   const pageName = [
     "/mypage/mypost",
