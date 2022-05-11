@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { postArray } from "./data/data";
+
 import { useNavigate } from "react-router-dom";
 import comment from "../img/svg/comment.svg";
 import Heart from "../img/svg/Heart.svg";
@@ -118,30 +118,30 @@ const CampingElementEmojiText = styled.p`
   margin-top: 1px;
 `;
 
-const clickAfter = styled.button`
-  cursor: pointer;
-  outline: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+// const clickAfter = styled.button`
+//   cursor: pointer;
+//   outline: none;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
 
-  font-family: "Noto Sans";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 26px;
+//   font-family: "Noto Sans";
+//   font-style: normal;
+//   font-weight: 400;
+//   font-size: 16px;
+//   line-height: 26px;
 
-  background: #bffcc7;
-  border: none;
-  border: 1px solid none;
-  border-radius: 100px;
-  width: auto;
-  height: 38px;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-left: 5px;
-  margin-right: 5px;
-`;
+//   background: #bffcc7;
+//   border: none;
+//   border: 1px solid none;
+//   border-radius: 100px;
+//   width: auto;
+//   height: 38px;
+//   padding-left: 20px;
+//   padding-right: 20px;
+//   margin-left: 5px;
+//   margin-right: 5px;
+// `;
 
 const CardList = ({ posts }) => {
   const navigate = useNavigate();

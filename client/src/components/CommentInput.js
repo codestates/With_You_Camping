@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // import { useDispatch } from 'react-redux';
 // import { setLoginModal, setMessageModal } from '../actions';
 import styled from "styled-components";
-import Confirm from "./Confirm"
+import Confirm from "./Confirm";
 
 const CommentInputArea = styled.section`
   margin: {
@@ -60,7 +60,7 @@ const ModalBackdrop = styled.div`
   bottom: 0;
   margin: auto;
   background-color: rgba(0, 0, 0, 0.5);
-`; 
+`;
 
 const CommentInput = ({ getCommentList, id, comments, isLogin }) => {
   const [comment, setComment] = useState("");
@@ -68,15 +68,14 @@ const CommentInput = ({ getCommentList, id, comments, isLogin }) => {
 
   const serverPath = process.env.REACT_APP_SERVER_PATH;
   const loginToken = window.sessionStorage.getItem("loginToken");
-  const userId = parseInt(window.sessionStorage.getItem("userId"));
 
   const sendCommentToServer = () => {
-    if (!isLogin) { 
+    if (!isLogin) {
       setMessage("login_check");
-    return;
-    } else if (comment === '') {
-      setMessage("comment_full")
-    return;
+      return;
+    } else if (comment === "") {
+      setMessage("comment_full");
+      return;
     }
     axios
       .post(
@@ -92,7 +91,7 @@ const CommentInput = ({ getCommentList, id, comments, isLogin }) => {
         }
       )
       .then(() => {
-        setMessage("comment_post_message")
+        setMessage("comment_post_message");
         getCommentList();
         setComment("");
       })
@@ -109,7 +108,6 @@ const CommentInput = ({ getCommentList, id, comments, isLogin }) => {
     setMessage("");
   };
 
-
   return (
     <div>
       {message ? (
@@ -120,18 +118,17 @@ const CommentInput = ({ getCommentList, id, comments, isLogin }) => {
         </SignContainer>
       ) : null}
 
-    <CommentInputArea>
-      
-      <textarea
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-        placeholder="댓글을 입력해주세요"
-        maxLength="300"
-      ></textarea>
-      <button className="btn" onClick={sendCommentToServer}>
-        등록
-      </button>
-    </CommentInputArea>
+      <CommentInputArea>
+        <textarea
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="댓글을 입력해주세요"
+          maxLength="300"
+        ></textarea>
+        <button className="btn" onClick={sendCommentToServer}>
+          등록
+        </button>
+      </CommentInputArea>
     </div>
   );
 };

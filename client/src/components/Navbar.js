@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import LoginModal from "../modals/LoginModal";
 import SignupModal from "../modals/SignupModal";
-// import Search from "./Search";
 import { TwoBtnModal } from "./TwoBtnModal";
 import Confirm from "./Confirm";
-import image from "../img/logo3.jpg";
-import image2 from "../img/logo5.jpg";
 import image3 from "../img/15logo.jpg";
 
 const Container = styled.header`
@@ -72,29 +69,29 @@ const Logo = styled.div`
     display: none;
   }
 `;
-const Logo2 = styled.div`
-  font-family: "Stylish", sans-serif;
-  font-size: 4.3rem;
+// const Logo2 = styled.div`
+//   font-family: "Stylish", sans-serif;
+//   font-size: 4.3rem;
 
-  text-align: center;
-  cursor: pointer;
-  img {
-    margin-top: 25px;
-    margin-right: 100px;
-    margin-left: -150px;
-    height: 70px;
-    width: 200px;
-    object-fit: contain;
-    float: left;
-  }
+//   text-align: center;
+//   cursor: pointer;
+//   img {
+//     margin-top: 25px;
+//     margin-right: 100px;
+//     margin-left: -150px;
+//     height: 70px;
+//     width: 200px;
+//     object-fit: contain;
+//     float: left;
+//   }
 
-  @media screen and (max-width: 500px) {
-    margin-left: 150px;
-    margin-right: 0px;
-    font-size: 2.8rem;
-    width: 70%;
-  }
-`;
+//   @media screen and (max-width: 500px) {
+//     margin-left: 150px;
+//     margin-right: 0px;
+//     font-size: 2.8rem;
+//     width: 70%;
+//   }
+// `;
 const Page = styled.div`
   display: flex;
 

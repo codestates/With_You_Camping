@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { BsGeoAltFill, BsMapFill } from "react-icons/bs";
 import { FaSearchLocation, FaCommentDots } from "react-icons/fa";
-import { MdPersonPin } from "react-icons/md";
 import { DetailBtnComponent as Btn } from "../components/DetailBtnComponent";
 
 import StarRating from "../components/StarRating";
@@ -61,19 +60,19 @@ const TitleContainer = styled.div`
   font-size: 1.9rem;
 `;
 
-const LikeButton = styled.div`
-  text-align: right;
-  margin-bottom: 50px;
-  font-size: 1.7rem;
-  .fas {
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.1);
-      /* background-color: ${(props) =>
-        props.hover ? `${props.hover}` : null}; */
-    }
-  }
-`;
+// const LikeButton = styled.div`
+//   text-align: right;
+//   margin-bottom: 50px;
+//   font-size: 1.7rem;
+//   .fas {
+//     &:hover {
+//       transform: translateY(-2px);
+//       box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.1);
+//       /* background-color: ${(props) =>
+//         props.hover ? `${props.hover}` : null}; */
+//     }
+//   }
+// `;
 
 const TagContainer = styled.section`
   position: relative;
@@ -96,31 +95,31 @@ const TagContainer = styled.section`
   }
 `;
 
-const ModifyBtn = styled.div`
-  position: absolute;
-  right: 0;
-  top: -31px;
-  display: flex;
-  align-items: center;
-  width: max-content;
-  height: 30px;
-  transition: 0.1s;
-  cursor: pointer;
-  font-size: 0.9rem;
-  color: #777;
-  span {
-    position: relative;
-    top: 1px;
-    margin-right: 6px;
-  }
-  &:hover {
-    transform: translateY(-2px);
-    color: #000;
-  }
-  @media screen and (max-width: 500px) {
-    top: -60px;
-  }
-`;
+// const ModifyBtn = styled.div`
+//   position: absolute;
+//   right: 0;
+//   top: -31px;
+//   display: flex;
+//   align-items: center;
+//   width: max-content;
+//   height: 30px;
+//   transition: 0.1s;
+//   cursor: pointer;
+//   font-size: 0.9rem;
+//   color: #777;
+//   span {
+//     position: relative;
+//     top: 1px;
+//     margin-right: 6px;
+//   }
+//   &:hover {
+//     transform: translateY(-2px);
+//     color: #000;
+//   }
+//   @media screen and (max-width: 500px) {
+//     top: -60px;
+//   }
+// `;
 
 const ImgContainer = styled.section`
   display: grid;
@@ -304,9 +303,9 @@ const ModifyBtnContainer = styled.div`
   /* margin-bottom: px; */
 `;
 
-const DeleteBtnContainer = styled.div`
-  /* margin-top: 5px; */
-`;
+// const DeleteBtnContainer = styled.div`
+//   /* margin-top: 5px; */
+// `;
 
 const ProfileContainer = styled.div`
   margin-top: -8px;
@@ -334,7 +333,7 @@ export default function DetailPost({ isLogin, userInfo }) {
   // console.log(userId)
   // console.log(id)
 
-  const [interestIconColor, setInterestIconColor] = useState("#cccccc");
+  //const [interestIconColor, setInterestIconColor] = useState("#cccccc");
 
   // 게시글 정보
   const [postData, setPostData] = useState({});
@@ -347,7 +346,7 @@ export default function DetailPost({ isLogin, userInfo }) {
   // 게시글 위치 정보
   const [postMapData, setPostMapData] = useState({});
 
-  const [isLoading, setIsLoading] = useState(false);
+  //const [isLoading, setIsLoading] = useState(false);
 
   const [coords, setCoords] = useState([]);
 

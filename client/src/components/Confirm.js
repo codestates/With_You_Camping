@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   position: absolute;
@@ -49,7 +48,6 @@ const MessageBox = styled.div`
 `;
 
 function Confirm({ message, handleMessage }) {
-  const navigate = useNavigate();
   const [curMessage, setCurMessage] = useState("");
   const [btnInfo, setBtnInfo] = useState("");
 
@@ -102,7 +100,7 @@ function Confirm({ message, handleMessage }) {
       setCurMessage("댓글이 등록 되었습니다.");
       setBtnInfo("닫 기");
     }
-  }, []);
+  }, [message]);
 
   const handleCancel = () => {
     handleMessage("");
@@ -122,4 +120,3 @@ function Confirm({ message, handleMessage }) {
 }
 
 export default Confirm;
-

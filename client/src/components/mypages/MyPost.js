@@ -1,117 +1,101 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
 import Card from "../Card";
-import { PageTitle } from "../pageTitle";
-
-const TitleContainer = styled.div``;
-/**
- * display: grid;
-
-  grid-template-rows: 1fr;
-
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  width: 70%;
-  height: max-content;
-
-  @media screen and (max-width: 500px) {
-    display: grid;
-
-    grid-template-rows: 1fr;
-
-    grid-template-columns: 1fr;
-    width: 1px;
-    height: max-content;
-  }
- * 
- */
-const Title = styled.span`
-  position: relative;
-  right: -100%;
-  bottom: 10%;
-`;
 
 function MyPost() {
   const serverPath = process.env.REACT_APP_SERVER_PATH;
-  const userId = window.sessionStorage.getItem("userId");
   const accessToken = window.sessionStorage.getItem("loginToken");
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [userPost, setUserPost] = useState([]);
-  const [postEnd, setPostEnd] = useState(false);
+  const [postEnd, setEndPost] = useState(true);
 
-  const viewmore = useRef();
-  
+  const viewmore = useRef(null);
+
   useEffect(() => {
     getUserPost();
   }, []);
 
   async function getUserPost() {
-    console.log("초기값");
     const headers = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     };
-    // setUserPost([]);
-    // setPage(1);
+
+    console.log("첫번째");
     try {
       const res = await axios.get(
         `${serverPath}/users/boards?pages=${1}&limit=12`,
         headers
       );
-      if (res.status === 200) {
-        setUserPost(res.data.boards.rows);
-      }
+      setUserPost(res.data.boards.rows);
     } catch (err) {}
   }
 
-  const getPage = async (page) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  async function getPage(pages) {
     const headers = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     };
-    try {
-      const res = await axios.get(
-        `${serverPath}/users/boards?pages=${page}&limit=12`,
-        headers
-      );
-      if (res.status === 200 && res.data.boards.rows.length > 0) {
-        setUserPost([...userPost, ...res.data.boards.rows]);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    console.log("getPage 실행");
+    if (pages <= page) {
+      try {
+        const res = await axios.get(
+          `${serverPath}/users/boards?pages=${pages}&limit=12`,
+          headers
+        );
 
-  // const loadMore = () => {
-  //   setPage(page + 1);
-  // };
+        if (
+          res.data.message === "내가 쓴 게시물을 불러왔습니다," ||
+          res.data.boards.count > 0
+        ) {
+          console.log("게시물을 불러왔습니다", pages);
+          setUserPost([...userPost, ...res.data.boards.rows]);
+          setEndPost(true);
+          console.log(res.data.boards.rows);
+        } else if (
+          res.data.message === "게시물이 존재하지 않습니다." ||
+          res.data.boards.count === 0
+        ) {
+          console.log("존재하지 않습니다.");
+          setEndPost(false);
+        }
+      } catch (err) {}
+    }
+  }
+
+  const loadMore = () => {
+    setPage(page + 1);
+  };
 
   useEffect(() => {
     getPage(page);
   }, [page]);
 
-  // useEffect(() => {
-  //   const observer = new IntersectionObserver(
-  //     (entries) => {
-  //       if (entries[0].isIntersecting && viewmore.current) {
-  //         viewmore.current.click();
-  //       }
-  //     },
-  //     { threshold: 1 }
-  //   );
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && viewmore.current) {
+          console.log("viewmore", entries[0].isIntersecting);
+          viewmore.current.click();
+        }
+      },
+      { threshold: 1 }
+    );
 
-  //   if (viewmore.current) {
-  //     observer.observe(viewmore.current);
-  //   }
-  // }, [userPost]);
+    if (viewmore.current) {
+      observer.observe(viewmore.current);
+    }
+  }, [userPost]);
 
   return (
     <React.Fragment>
-      <Card post={userPost} />
-      <div ref={viewmore} />
+      {postEnd ? <Card post={userPost} /> : null}
+      <div ref={viewmore} onClick={loadMore}></div>
     </React.Fragment>
   );
 }

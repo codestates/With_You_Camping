@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { IoClose } from "react-icons/io5";
 import Confirm from "../components/Confirm";
@@ -208,7 +207,6 @@ function LoginModal({
 
   const serverPath = process.env.REACT_APP_SERVER_PATH;
 
-  const navigate = useNavigate();
   const [loginInfo, setloginInfo] = useState({
     email: "",
     password: "",

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Search from "./Search";
 import SelectList from "./SelectList";
@@ -131,11 +130,6 @@ const ClickButton = styled.button`
 
 export default function PostListComponent() {
   const serverPath = process.env.REACT_APP_SERVER_PATH;
-  const userId = window.sessionStorage.getItem("userId");
-  const nickname = window.sessionStorage.getItem("nickname");
-  const accessToken = window.sessionStorage.getItem("loginToken");
-
-  const navigate = useNavigate();
 
   const [LocationList, setLocationList] = useState(list.location);
   const [CategoryList, setCategoryList] = useState(list.category);
@@ -211,14 +205,12 @@ export default function PostListComponent() {
       } else {
         // console.log('zz')
         for (let i = 1; i <= res.data.boards.count / 12 + 1; i++) {
-
           console.log(i);
 
           pageArray.push(i);
         }
       }
     }
-
 
     setPageNumber(pageArray);
   }
