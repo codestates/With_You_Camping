@@ -55,24 +55,10 @@ const TitleContainer = styled.div`
   width: 45%;
   border-left-width: 5%;
   text-align: center;
-  /* padding-top: 10px; */
+  
   font-family: "Sriracha", cursive;
   font-size: 1.9rem;
 `;
-
-// const LikeButton = styled.div`
-//   text-align: right;
-//   margin-bottom: 50px;
-//   font-size: 1.7rem;
-//   .fas {
-//     &:hover {
-//       transform: translateY(-2px);
-//       box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.1);
-//       /* background-color: ${(props) =>
-//         props.hover ? `${props.hover}` : null}; */
-//     }
-//   }
-// `;
 
 const TagContainer = styled.section`
   position: relative;
@@ -94,32 +80,6 @@ const TagContainer = styled.section`
     text-align: center;
   }
 `;
-
-// const ModifyBtn = styled.div`
-//   position: absolute;
-//   right: 0;
-//   top: -31px;
-//   display: flex;
-//   align-items: center;
-//   width: max-content;
-//   height: 30px;
-//   transition: 0.1s;
-//   cursor: pointer;
-//   font-size: 0.9rem;
-//   color: #777;
-//   span {
-//     position: relative;
-//     top: 1px;
-//     margin-right: 6px;
-//   }
-//   &:hover {
-//     transform: translateY(-2px);
-//     color: #000;
-//   }
-//   @media screen and (max-width: 500px) {
-//     top: -60px;
-//   }
-// `;
 
 const ImgContainer = styled.section`
   display: grid;
@@ -177,7 +137,6 @@ const DescContainer = styled.section`
   max-height: 500px;
   box-sizing: border-box;
   font-family: sans-serif;
-  /* margin-top: 10px; */
   .title_wrapper {
     color: #333;
     font-size: 1.4rem;
@@ -299,13 +258,9 @@ const ModifyBtnContainer = styled.div`
   margin-top: 150px;
   display: flex;
   justify-content: space-between;
-  /* margin-left: 5% */
-  /* margin-bottom: px; */
 `;
 
-// const DeleteBtnContainer = styled.div`
-//   /* margin-top: 5px; */
-// `;
+
 
 const ProfileContainer = styled.div`
   margin-top: -8px;
@@ -323,17 +278,8 @@ export default function DetailPost({ isLogin, userInfo }) {
   const weatherAppID = process.env.REACT_APP_WEATHER_ID;
 
   const [weather, setWeather] = useState([]);
-  // console.log(userId)
-
-  // 게시글 id
+  
   const { id } = useParams();
-
-  // console.log(serverPath)
-  // console.log(loginToken)
-  // console.log(userId)
-  // console.log(id)
-
-  //const [interestIconColor, setInterestIconColor] = useState("#cccccc");
 
   // 게시글 정보
   const [postData, setPostData] = useState({});
@@ -359,25 +305,6 @@ export default function DetailPost({ isLogin, userInfo }) {
     getCommentList();
   }, []);
 
-  // function position() {
-  //   const params = {
-  //     // q: coords.enroad,
-  //     q: 'seoul',
-  //     appid: "72416c6d7bdd54253c2dd2797dc436b4",
-  //   };
-  //    axios
-  //     .get("https://api.openweathermap.org/data/2.5/weather", { params })
-  //     .then((res) => {
-  //       const data = res.data;
-  //       coords = {
-  //         latitude: data.coord.lat,
-  //         longitude: data.coord.lon,
-  //         roadAdd: coords.roadAdd,
-  //         enroad: coords.enload,
-  //       };
-  //       getWeather();
-  //     });
-  // }
 
   useEffect(() => {
     getWeather();
@@ -422,11 +349,9 @@ export default function DetailPost({ isLogin, userInfo }) {
       return <WiDust size={"4rem"} color={"#708090"} />;
     } else {
       return <TiWeatherSunny size={"4rem"} color={"#FF6347"} />;
-      // return <img src={image} width="70%" />;
     }
   }
 
-  // console.log(postData)
 
   async function getPostDetail() {
     await axios
@@ -451,8 +376,7 @@ export default function DetailPost({ isLogin, userInfo }) {
       });
   }
 
-  // console.log(postMapData);
-  // 지도 데이터 세팅
+
 
   const kakaoMap = useRef();
 

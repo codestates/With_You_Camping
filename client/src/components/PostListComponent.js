@@ -135,15 +135,11 @@ export default function PostListComponent() {
   const [CategoryList, setCategoryList] = useState(list.category);
   // 현재 클릭된 카테고리 리스트
   const listStatus = [...LocationList, ...CategoryList];
-  // console.log(LocationList)
-  // console.log(CategoryList)
-  // console.log(listStatus)
 
   const [inputSearch, setInputSearch] = useState("");
   const [typeSearch, setTypeSearch] = useState("");
 
-  // console.log(inputSearch.length);
-  // console.log(typeSearch.length);
+
 
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
@@ -151,17 +147,20 @@ export default function PostListComponent() {
 
   useEffect(() => {
     categoryPost();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, LocationList, CategoryList]);
 
   useEffect(() => {
     searchPost();
     window.scroll(0, 0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputSearch, typeSearch]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   async function searchPost() {
     if (inputSearch.length !== 0 && typeSearch.length !== 0) {
       const res = await axios.get(
-        `${serverPath}/main/search?searchType=${typeSearch}&input=${inputSearch}&pages=${page}&limit=12`
+        `${serverPath}/main/search?searchType=${typeSearch}&input=${inputSearch}&pages=${page}&limit=12`,
       );
       setPosts(res.data.boards.rows);
       let pageArray = [];
@@ -186,6 +185,7 @@ export default function PostListComponent() {
   useEffect(() => {
     categoryPost();
     window.scroll(0, 0);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, setLocationList, setCategoryList]);
 
   async function categoryPost() {
@@ -237,7 +237,7 @@ export default function PostListComponent() {
             CategoryList={CategoryList}
             setLocationList={setLocationList}
             setCategoryList={setCategoryList}
-          />
+          /> 
           <Search
             setInputSearch={setInputSearch}
             setTypeSearch={setTypeSearch}

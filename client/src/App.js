@@ -67,7 +67,7 @@ function Router() {
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({});
 
-  console.log(userInfo);
+  // console.log(userInfo);
 
   useEffect(() => {
     // 로그인을 정상적으로 했다면 세션 스토리지에 loginToken, userId 존재

@@ -66,7 +66,7 @@ function Confirm({ message, handleMessage }) {
       setBtnInfo("닫 기");
     } else if (message === "password_validate_fail") {
       setCurMessage("비밀번호와 비밀번호 확인란이 일치하지 않습니다.");
-      setBtnInfo("닫 기");
+      setBtnInfo("닫 기"); 
     } else if (message === "loginInfo_blank") {
       setCurMessage("이메일, 비밀번호를 입력해 주세요");
       setBtnInfo("닫 기");
@@ -81,6 +81,7 @@ function Confirm({ message, handleMessage }) {
       setBtnInfo("닫 기");
     } else if (message === "login_failed") {
       setCurMessage("이메일 또는 비밀번호가 올바르지 않습니다.");
+      setBtnInfo("닫 기");
     } else if (message === "login_check") {
       setCurMessage("로그인 후 사용해 주세요.");
       setBtnInfo("닫 기");
