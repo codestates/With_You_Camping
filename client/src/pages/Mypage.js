@@ -128,6 +128,16 @@ function Mypage(page, userInfo) {
           )}
         </div>
       </ContentsContainer>
+
+      <SignContainer>
+        {page["page"] === "2" && (
+          <ModifyMyinfo
+            AppuserInfo={page.userInfo}
+            setAppUserInfo={page.setUserInfo}
+          />
+        )}
+      </SignContainer>
+
     </MyPageContainer>
   ); 
 }

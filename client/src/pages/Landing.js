@@ -143,7 +143,8 @@ const InnerContainer = styled.div`
         display: flex;
       }
       p {
-        font-size: 1.9rem;
+        font-size: 1.8rem;
+
         margin-bottom: 20px;
         margin-right: 20px;
       }
