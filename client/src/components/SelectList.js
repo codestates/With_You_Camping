@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-
 
 const Container = styled.div`
   position: relative;
@@ -77,7 +76,7 @@ const CategoryBox = styled.div`
   display: flex;
   margin-left: 190px;
 `;
- 
+
 const CategoryBefore = styled.button`
   cursor: pointer;
   outline: none;
@@ -130,10 +129,12 @@ const CategoryAfter = styled.button`
   margin-right: 5px;
 `;
 
-function SelectList({LocationList, CategoryList, setLocationList, setCategoryList}) {
-    
-
-  
+function SelectList({
+  LocationList,
+  CategoryList,
+  setLocationList,
+  setCategoryList,
+}) {
   const TagOnClick = (e) => {
     const { name } = e.target;
     LocationList.map((x, index) => {

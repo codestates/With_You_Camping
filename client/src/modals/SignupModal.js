@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import { IoClose } from "react-icons/io5";
@@ -132,8 +131,6 @@ function SignupModal({
   const [isFull, setIsFull] = useState(false);
 
   const [message, setMessage] = useState("");
-
-  const naviagate = useNavigate();
 
   const handleInputValue = (key) => (e) => {
     setUserInfo({ ...userInfo, [key]: e.target.value });

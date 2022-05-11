@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
@@ -13,7 +13,7 @@ import ModifyPost from "./pages/ModifyPost";
 import DetailPost from "./pages/DetailPost";
 import AddPost from "./pages/AddPost";
 import PostList from "./pages/PostList";
-import ModifyMyinfo from "./pages/ModifyMyinfo";
+
 import KakaoCallback from "./pages/KakaoCallback";
 import NaverCallback from "./pages/NaverCallback";
 import Footer from "./components/Footer";
@@ -67,7 +67,7 @@ function Router() {
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({});
 
-  console.log(userInfo)
+  console.log(userInfo);
 
   useEffect(() => {
     // 로그인을 정상적으로 했다면 세션 스토리지에 loginToken, userId 존재
@@ -106,6 +106,7 @@ function Router() {
         }
       })();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setUserInfo]);
 
   // console.log(userInfo);
@@ -113,19 +114,32 @@ function Router() {
   return (
     <Container>
       <GlobalStyles />
-      <Navbar isLogin={isLogin} setIsLogin={setIsLogin} userInfo={userInfo} setUserInfo={setUserInfo} />
+      <Navbar
+        isLogin={isLogin}
+        setIsLogin={setIsLogin}
+        userInfo={userInfo}
+        setUserInfo={setUserInfo}
+      />
       <InnerContainer>
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/posts" element={<PostList />} />
 
           <Route path="/add_post" element={<AddPost />} />
-          <Route path="/post/:id" element={<DetailPost isLogin={isLogin} userInfo={userInfo} />} />
+          <Route
+            path="/post/:id"
+            element={<DetailPost isLogin={isLogin} userInfo={userInfo} />}
+          />
           <Route path="/post/:id/modify" element={<ModifyPost />} />
 
           <Route path="/mypage/mypost" element={<Mypage page="0" />} />
           <Route path="/mypage/likepost" element={<Mypage page="1" />} />
-          <Route path="/mypage/modifymyinfo" element={<Mypage page="2" userInfo={userInfo} setUserInfo={setUserInfo}  />} />
+          <Route
+            path="/mypage/modifymyinfo"
+            element={
+              <Mypage page="2" userInfo={userInfo} setUserInfo={setUserInfo} />
+            }
+          />
 
           <Route
             path="callback/kakao"

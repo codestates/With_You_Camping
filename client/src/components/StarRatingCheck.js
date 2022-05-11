@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 const Star = ({ starId, marked }) => {
   return (
@@ -11,7 +11,7 @@ const Star = ({ starId, marked }) => {
     </span>
   );
 };
- 
+
 // Create an array of 5: Array.from({length: 5}, (v,i) => i)
 
 export default function StarRatingCheck({ checkRating, setCheckRating }) {
@@ -40,17 +40,13 @@ export default function StarRatingCheck({ checkRating, setCheckRating }) {
       onClick={(event) => setRating(event.target.getAttribute("star-id"))}
       style={{ width: "10px" }}
     >
-      {
-        
-          Array.from({ length: 5 }, (v, i) => (
-            <Star
-              key={i}
-              starId={i + 1}
-              marked={selection ? selection > i : rating > i}
-            />
-          ))
-        
-      }
+      {Array.from({ length: 5 }, (v, i) => (
+        <Star
+          key={i}
+          starId={i + 1}
+          marked={selection ? selection > i : rating > i}
+        />
+      ))}
     </div>
   );
 }

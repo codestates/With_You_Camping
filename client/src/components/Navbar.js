@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import LoginModal from "../modals/LoginModal";
@@ -101,7 +101,7 @@ const ImgDiv = styled.div`
 
 const UserDiv = styled.div`
   margin: 42px 30px;
-  font-family: 'Malgun Gothic';
+  font-family: "Malgun Gothic";
   font-size: 80%;
   color: #622556;
   font-weight: 500;

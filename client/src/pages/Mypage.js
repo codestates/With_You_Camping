@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import Card from "../components/Card";
 import ModifyMyinfo from "./ModifyMyinfo";
 import MyPost from "../components/mypages/MyPost";
 import LikePost from "../components/mypages/LikePost";
@@ -27,6 +25,7 @@ const TabContainer = styled.div`
       height: 50%;
     }
   }
+
   ul {
     display: flex;
     flex-direction: column;
@@ -34,6 +33,7 @@ const TabContainer = styled.div`
     .active {
       color: #fc9f77;
     }
+
     * {
       margin-top: 4em;
       :hover {
@@ -42,18 +42,53 @@ const TabContainer = styled.div`
       }
     }
   }
+  @media screen and (max-width: 500px) {
+    font-size: 0.8rem;
+    height: max-content;
+    div {
+      border-bottom: #c0c0c0 solid 1px;
+
+      width: 60%;
+      span {
+        height: 10%;
+        width: 200%;
+      }
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 `;
 
 const ContentsContainer = styled.div`
   display: grid;
-
+  position: relative;
+  left: 60px;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  margin-left: 90px;
+
   height: max-content;
   .modify-user {
     position: relative;
     left: 100%;
+  }
+
+  @media screen and (max-width: 500px) {
+    display: grid;
+
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+
+    height: max-content;
+
+    .modify-user {
+      margin: 0px;
+      position: relative;
+      left: -10px;
+      width: 80%;
+    }
   }
 `;
 
@@ -61,24 +96,28 @@ const MyPageContainer = styled.div`
   display: flex;
 
   width: 100%;
-  height: 90vh;
+
+  height: max-content;
+  @media screen and (max-width: 500px) {
+    height: max-content;
+    width: 100%;
+  }
 `;
 
 const SignContainer = styled.div``;
 
-function Mypage(page, userInfo) {
+function Mypage(page) {
   const navigate = useNavigate();
 
   const tabContents = ["게시글", "좋아요", "회원 정보수정"];
-  const userId = window.sessionStorage.getItem("userId");
 
   // console.log(userInfo)
 
-  useEffect(() => {
-    if (!userId) {
-      navigate("/");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!userId) {
+  //     navigate("/");
+  //   }
+  // }, []);
 
   const pageName = [
     "/mypage/mypost",

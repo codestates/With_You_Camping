@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { postArray } from "./data/data";
 import { useNavigate } from "react-router-dom";
 import comment from "../img/svg/comment.svg";
 import Heart from "../img/svg/Heart.svg";
@@ -121,8 +120,6 @@ const CampingElementEmojiText = styled.p`
 const Card = ({ post, LikePost }) => {
   const navigate = useNavigate();
 
-
-  console.log(post)
   if (post) {
     return post.map((x, index) => {
       return (

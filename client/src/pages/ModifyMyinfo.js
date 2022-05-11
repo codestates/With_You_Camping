@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { OneBtnModal } from "../components/oneBtnModal";
 import { PageTitle } from "../components/pageTitle";
@@ -12,16 +12,16 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-const Header = styled.div`
-  height: 15vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+// const Header = styled.div`
+//   height: 15vh;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
 
-  h2 {
-    font-size: 1.5rem;
-  }
-`;
+//   h2 {
+//     font-size: 1.5rem;
+//   }
+// `;
 
 const UserInfoBox = styled.div`
   grid-column: 3 / 11;
@@ -71,6 +71,12 @@ const UserInfoBox = styled.div`
     .btn-location {
       position: relative;
       light: 20%;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    font-size: 0.8rem;
+    .title-font {
+      font-size: 0.8rem;
     }
   }
 `;
@@ -135,7 +141,7 @@ const ImgContainer = styled.div`
 function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
   const navigate = useNavigate();
   const serverPath = process.env.REACT_APP_SERVER_PATH;
-  const userId = window.sessionStorage.getItem("userId");
+  // const userId = window.sessionStorage.getItem("userId");
   const accessToken = window.sessionStorage.getItem("loginToken");
 
   const [currPassword, setCurrPassword] = useState("");
@@ -152,11 +158,11 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
   const [userInfo, setUserInfo] = useState({});
   useEffect(() => {
     getUserInfo();
-    if (!userId) {
-      navigate("/");
-    }
+    // if (!userId) {
+    //   navigate("/");
+    // }
   }, [setUserInfo]);
-
+  console.log(nicknameCheck);
   async function getUserInfo() {
     const res = await axios.post(`${serverPath}/auth/token/validate`, {
       token: sessionStorage.getItem("loginToken"),
@@ -399,7 +405,7 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
       ) : null}
 
       <UserInfoBox>
-        <PageTitle>회원정보 수정</PageTitle>
+        <PageTitle className="title-font">회원정보 수정</PageTitle>
         <ImgContainer>
           <input
             type="file"

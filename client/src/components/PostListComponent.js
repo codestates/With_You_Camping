@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Search from "./Search";
 import SelectList from "./SelectList";
@@ -104,11 +103,6 @@ const ClickButton = styled.button`
 
 export default function PostListComponent() {
   const serverPath = process.env.REACT_APP_SERVER_PATH;
-  const userId = window.sessionStorage.getItem("userId");
-  const nickname = window.sessionStorage.getItem("nickname");
-  const accessToken = window.sessionStorage.getItem("loginToken");
-
-  const navigate = useNavigate();
 
   const [LocationList, setLocationList] = useState(list.location);
   const [CategoryList, setCategoryList] = useState(list.category);
@@ -148,7 +142,7 @@ export default function PostListComponent() {
         if (res.data.boards.count <= 12) {
           pageArray.push(1);
         } else {
-          for (let i = 1; i <= res.data.boards.count / 12; i++) {
+          for (let i = 1; i <= res.data.boards.count / 12 + 1; i++) {
             pageArray.push(i);
           }
         }
@@ -182,7 +176,7 @@ export default function PostListComponent() {
       if (res.data.boards.count <= 12) {
         pageArray.push(1);
       } else {
-        for (let i = 1; i <= res.data.boards.count / 12; i++) {
+        for (let i = 1; i <= res.data.boards.count / 12 + 1; i++) {
           pageArray.push(i);
         }
       }

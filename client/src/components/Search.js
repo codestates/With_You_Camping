@@ -30,7 +30,6 @@
 
 // export default Search;
 
-import axios from "axios";
 import React, { useState } from "react";
 
 import styled from "styled-components";
@@ -79,13 +78,13 @@ const Container = styled.section`
   }
 `;
 
-export default function Search({setInputSearch, setTypeSearch}) {
+export default function Search({ setInputSearch, setTypeSearch }) {
   const [input, setInput] = useState("");
   const [searchType, setSearchType] = useState("title");
 
   function getSearchPosts(type, input) {
-    setTypeSearch(type)
-    setInputSearch(input)
+    setTypeSearch(type);
+    setInputSearch(input);
   }
 
   const changeQueryString = (e) => {
