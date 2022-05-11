@@ -23,7 +23,8 @@ function MyPost() {
         Authorization: `Bearer ${accessToken}`,
       },
     };
-
+    //setUserPost([]);
+    setPage(1);
     console.log("첫번째");
     try {
       const res = await axios.get(
@@ -42,7 +43,7 @@ function MyPost() {
       },
     };
     console.log("getPage 실행");
-    if (pages <= page) {
+    if (pages < page) {
       try {
         const res = await axios.get(
           `${serverPath}/users/boards?pages=${pages}&limit=12`,
