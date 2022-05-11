@@ -94,6 +94,10 @@ const InputContainer = styled.div`
       display: flex;
       flex-direction: column;
       .login_button {
+        /* text-align: center; */
+        /* place-items: center; */
+        margin-left: 18px;
+        width: 90%;
         margin-top: -30px;
         outline: none;
         border: none;
@@ -326,7 +330,7 @@ function LoginModal({
                   placeholder="password"
                   onChange={handleInputValue("password")}
                 />
-                <Nofify>이메일과 비밀번호를 확인해주세요</Nofify>
+                {/* <Nofify>이메일과 비밀번호를 확인해주세요</Nofify> */}
                 <div className="button-container">
                   <button className="login_button" type="submit">
                     로그인하기
@@ -339,7 +343,7 @@ function LoginModal({
               </form>
             </InputContainer>
             <BtnContainer>
-              <KakaoLoginBtn />
+              <KakaoLoginBtn /> 
               <GoogleLoginBtn />
               <NaverLoginBtn />
             </BtnContainer>

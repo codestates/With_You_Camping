@@ -139,7 +139,7 @@ function Mypage(page, userInfo) {
       </SignContainer>
 
     </MyPageContainer>
-  );
+  ); 
 }
 
 export default Mypage;

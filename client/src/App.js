@@ -115,7 +115,7 @@ function Router() {
       <GlobalStyles />
       <Navbar isLogin={isLogin} setIsLogin={setIsLogin} userInfo={userInfo} setUserInfo={setUserInfo} />
       <InnerContainer>
-        <Routes>
+        <Routes> 
           <Route path="/" element={<Landing />} />
           <Route path="/posts" element={<PostList />} />
 
@@ -135,8 +135,11 @@ function Router() {
           />
           <Route path="callback/naver" element={<NaverCallback />} />
         </Routes>
+
       </InnerContainer>
+      
       <Footer />
+     
     </Container>
   );
 }

@@ -148,7 +148,7 @@ export default function PostListComponent() {
         if (res.data.boards.count <= 12) {
           pageArray.push(1);
         } else {
-          for (let i = 1; i <= res.data.boards.count / 12; i++) {
+          for (let i = 1; i <= res.data.boards.count / 12 + 1; i++) {
             pageArray.push(i);
           }
         }
@@ -182,11 +182,15 @@ export default function PostListComponent() {
       if (res.data.boards.count <= 12) {
         pageArray.push(1);
       } else {
-        for (let i = 1; i <= res.data.boards.count / 12; i++) {
+        // console.log('zz')
+        for (let i = 1; i <= res.data.boards.count / 12 + 1; i++) {
+          console.log(i)
           pageArray.push(i);
         }
       }
     }
+
+    console.log(pageArray)
     setPageNumber(pageArray);
   }
 
