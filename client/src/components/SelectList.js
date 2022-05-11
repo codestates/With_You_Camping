@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-
 const Container = styled.div`
   position: relative;
   display: grid;
@@ -16,9 +15,9 @@ const ListBox = styled.div`
   display: flex;
   margin-top: 25px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 500px) {
     display: block;
-  }
+     
 `;
 
 const LocationBefore = styled.button`
@@ -46,6 +45,16 @@ const LocationBefore = styled.button`
   padding-right: 20px;
   margin-left: 5px;
   margin-right: 5px;
+  @media screen and (max-width: 500px) {
+    display: inline-block;
+    font-size: 12px;
+    width: auto;
+    height: 34px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-left: 1.5px;
+    margin-right: 1.5px;
+  }
 `;
 
 const LocationAfter = styled.button`
@@ -71,13 +80,28 @@ const LocationAfter = styled.button`
   padding-right: 20px;
   margin-left: 5px;
   margin-right: 5px;
+  @media screen and (max-width: 500px) {
+    display: inline-block;
+    font-size: 13px;
+    width: auto;
+    height: 33px;
+    padding-left: 13px;
+    padding-right: 13px;
+    margin-left: 1.5px;
+    margin-right: 1.5px;
+  }
 `;
 
 const CategoryBox = styled.div`
   display: flex;
   margin-left: 190px;
+  @media screen and (max-width: 768px) {
+    display: inline-block;
+    margin-left: 50px;
+    margin-top: 12px;
+  }
 `;
- 
+
 const CategoryBefore = styled.button`
   cursor: pointer;
   outline: none;
@@ -103,6 +127,16 @@ const CategoryBefore = styled.button`
   padding-right: 20px;
   margin-left: 5px;
   margin-right: 5px;
+  @media screen and (max-width: 500px) {
+    display: block;
+    font-size: 13px;
+    width: auto;
+    height: 33px;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-left: 3px;
+    margin-right: 3px;
+  }
 `;
 
 const CategoryAfter = styled.button`
@@ -128,12 +162,24 @@ const CategoryAfter = styled.button`
   padding-right: 20px;
   margin-left: 5px;
   margin-right: 5px;
+  @media screen and (max-width: 500px) {
+    display: block;
+    font-size: 13px;
+    width: auto;
+    height: 33px;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-left: 3px;
+    margin-right: 3px;
+  }
 `;
 
-function SelectList({LocationList, CategoryList, setLocationList, setCategoryList}) {
-    
-
-  
+function SelectList({
+  LocationList,
+  CategoryList,
+  setLocationList,
+  setCategoryList,
+}) {
   const TagOnClick = (e) => {
     const { name } = e.target;
     LocationList.map((x, index) => {

@@ -16,16 +16,19 @@ const HLine = styled.div`
   margin-left: 0px;
 
   background-color: #dad8d6;
+  @media screen and (max-width: 500px) {
+    position: relative;
+    width: 100%;
+  }
 `;
 
 const Container = styled.section`
   width: 113%;
   display: grid;
-
   word-break: break-all;
   height: auto;
-
   padding-bottom: 2rem;
+
   border-bottom: 1px solid $color-grey-border;
 `;
 
@@ -33,7 +36,9 @@ const InnerContainer = styled.div`
   display: flex;
 
   @media screen and (max-width: 500px) {
+    display: block;
     width: 100%;
+    margin-bottom: 90px;
   }
   &:hover {
     box-shadow: 0px 0px 8px $color-grey-border;
@@ -50,6 +55,13 @@ const TitleContainer = styled.div`
   font-size: 1.5rem;
   /* width: 100%; */
   width: 1250px;
+  @media screen and (max-width: 500px) {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 500px;
+    /* place-items: ; */
+  }
 `;
 
 const CardContainer = styled.div`
@@ -61,10 +73,16 @@ const CardContainer = styled.div`
 
   margin-top: 40px;
   width: 1px;
+  /* height: max-content; */
 
   @media screen and (max-width: 500px) {
-    right: 5%;
-    bottom: 5%;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    margin-top: -100px;
+    /* margin-bottom: 40px; */
+    justify-content: space-between;
+
     transform: scale(0.8);
   }
 `;
@@ -75,6 +93,8 @@ const DownContainer = styled.div`
   justify-content: space-between;
   justify-content: center;
   float: left;
+  @media screen and (max-width: 500px) {
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -100,6 +120,13 @@ const ClickButton = styled.button`
   height: 40px;
   padding-left: 20px;
   padding-right: 20px;
+  @media screen and (max-width: 500px) {
+    font-weight: 300;
+    font-size: 20px;
+    height: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 `;
 
 export default function PostListComponent() {
@@ -184,13 +211,15 @@ export default function PostListComponent() {
       } else {
         // console.log('zz')
         for (let i = 1; i <= res.data.boards.count / 12 + 1; i++) {
-          console.log(i)
+
+          console.log(i);
+
           pageArray.push(i);
         }
       }
     }
 
-    console.log(pageArray)
+
     setPageNumber(pageArray);
   }
 

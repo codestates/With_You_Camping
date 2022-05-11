@@ -58,7 +58,6 @@ const ContentsContainer = styled.div`
 `;
 
 const MyPageContainer = styled.div`
-
   font-family: "Lato", sans-serif;
 
   display: flex;
