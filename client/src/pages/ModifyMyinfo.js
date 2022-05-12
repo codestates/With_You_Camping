@@ -161,6 +161,7 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
     // if (!userId) {
     //   navigate("/");
     // }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setUserInfo]);
   console.log(nicknameCheck);
   async function getUserInfo() {

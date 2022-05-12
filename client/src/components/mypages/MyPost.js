@@ -1,24 +1,83 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import Card from "../Card";
+
+const DownContainer = styled.div`
+  position: absolute;
+  display: flex;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: center;
+
+  @media screen and (max-width: 500px) {
+    position: static;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    justify-content: center;
+
+    float: left;
+  }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  position: relative;
+  top: 900px;
+  right: 3%;
+  margin-left: 10px;
+  align-items: flex-end;
+  justify-content: center;
+  @media screen and (max-width: 500px) {
+    position: static;
+    margin-top: 30px;
+    margin-right: 30px;
+  }
+`;
+
+const ClickButton = styled.button`
+  cursor: pointer;
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 26px;
+  color: #605c59;
+
+  background: #f1f3ef;
+  border: none;
+  border: 1px solid none;
+  box-sizing: border-box;
+  border-radius: 100px;
+  width: auto;
+  height: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  @media screen and (max-width: 500px) {
+    font-weight: 300;
+    font-size: 20px;
+    height: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+`;
 
 function MyPost() {
   const serverPath = process.env.REACT_APP_SERVER_PATH;
   const accessToken = window.sessionStorage.getItem("loginToken");
 
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
   const [userPost, setUserPost] = useState([]);
-  const [postEnd, setEndPost] = useState(true);
 
-  const viewmore = useRef();
+  const [pageNumber, setPageNumber] = useState([]);
 
   useEffect(() => {
     getUserPost();
-  }, []);
+  }, [page]);
 
   async function getUserPost() {
-    // console.log('getUserPost')
     const headers = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -27,87 +86,42 @@ function MyPost() {
 
     try {
       const res = await axios.get(
-        `${serverPath}/users/boards?pages=${1}&limit=12`,
+        `${serverPath}/users/boards?pages=${page}&limit=12`,
         headers
       );
       setUserPost(res.data.boards.rows);
+
+      let pageArray = [];
+      if (res.data.boards.count) {
+        if (res.data.boards.count <= 12) {
+          pageArray.push(1);
+        } else {
+          for (let i = 1; i <= res.data.boards.count / 12 + 1; i++) {
+            pageArray.push(i);
+          }
+        }
+      }
+      setPageNumber(pageArray);
     } catch (err) {
       console.log(err);
     }
   }
 
-  useEffect(() => {
-    getPage(page);
-  }, [setPage]);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  async function getPage(pages) {
-    console.log("getPage");
-    const headers = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-    // console.log("getPage 실행");
-    console.log(`pages = ${pages}`);
-    console.log(`page = ${page}`);
-    if (pages < page) {
-      try {
-        const res = await axios.get(
-          `${serverPath}/users/boards?pages=${pages}&limit=12`,
-          headers
-        );
-
-        if (
-          res.data.message === "내가 쓴 게시물을 불러왔습니다," ||
-          res.data.boards.count > 0
-        ) {
-          // console.log("게시물을 불러왔습니다", pages);
-          setUserPost([...userPost, ...res.data.boards.rows]);
-          setEndPost(true);
-          // console.log(res.data.boards.rows);
-        } else if (
-          res.data.message === "게시물이 존재하지 않습니다." ||
-          res.data.boards.count === 0
-        ) {
-          // console.log("존재하지 않습니다.");
-          setEndPost(false);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  }
-
-  const loadMore = () => {
-    console.log("loadMore");
-    setPage(page + 1);
-  };
-
-  useEffect(() => {
-    // console.log("IntersectionObserver");
-    console.log(viewmore)
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && viewmore.current) {
-          console.log("viewmore", entries[0].isIntersecting);
-          viewmore.current.click();
-        }
-      },
-      { threshold: 1 }
+  const pageButton = pageNumber.map((page, i) => {
+    return (
+      <ButtonContainer key={i}>
+        <ClickButton onClick={() => setPage(page)}>{page}</ClickButton>
+      </ButtonContainer>
     );
-      // console.log(viewmore.current)
-    if (viewmore.current) {
-      console.log(viewmore.current)
-      observer.observe(viewmore.current);
-    }
-  }, [userPost]);
+  });
 
   return (
+    <>
       <React.Fragment>
-        {postEnd ? <Card post={userPost} /> : null}
-        <div ref={viewmore} onClick={loadMore}>더보기</div>
-      </React.Fragment>  
+        <Card post={userPost} />
+        <DownContainer>{pageButton}</DownContainer>
+      </React.Fragment>
+    </>
   );
 }
 

@@ -289,7 +289,7 @@ function ModifyPost() {
   // 이미지 url
   const [imgHostUrl, setImgHostUrl] = useState("");
 
-  const [nowCheckDetail, setNowCheckDeatail] = useState(null)
+  const [nowCheckDetail, setNowCheckDeatail] = useState(null);
   // 게시물 세부 사항 체크
   const [checkDetail, setCheckDetail] = useState({
     area: null,
@@ -337,20 +337,20 @@ function ModifyPost() {
         setImgHostUrl(board.picture);
         setLocation({
           latitude: locate.latitude,
-          longitude: locate.longtitude
+          longitude: locate.longtitude,
         });
-        setCheckRating(board.rating)
+        setCheckRating(board.rating);
         setNowCheckDeatail({
           area: boardData.area,
           internet: boardData.wifi,
           parking: boardData.parking,
           electronic: boardData.electricity,
-          toilet: boardData.toiletType
-        })
+          toilet: boardData.toiletType,
+        });
       }
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   const uploadImage = async (e) => {
     e.preventDefault();
@@ -430,6 +430,7 @@ function ModifyPost() {
         longitude: latlng.getLng(), //경도
       });
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   // location 상태가 바뀔 때
@@ -500,7 +501,6 @@ function ModifyPost() {
     }
   }, [title, content, imgHostUrl, location, checkDetail, checkRating]);
 
-
   const modifyPost = async () => {
     if (isFull) {
       const headers = {
@@ -527,7 +527,11 @@ function ModifyPost() {
       };
       // // console.log(body);
       try {
-        const res = await axios.put(`${serverPath}/boards/${id}`, body, headers);
+        const res = await axios.put(
+          `${serverPath}/boards/${id}`,
+          body,
+          headers
+        );
         if (res.status === 200) {
           navigate(`/post/${id}`);
         }
@@ -620,20 +624,23 @@ function ModifyPost() {
           <GiCheckMark /> 현재 등록된 위치가 맞으신가요?
           <span style={{ textDecoration: "underline" }}>{address.lotAdd}</span>
         </h4>
- 
+
         <OuterCheckContainer>
           <h3 className="category">추가 정보</h3>
           <Checkinfo
-             nowCheckDetail={nowCheckDetail}
+            nowCheckDetail={nowCheckDetail}
             checkDetail={checkDetail}
             setCheckDetail={setCheckDetail}
             setNowCheckDeatail={setNowCheckDeatail}
-          /> 
+          />
         </OuterCheckContainer>
 
         <h3 className="category"> 캠핑장 어떠셨나요? </h3>
         <StarCheckContainer>
-          <StarRatingCheck checkRating={checkRating} setCheckRating={setCheckRating} />
+          <StarRatingCheck
+            checkRating={checkRating}
+            setCheckRating={setCheckRating}
+          />
         </StarCheckContainer>
 
         <BtnContainer>

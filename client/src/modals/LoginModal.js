@@ -7,7 +7,6 @@ import Confirm from "../components/Confirm";
 import KakaoLoginBtn from "../components/KakaoLoginBtn";
 import GoogleLoginBtn from "../components/GoogleLoginBtn";
 import NaverLoginBtn from "../components/NaverLoginBtn";
-import Icon from "../img/icon_2.jpg";
 import logo from "../img/logo3.jpg";
 
 const ModalContainer = styled.div`
@@ -164,21 +163,6 @@ const CloseBtn = styled.div`
   }
 `;
 
-const Nofication = styled.h1`
-  font-family: "Stylish", sans-serif;
-  position: relative;
-  top: -130%;
-  right: 0%;
-  font-size: 3rem; ;
-`;
-
-const Nofify = styled.div`
-  font-family: "Stylish", sans-serif;
-  position: relative;
-  bottom: 500%;
-  left: -12%;
-  font-size: 0.8rem;
-`;
 const Logo = styled.div`
   position: relative;
   bottom: 80%;
@@ -240,6 +224,7 @@ function LoginModal({
       setMessage("signup_success");
       setConfirmSignupModal(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSubmit = async (e) => {
@@ -341,7 +326,7 @@ function LoginModal({
               </form>
             </InputContainer>
             <BtnContainer>
-              <KakaoLoginBtn /> 
+              <KakaoLoginBtn />
               <GoogleLoginBtn />
               <NaverLoginBtn />
             </BtnContainer>

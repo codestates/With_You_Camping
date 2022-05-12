@@ -23,6 +23,7 @@ export default function StarRatingCheck({ checkRating, setCheckRating }) {
 
   useEffect(() => {
     setCheckRating(rating);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rating]);
 
   const hoverOver = (event) => {
