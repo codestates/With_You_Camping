@@ -454,8 +454,6 @@ export default function DetailPost({ isLogin, userInfo }) {
       });
   };
 
-  console.log(userInfo.profile);
-
   return (
     <Container>
       {openDeleteModal ? (

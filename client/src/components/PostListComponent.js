@@ -139,28 +139,26 @@ export default function PostListComponent() {
   const [inputSearch, setInputSearch] = useState("");
   const [typeSearch, setTypeSearch] = useState("");
 
-
-
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [pageNumber, setPageNumber] = useState([]);
 
   useEffect(() => {
     categoryPost();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, LocationList, CategoryList]);
 
   useEffect(() => {
     searchPost();
     window.scroll(0, 0);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputSearch, typeSearch]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   async function searchPost() {
     if (inputSearch.length !== 0 && typeSearch.length !== 0) {
       const res = await axios.get(
-        `${serverPath}/main/search?searchType=${typeSearch}&input=${inputSearch}&pages=${page}&limit=12`,
+        `${serverPath}/main/search?searchType=${typeSearch}&input=${inputSearch}&pages=${page}&limit=12`
       );
       setPosts(res.data.boards.rows);
       let pageArray = [];
@@ -185,7 +183,7 @@ export default function PostListComponent() {
   useEffect(() => {
     categoryPost();
     window.scroll(0, 0);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, setLocationList, setCategoryList]);
 
   async function categoryPost() {
@@ -203,10 +201,7 @@ export default function PostListComponent() {
       if (res.data.boards.count <= 12) {
         pageArray.push(1);
       } else {
-        // console.log('zz')
         for (let i = 1; i <= res.data.boards.count / 12 + 1; i++) {
-          console.log(i);
-
           pageArray.push(i);
         }
       }
@@ -214,8 +209,6 @@ export default function PostListComponent() {
 
     setPageNumber(pageArray);
   }
-
-  console.log(posts);
 
   const pageButton = pageNumber.map((page, i) => {
     return (
@@ -237,7 +230,7 @@ export default function PostListComponent() {
             CategoryList={CategoryList}
             setLocationList={setLocationList}
             setCategoryList={setCategoryList}
-          /> 
+          />
           <Search
             setInputSearch={setInputSearch}
             setTypeSearch={setTypeSearch}

@@ -23,10 +23,6 @@ export default function NaverLoginBtn() {
   const naverRedirectUrl = process.env.REACT_APP_NAVER_REDIRECT_URL;
   const naverState = process.env.REACT_APP_NAVER_STATE;
 
-  console.log(naverClientId);
-
-  //   console.log('ewklfjlw')
-
   const loginHandler = async () => {
     const url = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClientId}&redirect_uri=${naverRedirectUrl}&state=${naverState}`;
     window.location.replace(url);

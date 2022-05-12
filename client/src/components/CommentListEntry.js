@@ -14,7 +14,6 @@ const CommmentAreaContainer = styled.section`
       font: {
         weight: 700;
         size: 1.2rem;
-        
       }
     }
     i {
@@ -99,8 +98,6 @@ const CommentListEntry = ({ comment, getCommentList, id }) => {
       });
   };
 
-  console.log(comment);
-
   return (
     <CommmentAreaContainer>
       <div className="header">
@@ -110,10 +107,13 @@ const CommentListEntry = ({ comment, getCommentList, id }) => {
             src={comment.profile}
             width="30"
             height="30"
-            style={{ borderRadius: "50%" ,marginRight: '8px', marginBottom: '9px'}}
+            style={{
+              borderRadius: "50%",
+              marginRight: "8px",
+              marginBottom: "9px",
+            }}
           ></img>
-          <div style={{ marginTop: '14px'}}>{comment.nickname}</div>
-            
+          <div style={{ marginTop: "14px" }}>{comment.nickname}</div>
         </div>
         {comment.userId === userId ? (
           <React.Fragment>

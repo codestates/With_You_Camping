@@ -119,9 +119,8 @@ function MyPost() {
     <>
       <React.Fragment>
         <Card post={userPost} />
+        <DownContainer>{pageButton}</DownContainer>
       </React.Fragment>
-
-      <DownContainer>{pageButton}</DownContainer>
     </>
   );
 }

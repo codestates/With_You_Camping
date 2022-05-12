@@ -460,7 +460,7 @@ function AddPost() {
         siteInfo: checkDetail,
         rating: checkRating,
       };
-      // console.log(body);
+
       try {
         const res = await axios.post(`${serverPath}/boards`, body, headers);
         if (res.status === 203) {
