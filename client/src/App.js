@@ -67,8 +67,6 @@ function Router() {
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({});
 
-  // console.log(userInfo);
-
   useEffect(() => {
     // 로그인을 정상적으로 했다면 세션 스토리지에 loginToken, userId 존재
     if (
@@ -109,8 +107,6 @@ function Router() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setUserInfo]);
 
-  // console.log(userInfo);
-
   return (
     <Container>
       <GlobalStyles />
@@ -121,7 +117,7 @@ function Router() {
         setUserInfo={setUserInfo}
       />
       <InnerContainer>
-        <Routes> 
+        <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/posts" element={<PostList />} />
 
@@ -149,11 +145,9 @@ function Router() {
           />
           <Route path="callback/naver" element={<NaverCallback />} />
         </Routes>
-
       </InnerContainer>
-      
+
       <Footer />
-     
     </Container>
   );
 }

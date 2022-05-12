@@ -31,7 +31,6 @@ export default function KakaoLoginBtn() {
       kakao.init(kakaoClientID);
     }
   };
-  // console.log(kakao);
 
   const kakaoSignIn = () => {
     kakao.Auth.authorize({

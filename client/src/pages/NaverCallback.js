@@ -31,7 +31,6 @@ export default function NaverCallback() {
   const navigate = useNavigate();
 
   const nidCode = new URLSearchParams(window.location.search).get("code");
-  console.log(nidCode);
 
   useEffect(() => {
     axios

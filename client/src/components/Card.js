@@ -114,7 +114,6 @@ const CampingElementEmojiText = styled.p`
 const Card = ({ post, LikePost }) => {
   const navigate = useNavigate();
 
-  console.log(post);
   if (post) {
     return post.map((x, index) => {
       return (

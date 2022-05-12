@@ -195,7 +195,6 @@ function LoginModal({
     email: "",
     password: "",
   });
-  // console.log(loginInfo);
 
   const [isFull, setIsFull] = useState(false);
   const [message, setMessage] = useState("");
