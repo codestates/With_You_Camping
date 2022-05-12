@@ -106,7 +106,7 @@ function Router() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setUserInfo]);
-  console.log(process.env.REACT_APP_SERVER_PATH);
+  console.log("change");
 
   return (
     <Container>
