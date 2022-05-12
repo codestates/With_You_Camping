@@ -55,7 +55,6 @@ const TitleContainer = styled.div`
   width: 45%;
   border-left-width: 5%;
   text-align: center;
-  
   font-family: "Sriracha", cursive;
   font-size: 1.9rem;
 `;
@@ -261,7 +260,6 @@ const ModifyBtnContainer = styled.div`
 `;
 
 
-
 const ProfileContainer = styled.div`
   margin-top: -8px;
   margin-right: 6px;
@@ -278,7 +276,7 @@ export default function DetailPost({ isLogin, userInfo }) {
   const weatherAppID = process.env.REACT_APP_WEATHER_ID;
 
   const [weather, setWeather] = useState([]);
-  
+
   const { id } = useParams();
 
   // 게시글 정보
@@ -303,11 +301,13 @@ export default function DetailPost({ isLogin, userInfo }) {
     window.scrollTo(0, 0);
     getPostDetail();
     getCommentList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
   useEffect(() => {
     getWeather();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coords.latitude, coords.roadAdd]);
 
   async function getWeather() {
@@ -376,8 +376,6 @@ export default function DetailPost({ isLogin, userInfo }) {
       });
   }
 
-
-
   const kakaoMap = useRef();
 
   useEffect(() => {
@@ -408,6 +406,7 @@ export default function DetailPost({ isLogin, userInfo }) {
 
       marker.setMap(map);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coords]);
 
   const openKakaoMap = () => {
@@ -589,7 +588,7 @@ export default function DetailPost({ isLogin, userInfo }) {
             <FaCommentDots />
             <h3>댓글</h3>
           </div>
-          <hr /> 
+          <hr />
           <CommentList
             getCommentList={getCommentList}
             id={id}

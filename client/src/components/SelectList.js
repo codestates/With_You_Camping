@@ -182,6 +182,7 @@ function SelectList({
 }) {
   const TagOnClick = (e) => {
     const { name } = e.target;
+    // eslint-disable-next-line array-callback-return
     LocationList.map((x, index) => {
       if (name === String(x.id)) {
         let copyList = [...LocationList];
@@ -191,6 +192,7 @@ function SelectList({
         x.onOff = false;
       }
     });
+    // eslint-disable-next-line array-callback-return
     CategoryList.map((x, index) => {
       if (name === String(x.id)) {
         let copyList = [...CategoryList];

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const Star = ({ starId, marked }) => {
   return (
@@ -14,8 +14,9 @@ const Star = ({ starId, marked }) => {
 
 // Create an array of 5: Array.from({length: 5}, (v,i) => i)
 
-export default function StarRating({postRating}) {
+export default function StarRating({ postRating }) {
   // Manages on Hover selection of a star
+  // eslint-disable-next-line no-unused-vars
   const [selection, setSelection] = useState(0);
 
   // 별점 props로 받아 해당 별점 업데이트
@@ -24,7 +25,11 @@ export default function StarRating({postRating}) {
   return (
     <div>
       {Array.from({ length: 5 }, (v, i) => (
-        <Star key={i} starId={i + 1} marked={selection ? selection > i : rating > i} />
+        <Star
+          key={i}
+          starId={i + 1}
+          marked={selection ? selection > i : rating > i}
+        />
       ))}
     </div>
   );
