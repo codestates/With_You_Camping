@@ -282,6 +282,7 @@ function AddPost() {
     if (!accessToken) {
       navigate("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 이미지 업로드 및 사진 미리보기
@@ -364,6 +365,7 @@ function AddPost() {
         longitude: latlng.getLng(), //경도
       });
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   // location 상태가 바뀔 때

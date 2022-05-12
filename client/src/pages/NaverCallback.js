@@ -34,20 +34,23 @@ export default function NaverCallback() {
   console.log(nidCode);
 
   useEffect(() => {
-    axios.post(`${serverPath}/oauth/naver`, {
-      code: nidCode,
-      state: naverState,
-    }).then((res) => { 
+    axios
+      .post(`${serverPath}/oauth/naver`, {
+        code: nidCode,
+        state: naverState,
+      })
+      .then((res) => {
         if (res.status === 200) {
-            sessionStorage.setItem("userId", res.data.userId);
-            sessionStorage.setItem("loginToken", res.data.accessToken);
-            sessionStorage.setItem("nickname", res.data.nickname);
-            sessionStorage.setItem("loginMethod", "naver");
-            navigate("/");
-            window.location.reload();
+          sessionStorage.setItem("userId", res.data.userId);
+          sessionStorage.setItem("loginToken", res.data.accessToken);
+          sessionStorage.setItem("nickname", res.data.nickname);
+          sessionStorage.setItem("loginMethod", "naver");
+          navigate("/");
+          window.location.reload();
         }
-    })
-    .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

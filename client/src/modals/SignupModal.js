@@ -181,12 +181,19 @@ function SignupModal({
       setMessage("username_validate_fail");
     } else {
       try {
-        const res = await axios.post(`${serverPath}/auth/signup`, {
-          email: userInfo.email,
-          password: userInfo.password,
-          nickname: userInfo.nickname,
-          name: userInfo.name,
-        });
+        const res = await axios.post(
+          `${serverPath}/auth/signup`,
+          {
+            email: userInfo.email,
+            password: userInfo.password,
+            nickname: userInfo.nickname,
+            name: userInfo.name,
+          },
+          // { withCredentials: true },
+          {
+            headers: { Accept: "application/json" },
+          }
+        );
         if (res.status === 201) {
           setConfirmSignupModal(true);
           setOpenSignupModal(false);

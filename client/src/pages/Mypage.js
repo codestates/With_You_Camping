@@ -106,7 +106,7 @@ const MyPageContainer = styled.div`
   }
 `;
 
-const SignContainer = styled.div``;
+//const SignContainer = styled.div``;
 
 function Mypage(page) {
   const navigate = useNavigate();
@@ -117,10 +117,13 @@ function Mypage(page) {
 
   // console.log(userInfo)
 
+  // console.log(userInfo)
+
   useEffect(() => {
     if (!userId) {
       navigate("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const pageName = [
