@@ -602,7 +602,7 @@ export default function DetailPost({ isLogin, userInfo }) {
             id={id}
             comments={comments}
             isLogin={isLogin}
-          />
+          />  
         </CommentContainer>
 
         {postData.userId === userId ? (
