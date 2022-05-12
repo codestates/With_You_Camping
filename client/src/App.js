@@ -106,7 +106,6 @@ function Router() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setUserInfo]);
-
   return (
     <Container>
       <GlobalStyles />
@@ -138,12 +137,12 @@ function Router() {
           />
 
           <Route
-            path="callback/kakao"
+            path="/callback/kakao"
             element={
               <KakaoCallback isLogin={isLogin} setIsLogin={setIsLogin} />
             }
           />
-          <Route path="callback/naver" element={<NaverCallback />} />
+          <Route path="/callback/naver" element={<NaverCallback />} />
         </Routes>
       </InnerContainer>
 

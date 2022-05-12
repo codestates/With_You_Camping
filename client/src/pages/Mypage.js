@@ -113,12 +113,6 @@ function Mypage(page) {
   const userId = window.sessionStorage.getItem("userId");
   const tabContents = ["게시글", "좋아요", "회원 정보수정"];
 
-  // console.log(userInfo)
-
-  // console.log(userInfo)
-
-  // console.log(userInfo)
-
   useEffect(() => {
     if (!userId) {
       navigate("/");
@@ -131,9 +125,6 @@ function Mypage(page) {
     "/mypage/likepost",
     "/mypage/modifymyinfo",
   ];
-
-  // console.log(userInfo)
-  // console.log(page.userInfo)
 
   return (
     <MyPageContainer>
