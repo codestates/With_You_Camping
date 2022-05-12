@@ -32,7 +32,13 @@ const UserInfoBox = styled.div`
   min-height: max-content;
   justify-content: center;
   align-items: center;
+
   height: 70vh;
+
+  p {
+    font-size: 0.8rem;
+  }
+
   .fields {
     display: grid;
     justify-content: center;
@@ -415,7 +421,7 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
             style={{ borderRadius: "50%" }}
           ></img>
         </ImgContainer>
-
+        <p>이미지 크기는 5MB 이하입니다.</p>
         <div className="fields">
           <div className="form">
             <div>새로운 닉네임</div>

@@ -73,6 +73,9 @@ const UploadImageBox = styled.section`
     svg {
       font-size: 3rem;
     }
+    div {
+      font-size: 0.7rem;
+    }
   }
   cursor: pointer;
   @media screen and (max-width: 500px) {
@@ -314,6 +317,7 @@ function AddPost() {
         <div className="click_for_upload">
           <BsCameraFill />
           <p>클릭하여 이미지 업로드</p>
+          <div>이미지 크기는 5MB 이하입니다.</div>
         </div>
       );
     }
