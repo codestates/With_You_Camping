@@ -264,13 +264,6 @@ function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
               </NavLink>
             </Div>
             <Div onClick={confirmLoginModal}>게시물 작성</Div>
-            <Div
-              className="login"
-              style={{ textDecoration: "none", color: "inherit" }}
-              onClick={() => modalHandler("login")}
-            >
-              로그인
-            </Div>
           </Page>
         )}
       </Container>
