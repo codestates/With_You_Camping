@@ -170,7 +170,7 @@ function Mypage(page) {
         </div>
       </ContentsContainer>
     </MyPageContainer>
-  );
+  ); 
 }
 
 export default Mypage;

@@ -55,7 +55,6 @@ const TitleContainer = styled.div`
   width: 45%;
   border-left-width: 5%;
   text-align: center;
-
   font-family: "Sriracha", cursive;
   font-size: 1.9rem;
 `;
@@ -260,6 +259,7 @@ const ModifyBtnContainer = styled.div`
   justify-content: space-between;
 `;
 
+
 const ProfileContainer = styled.div`
   margin-top: -8px;
   margin-right: 6px;
@@ -303,6 +303,7 @@ export default function DetailPost({ isLogin, userInfo }) {
     getCommentList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   useEffect(() => {
     getWeather();
@@ -350,6 +351,7 @@ export default function DetailPost({ isLogin, userInfo }) {
       return <TiWeatherSunny size={"4rem"} color={"#FF6347"} />;
     }
   }
+
 
   async function getPostDetail() {
     await axios
