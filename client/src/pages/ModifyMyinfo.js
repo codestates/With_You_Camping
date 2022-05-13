@@ -36,7 +36,9 @@ const UserInfoBox = styled.div`
   height: 70vh;
 
   p {
-    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 0.8rem;
+    font-size: 0.6rem;
   }
 
   .fields {

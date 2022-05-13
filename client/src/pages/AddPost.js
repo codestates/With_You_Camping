@@ -74,6 +74,7 @@ const UploadImageBox = styled.section`
       font-size: 3rem;
     }
     div {
+      margin-top: 5px;
       font-size: 0.7rem;
     }
   }
