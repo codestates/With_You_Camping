@@ -162,8 +162,6 @@ function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
     setMessage("");
   };
 
-
-
   return (
     <div>
       {/* 로그인 X, 게시물 작성 버튼 클릭 시 모달 */}
