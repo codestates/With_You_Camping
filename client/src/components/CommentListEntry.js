@@ -34,12 +34,14 @@ const CommmentAreaContainer = styled.section`
     height: 4rem;
     padding: 0.5rem;
     resize: none;
+    font-size: 0.8rem;
   }
 
   .content {
     padding-bottom: 0.8rem;
+    margin-top: 10px;
     margin-bottom: 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   hr {
@@ -120,7 +122,7 @@ const CommentListEntry = ({ comment, getCommentList, id }) => {
             <div className={isEdit ? null : "hide"}>
               <i className="fas fa-check" onClick={editComment}></i>
               <i
-                className="fas fa-times"
+                className="fas fa-times font-size"
                 onClick={() => {
                   setIsEdit(false);
                   setCommentValue(comment.comment);

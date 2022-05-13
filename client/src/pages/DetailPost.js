@@ -164,6 +164,7 @@ const DescContainer = styled.section`
     white-space: pre-wrap;
     line-height: 1.4rem;
     margin-top: 15px;
+    font-size: 1.2rem;
   }
 `;
 
