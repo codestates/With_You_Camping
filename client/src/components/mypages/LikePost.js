@@ -103,6 +103,7 @@ function LikePost() {
       setPageNumber(pageArray);
     } catch (err) {}
   }
+  console.log(likePost);
 
   const pageButton = pageNumber.map((page, i) => {
     return (
