@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 import image from "../img/camping.jpeg";
-import image1 from "../img/camping1.jpeg";
-import image3 from "../img/camping3.jpeg";
-import image4 from "../img/camping4.jpeg";
+import image1 from "../img/camping1.jpg";
+import image2 from "../img/camping2.jpg";
+import image3 from "../img/camping3.jpg";
+import image4 from "../img/camping4.jpg";
 import image5 from "../img/campingMedia.jpg";
-import image6 from "../img/camping6.jpg";
 
 const Container = styled.section`
   /* font-family: "Lato", sans-serif; */
@@ -189,7 +189,7 @@ const InnerContainer = styled.div`
         }
 
         p {
-          font-size: 1.0rem;
+          font-size: 1rem;
         }
       }
     }
@@ -228,7 +228,7 @@ function Landing() {
         </section>
         <section>
           <div className="image">
-            <img src={image3} alt="3" />
+            <img src={image2} alt="2" />
           </div>
           <div className="text">
             <p> 캠핑지의 일주일 간 날씨 정보를 통해 </p>
@@ -237,7 +237,7 @@ function Landing() {
         </section>
         <section>
           <div className="image">
-            <img src={image4} alt="4" />
+            <img src={image3} alt="3" />
           </div>
           <div className="text">
             <p> 지역별 카테고리와 검색 기능을 통해</p>
@@ -247,7 +247,7 @@ function Landing() {
         </section>
         <section>
           <div className="image">
-            <img src={image6} alt="6" />
+            <img src={image4} alt="4" />
           </div>
           <div className="text">
             {/* <p> 생생한 후기와 소통을 통해 </p> */}
