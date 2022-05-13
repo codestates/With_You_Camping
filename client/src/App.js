@@ -106,7 +106,6 @@ function Router() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setUserInfo]);
-  console.log("change env");
 
   return (
     <Container>
