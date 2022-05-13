@@ -28,7 +28,7 @@ export default function GoogleLoginBtn() {
   const sessionStorage = window.sessionStorage;
   const serverPath = process.env.REACT_APP_SERVER_PATH;
   const navigate = useNavigate();
- 
+
   const onSuccess = async (e) => {
     const code = e.tokenId;
 
@@ -40,7 +40,7 @@ export default function GoogleLoginBtn() {
       sessionStorage.setItem("loginToken", getToken.data.accessToken);
       sessionStorage.setItem("nickname", getToken.data.nickname);
       sessionStorage.setItem("loginMethod", "google");
-      
+
       navigate("/");
       window.location.reload();
     }

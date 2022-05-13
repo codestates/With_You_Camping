@@ -320,13 +320,10 @@ function ModifyPost() {
   const descArea = useRef();
   // 이미지 업로드 및 사진 미리보기
 
-  // console.log(nowCheckDetail)
-
   useEffect(() => {
     (async () => {
       const res = await axios.get(`${serverPath}/boards/${id}`);
 
-      // console.log(res)
       if (res.status === 200) {
         if (res.data.board.userId !== userId) {
           navigate("/posts");
@@ -525,7 +522,7 @@ function ModifyPost() {
         siteInfo: checkDetail,
         rating: checkRating,
       };
-      // // console.log(body);
+
       try {
         const res = await axios.put(
           `${serverPath}/boards/${id}`,

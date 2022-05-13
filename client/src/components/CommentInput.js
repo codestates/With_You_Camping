@@ -100,8 +100,6 @@ const CommentInput = ({ getCommentList, id, comments, isLogin }) => {
       });
   };
 
-  // console.log(comment)
-
   const [message, setMessage] = useState("");
 
   const resetMessage = () => {

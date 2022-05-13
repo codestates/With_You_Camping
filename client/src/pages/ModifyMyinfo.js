@@ -149,6 +149,7 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
   const [newNickname, setNewNickname] = useState("");
   const [nick, setNick] = useState("");
 
+  // eslint-disable-next-line no-unused-vars
   const [nicknameCheck, setNicknameCheck] = useState(true);
 
   const [signoutModal, setSignoutModal] = useState(false);
@@ -163,14 +164,13 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
     // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setUserInfo]);
-  console.log(nicknameCheck);
+
   async function getUserInfo() {
     const res = await axios.post(`${serverPath}/auth/token/validate`, {
       token: sessionStorage.getItem("loginToken"),
     });
 
     if (res.status === 200) {
-      // console.log(res.data.userInfo);
       setUserInfo(res.data.userInfo);
     }
   }
@@ -178,8 +178,6 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
   const nicknameValue = (e) => {
     setNick(e.target.value);
   };
-
-  console.log(nick);
 
   const nicknameValidCheck = (value) => {
     let nicknameReg = /^[가-힣a-zA-Z0-9_]{2,12}$/;
@@ -189,7 +187,6 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
   const nicknameCheckHandler = (e) => {
     setNewNickname(e.target.value);
   };
-  // console.log(newNickname)
 
   const clickModifyNicknameBtn = async () => {
     (async () => {
@@ -224,8 +221,6 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
     })();
   };
 
-  // console.log(AppuserInfo)
-
   const clickModifyPasswordBtn = async () => {
     (async () => {
       const headers = {
@@ -248,7 +243,6 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
           if (res.status === 200) {
             setOkModalOpen(true);
             navigate("/mypage/modifymyinfo");
-            console.log(res);
           }
         } catch (err) {
           console.log(err);
@@ -260,7 +254,6 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
   };
 
   const NicknameNofication = () => {
-    console.log("???");
     if (
       !nicknameValidCheck(newNickname) &&
       newNickname.length < 2 &&
@@ -371,15 +364,11 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
       formData,
       headers
     );
-    // console.log(res.data.profile)
+
     setUserInfo(res.data.userInfo);
     setAppUserInfo(res.data.userInfo);
-    // setImgHostUrl(res.data.userInfo.profile);
-    console.log(res.data.userInfo);
   };
 
-  // console.log(userInfo)
-  // // console.log(setUserInfo)
   return (
     <Container>
       {okModalOpen ? (
