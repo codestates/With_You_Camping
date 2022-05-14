@@ -139,6 +139,8 @@ export default function PostListComponent() {
   const [inputSearch, setInputSearch] = useState("");
   const [typeSearch, setTypeSearch] = useState("");
 
+  const [nowCategory, setNowCategory] = useState("");
+
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [pageNumber, setPageNumber] = useState([]);
@@ -166,7 +168,7 @@ export default function PostListComponent() {
         if (res.data.boards.count <= 12) {
           pageArray.push(1);
         } else {
-          for (let i = 1; i <= res.data.boards.count / 12 + 1; i++) {
+          for (let i = 1; i <= res.data.boards.count / 12; i++) {
             pageArray.push(i);
           }
         }
@@ -190,6 +192,9 @@ export default function PostListComponent() {
     let category =
       listStatus[listStatus.findIndex((index) => index.onOff === true)].name;
 
+    setNowCategory(category);
+    if (nowCategory !== category) setPage(1);
+
     const res = await axios.get(
       `${serverPath}/main?&category=${category}&pages=${page}&limit=12`
     );
@@ -201,7 +206,7 @@ export default function PostListComponent() {
       if (res.data.boards.count <= 12) {
         pageArray.push(1);
       } else {
-        for (let i = 1; i <= res.data.boards.count / 12 + 1; i++) {
+        for (let i = 1; i <= res.data.boards.count / 12; i++) {
           pageArray.push(i);
         }
       }
