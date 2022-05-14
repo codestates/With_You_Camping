@@ -35,7 +35,7 @@ const ModalBackdrop = styled.div`
 const ModalView = styled.div`
   position: relative;
   top: 20%;
-  left: 40%;
+  left: 45rem;
   display: grid;
   place-items: center;
   background-color: white;
@@ -50,17 +50,17 @@ const ModalView = styled.div`
     justify-content: center;
     margin: 10px 10px;
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 500px) {
     position: relative;
     top: 25%;
-    left: 10%;
+    left: 9%;
     display: grid;
     place-items: center;
     background-color: white;
     width: 400px;
     height: 550px;
     border-radius: 15px;
-    z-index: 999;
+    z-index: 800;
   }
 `;
 

@@ -149,13 +149,16 @@ const ImgContainer = styled.div`
 function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
   const navigate = useNavigate();
   const serverPath = process.env.REACT_APP_SERVER_PATH;
-  // const userId = window.sessionStorage.getItem("userId");
+  const userId = window.sessionStorage.getItem("userId");
   const accessToken = window.sessionStorage.getItem("loginToken");
 
+  const nickNameRef = useRef();
+  const currPassWordRef = useRef();
+  const newPassWordRef = useRef();
+
+  const [nick, setNick] = useState("");
   const [currPassword, setCurrPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [newNickname, setNewNickname] = useState("");
-  const [nick, setNick] = useState("");
 
   // eslint-disable-next-line no-unused-vars
   const [nicknameCheck, setNicknameCheck] = useState(true);
@@ -167,9 +170,9 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
   const [userInfo, setUserInfo] = useState({});
   useEffect(() => {
     getUserInfo();
-    // if (!userId) {
-    //   navigate("/");
-    // }
+    if (!userId) {
+      navigate("/");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setUserInfo]);
 
@@ -192,11 +195,16 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
     return nicknameReg.test(value);
   };
 
-  const nicknameCheckHandler = (e) => {
-    setNewNickname(e.target.value);
+  const currPassWordValue = (e) => {
+    setCurrPassword(e.target.value);
+  };
+
+  const newPassWordValue = (e) => {
+    setNewPassword(e.target.value);
   };
 
   const clickModifyNicknameBtn = async () => {
+    console.log(nickNameRef.current.value);
     (async () => {
       const headers = {
         headers: {
@@ -204,12 +212,15 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
         },
       };
 
-      if (newNickname && nicknameValidCheck(newNickname)) {
+      if (
+        nickNameRef.current.value &&
+        nicknameValidCheck(nickNameRef.current.value)
+      ) {
         try {
           const res = await axios.put(
             `${serverPath}/users/`,
             {
-              nickname: newNickname,
+              nickname: nickNameRef.current.value,
             },
             headers
           );
@@ -237,13 +248,13 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
         },
       };
 
-      if (newPassword && currPassword) {
+      if (newPassWordRef.current.value && currPassWordRef.current.value) {
         try {
           const res = await axios.put(
             `${serverPath}/users`,
             {
-              nowPassword: currPassword,
-              newPassword,
+              nowPassword: currPassWordRef.current.value,
+              newPassword: newPassWordRef.current.value,
             },
             headers
           );
@@ -251,6 +262,8 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
           if (res.status === 200) {
             setOkModalOpen(true);
             navigate("/mypage/modifymyinfo");
+            setCurrPassword("");
+            setNewPassword("");
           }
         } catch (err) {
           console.log(err);
@@ -262,14 +275,10 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
   };
 
   const NicknameNofication = () => {
-    if (
-      !nicknameValidCheck(newNickname) &&
-      newNickname.length < 2 &&
-      newNickname
-    ) {
+    if (!nicknameValidCheck(nick) && nick.length < 2 && nick) {
       return <Nofication>닉네임은 2글자 이상이여야 합니다!</Nofication>;
     }
-    if (!nicknameValidCheck(newNickname) && newNickname) {
+    if (!nicknameValidCheck(nick) && nick) {
       return <Nofication>한글, 영문, 숫자만 가능합니다 </Nofication>;
     }
     return null;
@@ -302,35 +311,19 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
   };
 
   const NickNameBtn = () => {
-    // if (newNickname) {
     return (
       <ConfirmBtn onClick={clickModifyNicknameBtn}>
         <span>닉네임 변경</span>
       </ConfirmBtn>
     );
-    // } else {
-    // return (
-    // <ConfirmBtn disabled={true}>
-    // <span>닉네/임 변경</span>
-    // </ConfirmBtn>
-    // );
-    // }
   };
 
   const PasswordBtn = () => {
-    // if (currPassword && newPassword) {
     return (
       <ConfirmBtn onClick={clickModifyPasswordBtn}>
         <span>비밀번호 변경</span>
       </ConfirmBtn>
-      // );
-      // } else {
-      // return (
-      // <ConfirmBtn disabled={true}>
-      // <span>비밀번호 변경</span>
-      // </ConfirmBtn>
     );
-    // }
   };
 
   const SignoutBtnBy = () => {
@@ -353,7 +346,6 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
   };
 
   const imgInput = useRef();
-  // const [imgHostUrl, setImgHostUrl] = useState(userInfo.profile)
 
   const uploadImage = async (e) => {
     e.preventDefault();
@@ -430,7 +422,7 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
             <input
               type="text"
               placeholder="변경할 닉네임을 입력합니다"
-              onBlur={nicknameCheckHandler}
+              ref={nickNameRef}
               onChange={nicknameValue}
               value={nick}
             />
@@ -443,9 +435,9 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
             <input
               type={"password"}
               placeholder="비밀번호 변경을 위해서는 필수입력입니다."
-              onBlur={(e) => {
-                setCurrPassword(e.target.value);
-              }}
+              ref={currPassWordRef}
+              onChange={currPassWordValue}
+              value={currPassword}
             />
           </div>
           <div className="form">
@@ -453,9 +445,9 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
             <input
               type={"password"}
               placeholder="변경할 비밀번호를 입력 합니다."
-              onBlur={(e) => {
-                setNewPassword(e.target.value);
-              }}
+              ref={newPassWordRef}
+              onChange={newPassWordValue}
+              value={newPassword}
             />
             <PasswordNofication />
             <PasswordBtn />

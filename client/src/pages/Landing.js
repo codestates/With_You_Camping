@@ -176,6 +176,9 @@ const InnerContainer = styled.div`
       }
 
       .text {
+        &:first:child {
+          margin-top: -20px;
+        }
         position: static;
         display: flex;
         flex-direction: column;
@@ -219,7 +222,7 @@ function Landing() {
           <div className="image">
             <img src={image1} alt="1" />
           </div>
-          <div className="text">
+          <div className="text first-text">
             {/* <p> 나만 알기 아쉬웠던 장소를 </p>
             <p>정확하게 공유 할 수 있어요</p> */}
             <p>캠핑지의 위치, 조건, 평점 등</p>

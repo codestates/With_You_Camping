@@ -56,8 +56,16 @@ const Container = styled.div`
   }
 
   @media screen and (max-width: 500px) {
-    .footer .logo-full {
+    .footer {
+      dipslay: flex;
+      position: relative;
+      right: 30px;
+    }
+    .logo-full {
+      margin: 0px;
       display: none;
+      position: relative;
+      left: 40px;
     }
   }
 `;
