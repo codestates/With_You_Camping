@@ -162,11 +162,13 @@ export default function PostListComponent() {
       );
       setPosts(res.data.boards.rows);
       let pageArray = [];
+      if (pageArray.length > 0 ) pageArray = [];
+    
       if (res.data.boards.count) {
         if (res.data.boards.count <= 12) {
           pageArray.push(1);
         } else {
-          for (let i = 1; i <= res.data.boards.count / 12 + 1; i++) {
+          for (let i = 1; i <= res.data.boards.count / 12; i++) {
             pageArray.push(i);
           }
         }
@@ -186,9 +188,14 @@ export default function PostListComponent() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, setLocationList, setCategoryList]);
 
+  const [nowCategory, setNowCategory] = useState('')
+
   async function categoryPost() {
     let category =
       listStatus[listStatus.findIndex((index) => index.onOff === true)].name;
+    
+    setNowCategory(category)
+    if (nowCategory !== category) setPage(1);
 
     const res = await axios.get(
       `${serverPath}/main?&category=${category}&pages=${page}&limit=12`
@@ -196,12 +203,15 @@ export default function PostListComponent() {
 
     setPosts(res.data.boards.rows);
 
+
     let pageArray = [];
+    // if (pageArray.length > 0 ) pageArray = [];
+
     if (res.data.boards.count) {
       if (res.data.boards.count <= 12) {
         pageArray.push(1);
       } else {
-        for (let i = 1; i <= res.data.boards.count / 12 + 1; i++) {
+        for (let i = 1; i <= res.data.boards.count / 12; i++) {
           pageArray.push(i);
         }
       }

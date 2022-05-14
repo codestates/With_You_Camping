@@ -100,6 +100,9 @@ function Confirm({ message, handleMessage }) {
     } else if (message === "comment_post_message") {
       setCurMessage("댓글이 등록 되었습니다.");
       setBtnInfo("닫 기");
+    } else if ( message === "password_check_fail") {
+      setCurMessage("비밀번호 확인란이 일치하지 않습니다.");
+      setBtnInfo("닫 기");
     }
   }, [message]);
 

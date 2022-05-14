@@ -179,6 +179,8 @@ function SignupModal({
       setMessage("nickname_validate_fail");
     } else if (!validateName(userInfo.name)) {
       setMessage("username_validate_fail");
+    } else if (userInfo.password !== userInfo.password_check) {
+      setMessage("password_check_fail");
     } else {
       try {
         const res = await axios.post(

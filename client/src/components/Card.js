@@ -160,7 +160,7 @@ const Card = ({ post, LikePost }) => {
               <CampingElementTextBox>
                 <CampingElementTitle>{x.Board.title}</CampingElementTitle>
                 <CampingElementEmojiAria>
-                  <CampingElementName>{x.User.nickname}</CampingElementName>
+                  <CampingElementName>{x.Board.User.nickname}</CampingElementName>
                   <CampingElementIcon src={Heart} />
                   <CampingElementEmojiText>
                     {x.totalLike}
