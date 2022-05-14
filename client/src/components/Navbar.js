@@ -246,7 +246,7 @@ function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
                 width="32"
                 height="32"
                 style={{ borderRadius: "50%" }}
-                onClick={() => navigate("/mypage/modifymyinfo")}
+                onClick={() => navigate("/mypage/mypost")}
               />
             </ImgDiv>
 
