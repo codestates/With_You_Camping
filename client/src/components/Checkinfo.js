@@ -3,10 +3,7 @@ import { IoPaperPlaneSharp } from "react-icons/io5";
 import { useEffect, useState } from "react";
 
 const InnerContainer = styled.div`
-  /* grid-column: 2 / 12; */
-  /* height: max-content; */
   margin-top: 10px;
-  /* justify-content: space-between; */
   .checked {
     position: relative;
     color: #fff;
@@ -29,24 +26,15 @@ const InnerContainer = styled.div`
 
 const CheckContainer = styled.div`
   justify-content: space-between;
-  /* aspect-ratio: 3 / 1; */
   position: relative;
   flex-direction: column;
   margin-top: 10px;
   float: left;
 `;
 
-const TitleContainer = styled.div`
-  /* font-size : 1.0rem; */
-  /* margin-top: 40px; */
-`;
+const TitleContainer = styled.div``;
 
-export default function Checkinfo({
-  setCheckDetail,
-  checkDetail,
-  setNowCheckDeatail,
-  nowCheckDetail,
-}) {
+export default function Checkinfo({ setCheckDetail, checkDetail }) {
   const [area, setArea] = useState([
     { contents: "서울", checked: false, info: "area" },
     { contents: "경기도", checked: false, info: "area" },
@@ -73,83 +61,71 @@ export default function Checkinfo({
     { contents: "불량", checked: false, info: "toilet" },
   ]);
 
-  const [nowArea, setNowArea] = useState(null);
-  const [nowInternet, setNowInternet] = useState(null);
-  const [nowParking, setNowParking] = useState(null);
-  const [nowElectronic, setNowElectronic] = useState(null);
-  const [nowToilet, setNowToilet] = useState(null);
+  // const [precheckDetail, setPreCheckDetail] = useState({
+  //   area: null,
+  //   internet: null,
+  //   parking: null,
+  //   electronic: null,
+  //   toilet: null,
+  // });
 
-  // if (nowCheckDetail) {
-  //   setCheckDetail(nowCheckDetail)
-  // }
+  // const [areaflag, setAreaFlag] = useState(0);
+  // const [internetflag, setinternetFlag] = useState(0);
 
-  // if (nowCheckDetail) {
-  //   if (nowCheckDetail.area === "서울") {
-  //     area[0].checked = true;
-  //   } else if (nowCheckDetail.area === "경기도") {
-  //     area[1].checked = true;
-  //   } else if (nowCheckDetail.area === "충청도") {
-  //     area[2].checked = true;
-  //   } else if (nowCheckDetail.area === "강원도") {
-  //     area[3].checked = true;
-  //   } else if (nowCheckDetail.area === "경상도") {
-  //     area[4].checked = true;
-  //   } else if (nowCheckDetail.area === "전라도") {
-  //     area[5].checked = true;
-  //   } else if (nowCheckDetail.area === "제주도") {
-  //     area[6].checked = true;
-  //   }
-  //   if (nowCheckDetail.internet === "가능") {
-  //     internet[0].checked = true;
-  //   } else if (nowCheckDetail.internet === "불가") {
-  //     internet[1].checked = true;
-  //   }
-  //   if (nowCheckDetail.parking === "여유") {
-  //     parking[0].checked = true;
-  //   } else if (nowCheckDetail.parking === "협소") {
-  //     parking[1].checked = true;
-  //   }
-  //   if (nowCheckDetail.electronic === "가능") {
-  //     electronic[0].checked = true;
-  //   } else if (nowCheckDetail.electronic === "불가") {
-  //     electronic[1].checked = true;
-  //   }
-  //   if (nowCheckDetail.toilet === "양호") {
-  //     toilet[0].checked = true;
-  //   } else if (nowCheckDetail.toilet === "불량") {
-  //     toilet[0].checked = true;
-  //   }
-  //   setNowCheckDeatail(null)
-  // }
+  // const serverPath = process.env.REACT_APP_SERVER_PATH;
+  // const { id } = useParams();
 
-  // const [checkData, setCheckData] = ({
-  //   area: nowArea,
-  //   internet: nowInternet,
-  //   parking: nowParking,
-  //   electronic: nowElectronic,
-  //   toilet: nowToilet,
-  // })
+  // useEffect(() => {
+  //   (async () => {
+  //     if (id !== undefined) {
+  //       const res = await axios.get(`${serverPath}/boards/${id}`);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  let checkData = {
-    area: nowArea,
-    internet: nowInternet,
-    parking: nowParking,
-    electronic: nowElectronic,
-    toilet: nowToilet,
-  };
+  //       if (res.status === 200) {
+  //         setCheckDetail({
+  //           area: res.data.boardData.area,
+  //           internet: res.data.boardData.wifi,
+  //           parking: res.data.boardData.parking,
+  //           electronic: res.data.boardData.electricity,
+  //           toilet: res.data.boardData.toiletType,
+  //         });
+  //         setAreaFlag(1);
+  //         setinternetFlag(1);
+  //       }
+  //     }
+  //   })();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+  // // console.log(precheckDetail)
+
+
 
   useEffect(() => {
-    setCheckDetail(checkData);
-  }, [
-    checkData.area,
-    checkData.internet,
-    checkData.parking,
-    checkData.electronic,
-    checkData.toilet,
-    setCheckDetail,
-    checkData,
-  ]);
+    let findArea = area.findIndex((index) => index.checked === true);
+    if (findArea === -1) findArea = 0;
+
+    let findInternet = internet.findIndex((index) => index.checked === true);
+    if (findInternet === -1) findInternet = 0;
+
+    let findParking = parking.findIndex((index) => index.checked === true);
+    if (findParking === -1) findParking = 0;
+
+    let findElectronic = electronic.findIndex(
+      (index) => index.checked === true
+    );
+    if (findElectronic === -1) findElectronic = 0;
+
+    let findToilet = toilet.findIndex((index) => index.checked === true);
+    if (findToilet === -1) findToilet = 0;
+
+    setCheckDetail({
+      area: area[findArea].contents,
+      internet: internet[findInternet].contents,
+      parking: parking[findParking].contents,
+      electronic: electronic[findElectronic].contents,
+      toilet: toilet[findToilet].contents,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [area, internet, parking, electronic, toilet]);
 
   const handleChange = (data) => {
     if (data.info === "area") {
@@ -157,10 +133,12 @@ export default function Checkinfo({
       const modifiedProducts = copyProducts.map((area) => {
         if (data.contents === area.contents) {
           area.checked = !area.checked;
+        } else {
+          area.checked = false;
         }
         return area;
       });
-      setNowArea(data.contents);
+
       setArea(modifiedProducts);
     }
 
@@ -169,10 +147,11 @@ export default function Checkinfo({
       const modifiedProducts = copyProducts.map((internet) => {
         if (data.contents === internet.contents) {
           internet.checked = !internet.checked;
+        } else {
+          internet.checked = false;
         }
         return internet;
       });
-      setNowInternet(data.contents);
       setInternet(modifiedProducts);
     }
 
@@ -181,10 +160,11 @@ export default function Checkinfo({
       const modifiedProducts = copyProducts.map((parking) => {
         if (data.contents === parking.contents) {
           parking.checked = !parking.checked;
+        } else {
+          parking.checked = false;
         }
         return parking;
       });
-      setNowParking(data.contents);
       setParking(modifiedProducts);
     }
 
@@ -193,10 +173,11 @@ export default function Checkinfo({
       const modifiedProducts = copyProducts.map((electronic) => {
         if (data.contents === electronic.contents) {
           electronic.checked = !electronic.checked;
+        } else {
+          electronic.checked = false;
         }
         return electronic;
       });
-      setNowElectronic(data.contents);
       setElectronic(modifiedProducts);
     }
 
@@ -205,10 +186,11 @@ export default function Checkinfo({
       const modifiedProducts = copyProducts.map((toilet) => {
         if (data.contents === toilet.contents) {
           toilet.checked = !toilet.checked;
+        } else {
+          toilet.checked = false;
         }
         return toilet;
       });
-      setNowToilet(data.contents);
       setToilet(modifiedProducts);
     }
   };

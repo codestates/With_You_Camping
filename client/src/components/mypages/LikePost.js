@@ -88,6 +88,7 @@ function LikePost() {
         `${serverPath}/users/likes?pages=${page}&limit=12`,
         headers
       );
+      console.log(res.data.boards.rows)
       setLikePost(res.data.boards.rows);
 
       let pageArray = [];
