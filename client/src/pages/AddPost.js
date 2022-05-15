@@ -327,7 +327,7 @@ function AddPost() {
     }
   };
 
-  // 카카오 지도 API 사용
+  // 카카오 지도 API 사용 d
   useEffect(() => {
     const container = kakaoMap.current;
     let options = {
