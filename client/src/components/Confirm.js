@@ -28,8 +28,8 @@ const MessageBox = styled.div`
   width: 500px;
   height: 250px;
   z-index: 10;
-  border-radius: 3px;
-  margin-left: 50px;
+  border-radius: 5px;
+
   h2 {
     text-align: center;
     margin-bottom: 3rem;
@@ -44,6 +44,9 @@ const MessageBox = styled.div`
     border: none;
     border-radius: 5px;
     margin: auto;
+  }
+  @media screen and (max-width: 500px) {
+    width: 450px;
   }
 `;
 
@@ -66,7 +69,7 @@ function Confirm({ message, handleMessage }) {
       setBtnInfo("닫 기");
     } else if (message === "password_validate_fail") {
       setCurMessage("비밀번호와 비밀번호 확인란이 일치하지 않습니다.");
-      setBtnInfo("닫 기"); 
+      setBtnInfo("닫 기");
     } else if (message === "loginInfo_blank") {
       setCurMessage("이메일, 비밀번호를 입력해 주세요");
       setBtnInfo("닫 기");
@@ -100,7 +103,7 @@ function Confirm({ message, handleMessage }) {
     } else if (message === "comment_post_message") {
       setCurMessage("댓글이 등록 되었습니다.");
       setBtnInfo("닫 기");
-    } else if ( message === "password_check_fail") {
+    } else if (message === "password_check_fail") {
       setCurMessage("비밀번호 확인란이 일치하지 않습니다.");
       setBtnInfo("닫 기");
     }

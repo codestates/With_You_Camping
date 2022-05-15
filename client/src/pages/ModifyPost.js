@@ -328,7 +328,7 @@ function ModifyPost() {
         if (res.data.board.userId !== userId) {
           navigate("/posts");
         }
-        const { board, boardData, locate } = res.data;
+        const { board, locate } = res.data;
         setTitle(board.title);
         setContent(board.content);
         setImgHostUrl(board.picture);
@@ -337,13 +337,13 @@ function ModifyPost() {
           longitude: locate.longtitude,
         });
         setCheckRating(board.rating);
-        setNowCheckDeatail({
-          area: boardData.area,
-          internet: boardData.wifi,
-          parking: boardData.parking,
-          electronic: boardData.electricity,
-          toilet: boardData.toiletType,
-        });
+        // setNowCheckDeatail({
+        //   area: boardData.area,
+        //   internet: boardData.wifi,
+        //   parking: boardData.parking,
+        //   electronic: boardData.electricity,
+        //   toilet: boardData.toiletType,
+        // });
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps

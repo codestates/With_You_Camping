@@ -15,7 +15,7 @@ const Container = styled.header`
   justify-content: space-around;
 
   width: 100%;
-  min-width: 1200px;
+  min-width: 1000px;
   height: 50px;
   margin: 20px;
   font-size: 1rem;
@@ -74,7 +74,7 @@ const Page = styled.div`
   display: flex;
 
   @media screen and (max-width: 500px) {
-    margin-right: 10px;
+    margin-right: 60px;
   }
 `;
 
@@ -162,8 +162,6 @@ function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
     setMessage("");
   };
 
-
-
   return (
     <div>
       {/* 로그인 X, 게시물 작성 버튼 클릭 시 모달 */}
@@ -248,6 +246,7 @@ function Navber({ isLogin, setIsLogin, userInfo, setUserInfo }) {
                 width="32"
                 height="32"
                 style={{ borderRadius: "50%" }}
+                onClick={() => navigate("/mypage/mypost")}
               />
             </ImgDiv>
 

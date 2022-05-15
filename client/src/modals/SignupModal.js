@@ -6,28 +6,33 @@ import Confirm from "../components/Confirm";
 import logo from "../img/logo3.jpg";
 
 const SignContainer = styled.div`
-  display: flex;
-  justify-content: center;
+  position: fixed;
+  display: grid;
+  place-items: center;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 800;
 `;
 
 const ModalBackdrop = styled.div`
   position: fixed;
-  z-index: 809;
-  width: 100%;
-  height: 100%;
   top: 0;
   left: 0;
-  right: 0;
   bottom: 0;
-  margin: auto;
-  background-color: rgba(0, 0, 0, 0.5);
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 800;
 `;
 
 const SignModalView = styled.div`
   // TODO : Modal창 CSS를 구현합니다.
   position: relative;
   top: 20%;
-  left: 40%;
+  left: 45rem;
   display: grid;
   place-items: center;
   background-color: white;
@@ -79,14 +84,14 @@ const SignModalView = styled.div`
   @media screen and (max-width: 600px) {
     position: relative;
     top: 15%;
-    left: 10%;
+    left: 9%;
     display: grid;
     place-items: center;
     background-color: white;
     width: 400px;
     height: 650px;
     border-radius: 15px;
-    z-index: 999;
+    z-index: 800;
   }
 `;
 
