@@ -68,7 +68,7 @@ const ContentsContainer = styled.div`
   left: 60px;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-
+  width: 70%;
   height: max-content;
   .modify-user {
     position: relative;
@@ -82,12 +82,13 @@ const ContentsContainer = styled.div`
     grid-template-columns: 1fr;
 
     height: max-content;
+    left: 30px;
 
     .modify-user {
       margin: 0px;
       position: relative;
-      left: -10px;
-      width: 80%;
+      left: -30px;
+      width: 100%;
     }
   }
 `;
@@ -161,7 +162,7 @@ function Mypage(page) {
         </div>
       </ContentsContainer>
     </MyPageContainer>
-  ); 
+  );
 }
 
 export default Mypage;

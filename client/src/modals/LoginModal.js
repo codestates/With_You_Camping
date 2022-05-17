@@ -13,13 +13,16 @@ const ModalContainer = styled.div`
   position: fixed;
   display: grid;
   place-items: center;
+
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
+
   width: 100vw;
   height: 100vh;
-  z-index: 800;
+
+  z-index: 998;
 `;
 
 const ModalBackdrop = styled.div`
@@ -28,21 +31,21 @@ const ModalBackdrop = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
+
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 800;
+
+  z-index: 998;
 `;
 
 const ModalView = styled.div`
   position: relative;
-  top: 20%;
-  left: 45rem;
   display: grid;
   place-items: center;
   background-color: white;
   width: 400px;
   height: 550px;
   border-radius: 15px;
-  z-index: 800;
+  z-index: 999;
   span {
     color: black;
     outline: none;
@@ -51,16 +54,9 @@ const ModalView = styled.div`
     margin: 10px 10px;
   }
   @media screen and (max-width: 500px) {
-    position: relative;
-    top: 25%;
-    left: 9%;
-    display: grid;
-    place-items: center;
-    background-color: white;
-    width: 400px;
-    height: 550px;
-    border-radius: 15px;
-    z-index: 800;
+    width: 92%;
+    width: 350px;
+    height: 500px;
   }
 `;
 
@@ -274,64 +270,63 @@ function LoginModal({
 
   return (
     <ModalContainer>
-      <ModalBackdrop>
-        {message ? (
-          <Confirm message={message} handleMessage={resetMessage} />
-        ) : null}
-        <ModalView>
-          <CloseBtn onClick={closeFn}>
-            <IoClose size={"1.5rem"} />
-          </CloseBtn>
-          <InnerContainer>
-            <InputContainer>
-              <form onSubmit={handleSubmit}>
-                <Logo>
-                  <img
-                    src={logo}
-                    alt="icon"
-                    style={{
-                      height: "120%",
-                      width: "100%",
-                      margin: "30px 0px -57px 28px",
-                    }}
-                  />
-                </Logo>
-                {/* <Nofication></Nofication> */}
-                <label htmlFor="user-email" />
-                <input
-                  id="user-email"
-                  type="email"
-                  placeholder="email"
-                  onChange={handleInputValue("email")}
+      <ModalBackdrop />
+      {message ? (
+        <Confirm message={message} handleMessage={resetMessage} />
+      ) : null}
+      <ModalView>
+        <CloseBtn onClick={closeFn}>
+          <IoClose size={"1.5rem"} />
+        </CloseBtn>
+        <InnerContainer>
+          <InputContainer>
+            <form onSubmit={handleSubmit}>
+              <Logo>
+                <img
+                  src={logo}
+                  alt="icon"
+                  style={{
+                    height: "120%",
+                    width: "100%",
+                    margin: "30px 0px -57px 28px",
+                  }}
                 />
+              </Logo>
+              {/* <Nofication></Nofication> */}
+              <label htmlFor="user-email" />
+              <input
+                id="user-email"
+                type="email"
+                placeholder="email"
+                onChange={handleInputValue("email")}
+              />
 
-                <label htmlFor="user-password" />
-                <input
-                  id="user-password"
-                  type="password"
-                  placeholder="password"
-                  onChange={handleInputValue("password")}
-                />
-                {/* <Nofify>이메일과 비밀번호를 확인해주세요</Nofify> */}
-                <div className="button-container">
-                  <button className="login_button" type="submit">
-                    로그인하기
-                  </button>
-                  <div className="signup-select-area">
-                    <label>회원이 아니신가요?</label>
-                    <span onClick={openSignup}>회원가입 하러 가기</span>
-                  </div>
+              <label htmlFor="user-password" />
+              <input
+                id="user-password"
+                type="password"
+                placeholder="password"
+                onChange={handleInputValue("password")}
+              />
+              {/* <Nofify>이메일과 비밀번호를 확인해주세요</Nofify> */}
+              <div className="button-container">
+                <button className="login_button" type="submit">
+                  로그인하기
+                </button>
+                <div className="signup-select-area">
+                  <label>회원이 아니신가요?</label>
+                  <span onClick={openSignup}>회원가입 하러 가기</span>
                 </div>
-              </form>
-            </InputContainer>
-            <BtnContainer>
-              <KakaoLoginBtn />
-              <GoogleLoginBtn />
-              <NaverLoginBtn />
-            </BtnContainer>
-          </InnerContainer>
-        </ModalView>
-      </ModalBackdrop>
+              </div>
+            </form>
+          </InputContainer>
+          <BtnContainer>
+            <KakaoLoginBtn />
+            <GoogleLoginBtn />
+            <NaverLoginBtn />
+          </BtnContainer>
+        </InnerContainer>
+      </ModalView>
     </ModalContainer>
   );
 }

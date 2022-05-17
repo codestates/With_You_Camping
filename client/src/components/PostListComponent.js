@@ -13,11 +13,11 @@ const HLine = styled.div`
   width: 1240px;
   height: 1px;
   margin-left: 0px;
-
   background-color: #dad8d6;
   @media screen and (max-width: 500px) {
     position: relative;
     width: 100%;
+    margin-left: -30px;
   }
 `;
 
@@ -27,13 +27,18 @@ const Container = styled.section`
   word-break: break-all;
   height: auto;
   padding-bottom: 2rem;
-
   border-bottom: 1px solid $color-grey-border;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    .search-bar {
+      position: relative;
+      left: 60px;
+    }
+  }
 `;
 
 const InnerContainer = styled.div`
   display: flex;
-
   @media screen and (max-width: 500px) {
     display: block;
     width: 100%;
@@ -75,14 +80,14 @@ const CardContainer = styled.div`
   /* height: max-content; */
 
   @media screen and (max-width: 500px) {
+    position: relative;
+    left: 13%;
     display: grid;
+    width: 90%;
     grid-template-rows: 1fr;
-    grid-template-columns: 1fr 1fr;
-    margin-top: -100px;
-    /* margin-bottom: 40px; */
-    justify-content: space-between;
-
-    transform: scale(0.8);
+    grid-template-columns: 1fr;
+    margin-top: -50px;
+    justify-content: center;
   }
 `;
 
@@ -164,8 +169,8 @@ export default function PostListComponent() {
       );
       setPosts(res.data.boards.rows);
       let pageArray = [];
-      if (pageArray.length > 0 ) pageArray = [];
-    
+      if (pageArray.length > 0) pageArray = [];
+
       if (res.data.boards.count) {
         if (res.data.boards.count <= 12) {
           pageArray.push(1);
@@ -190,13 +195,11 @@ export default function PostListComponent() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, setLocationList, setCategoryList]);
 
-  const [nowCategory, setNowCategory] = useState('')
-
   async function categoryPost() {
     let category =
       listStatus[listStatus.findIndex((index) => index.onOff === true)].name;
-    
-    setNowCategory(category)
+
+    setNowCategory(category);
     if (nowCategory !== category) setPage(1);
 
     setNowCategory(category);
@@ -207,7 +210,6 @@ export default function PostListComponent() {
     );
 
     setPosts(res.data.boards.rows);
-
 
     let pageArray = [];
     // if (pageArray.length > 0 ) pageArray = [];
@@ -247,6 +249,7 @@ export default function PostListComponent() {
             setCategoryList={setCategoryList}
           />
           <Search
+            className="search-bar"
             setInputSearch={setInputSearch}
             setTypeSearch={setTypeSearch}
           />

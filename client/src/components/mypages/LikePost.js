@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "../Card";
+import { GiCampingTent } from "react-icons/gi";
 
 const DownContainer = styled.div`
   position: absolute;
@@ -63,6 +64,25 @@ const ClickButton = styled.button`
   }
 `;
 
+const EmptyPage = styled.div`
+  .size-camp {
+    font-size: 500px;
+    position: relative;
+    top: 10%;
+    left: 80%;
+    color: rgba(0, 0, 0, 0.1);
+  }
+  @media screen and (max-width: 500px) {
+    .size-camp {
+      font-size: 300px;
+      position: relative;
+      top: 10%;
+      left: 3%;
+      color: rgba(0, 0, 0, 0.1);
+    }
+  }
+`;
+
 function LikePost() {
   const serverPath = process.env.REACT_APP_SERVER_PATH;
   const accessToken = window.sessionStorage.getItem("loginToken");
@@ -88,7 +108,7 @@ function LikePost() {
         `${serverPath}/users/likes?pages=${page}&limit=12`,
         headers
       );
-      console.log(res.data.boards.rows)
+      console.log(res.data.boards.rows);
       setLikePost(res.data.boards.rows);
 
       let pageArray = [];
@@ -115,7 +135,13 @@ function LikePost() {
 
   return (
     <React.Fragment>
-      <Card LikePost={likePost} />
+      {likePost.length ? (
+        <Card LikePost={likePost} />
+      ) : (
+        <EmptyPage>
+          <GiCampingTent className="size-camp" />
+        </EmptyPage>
+      )}
 
       <DownContainer>{pageButton}</DownContainer>
     </React.Fragment>
