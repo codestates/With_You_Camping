@@ -7,7 +7,7 @@ const Container = styled.section`
   /* width: 1292px; */
   @media screen and (max-width: 500px) {
     height: max-content;
-    width: 100%;
+    width: 90%;
   }
 `;
 

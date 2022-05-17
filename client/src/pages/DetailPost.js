@@ -260,7 +260,6 @@ const ModifyBtnContainer = styled.div`
   justify-content: space-between;
 `;
 
-
 const ProfileContainer = styled.div`
   margin-top: -8px;
   margin-right: 6px;
@@ -304,7 +303,6 @@ export default function DetailPost({ isLogin, userInfo }) {
     getCommentList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
 
   useEffect(() => {
     getWeather();
@@ -352,7 +350,6 @@ export default function DetailPost({ isLogin, userInfo }) {
       return <TiWeatherSunny size={"4rem"} color={"#FF6347"} />;
     }
   }
-
 
   async function getPostDetail() {
     await axios
@@ -559,7 +556,7 @@ export default function DetailPost({ isLogin, userInfo }) {
                         margin: "12px 23px",
                       }}
                     >
-                      {new Date(weather[i].dt * 1000)
+                      {new Date(weather[i].dt * 1000) //년도 빼고 월 일만 짤라준다
                         .toLocaleDateString("ko-KR")
                         .slice(6, -1)}
                     </div>
@@ -600,7 +597,7 @@ export default function DetailPost({ isLogin, userInfo }) {
             id={id}
             comments={comments}
             isLogin={isLogin}
-          />  
+          />
         </CommentContainer>
 
         {postData.userId === userId ? (

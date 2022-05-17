@@ -7,6 +7,11 @@ const Container = styled.div`
   margin-top: -20px;
 
   width: 70%;
+  @media screen and (max-width: 500px) {
+    position: relative;
+    left: 50px;
+    width: 80%;
+  }
 `;
 
 const ListBox = styled.div`
@@ -94,10 +99,10 @@ const LocationAfter = styled.button`
 
 const CategoryBox = styled.div`
   display: flex;
-  margin-left: 190px;
+  margin-left: 170px;
   @media screen and (max-width: 768px) {
     display: inline-block;
-    margin-left: 50px;
+    margin-left: 0px;
     margin-top: 12px;
   }
 `;
@@ -126,7 +131,7 @@ const CategoryBefore = styled.button`
   padding-left: 20px;
   padding-right: 20px;
   margin-left: 5px;
-  margin-right: 5px;
+  margin-right: 0px;
   @media screen and (max-width: 500px) {
     display: block;
     font-size: 13px;

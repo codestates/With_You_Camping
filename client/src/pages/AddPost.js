@@ -262,8 +262,6 @@ function AddPost() {
     toilet: null,
   });
 
-  console.log(checkDetail)
-
   // 평가
   const [checkRating, setCheckRating] = useState(0);
 
@@ -556,7 +554,7 @@ function AddPost() {
           </MyLocationBtn>
           <LocationSearchBtn onClick={() => modalHandler("search")}>
             <span>주소로 검색하기</span>
-            <IoSearch /> 
+            <IoSearch />
           </LocationSearchBtn>
         </KakaoMapBox>
         <h4 className="position">

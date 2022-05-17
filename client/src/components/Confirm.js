@@ -10,7 +10,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 5, 12, 0.5);
-  z-index: 999;
+  z-index: 1000;
 
   /* left: 3%; */
   .back-arrow {
@@ -46,7 +46,8 @@ const MessageBox = styled.div`
     margin: auto;
   }
   @media screen and (max-width: 500px) {
-    width: 450px;
+    width: 400px;
+    border-radius: 10px;
   }
 `;
 

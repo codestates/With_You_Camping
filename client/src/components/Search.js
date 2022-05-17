@@ -40,7 +40,7 @@ const Container = styled.section`
   /* right: 5%; */
   height: 2.5rem;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1000px;
   border: 1px solid;
   border-color: lightgray;
   padding-top: 3px;
@@ -48,7 +48,7 @@ const Container = styled.section`
   padding-right: 0.6rem;
   padding-bottom: 0px;
   margin: {
-    left: 0.5rem;
+    left: 0rem;
     right: 0.8rem;
   }
   border-radius: 1rem;
@@ -77,6 +77,8 @@ const Container = styled.section`
     width: 100%;
   }
   @media screen and (max-width: 500px) {
+    position: relative;
+    left: -30px;
     height: 2.5rem;
     width: 100%;
     max-width: 300px;
@@ -86,7 +88,8 @@ const Container = styled.section`
     padding-left: rem;
     padding-right: 0.6rem;
     padding-bottom: 0px;
-    margin-top: 13px;
+
+    margin-top: 1rem;
     margin-left: 6rem;
     margin: {
       left: 0.5rem;
@@ -95,7 +98,7 @@ const Container = styled.section`
     select {
       min-width: 2rem;
       max-width: 4rem;
-      width: 20%;
+      width: 30%;
       border: none;
       font-size: 0.9rem;
     }
@@ -106,11 +109,12 @@ const Container = styled.section`
       background-color: white;
     }
 
-    .search-input {
+    .search-bar {
       border: none;
       outline: none;
       /* padding-left: 1rem; */
       width: 100%;
+      margin-top: 20px;
     }
   }
 `;

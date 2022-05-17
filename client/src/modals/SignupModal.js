@@ -15,7 +15,7 @@ const SignContainer = styled.div`
   right: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 800;
+  z-index: 998;
 `;
 
 const ModalBackdrop = styled.div`
@@ -25,21 +25,20 @@ const ModalBackdrop = styled.div`
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 800;
+  z-index: 998;
 `;
 
 const SignModalView = styled.div`
   // TODO : Modal창 CSS를 구현합니다.
   position: relative;
-  top: 20%;
-  left: 45rem;
   display: grid;
   place-items: center;
   background-color: white;
+
   width: 400px;
   height: 650px;
   border-radius: 15px;
-  z-index: 800;
+  z-index: 999;
   line-height: 80px;
 
   div {
@@ -82,16 +81,9 @@ const SignModalView = styled.div`
     border-radius: 10px;
   }
   @media screen and (max-width: 600px) {
-    position: relative;
-    top: 15%;
-    left: 9%;
-    display: grid;
-    place-items: center;
-    background-color: white;
-    width: 400px;
+    width: 380px;
     height: 650px;
     border-radius: 15px;
-    z-index: 800;
   }
 `;
 
@@ -218,75 +210,74 @@ function SignupModal({
 
   return (
     <SignContainer>
-      <ModalBackdrop>
-        {message ? (
-          <Confirm message={message} handleMessage={resetMessage} />
-        ) : null}
-        <SignModalView>
-          <CloseBtn onClick={closeFn}>
-            <IoClose size={"1.5rem"} />
-          </CloseBtn>
-          <SignUpWrapper>
-            <Nofication>
-              <img
-                src={logo}
-                alt="icon"
-                style={{
-                  height: "40%",
-                  width: "40%",
-                  margin: "20px 0px 0px 150px",
-                }}
-              />
-            </Nofication>
-            <form onSubmit={handleSubmit}>
-              <label htmlFor="email-for">이메일</label>
-              <input
-                type="email"
-                id="email-for"
-                placeholder="email"
-                onChange={handleInputValue("email")}
-              />
+      <ModalBackdrop />
+      {message ? (
+        <Confirm message={message} handleMessage={resetMessage} />
+      ) : null}
+      <SignModalView>
+        <CloseBtn onClick={closeFn}>
+          <IoClose size={"1.5rem"} />
+        </CloseBtn>
+        <SignUpWrapper>
+          <Nofication>
+            <img
+              src={logo}
+              alt="icon"
+              style={{
+                height: "40%",
+                width: "40%",
+                margin: "20px 0px 0px 150px",
+              }}
+            />
+          </Nofication>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="email-for">이메일</label>
+            <input
+              type="email"
+              id="email-for"
+              placeholder="email"
+              onChange={handleInputValue("email")}
+            />
 
-              <label htmlFor="password">비밀번호</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="비밀번호"
-                onChange={handleInputValue("password")}
-              />
+            <label htmlFor="password">비밀번호</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="비밀번호"
+              onChange={handleInputValue("password")}
+            />
 
-              <label htmlFor="password2">비밀번호 확인</label>
+            <label htmlFor="password2">비밀번호 확인</label>
 
-              <input
-                type="password"
-                id="password2"
-                placeholder="비밀번호 확인"
-                onChange={handleInputValue("password_check")}
-              />
+            <input
+              type="password"
+              id="password2"
+              placeholder="비밀번호 확인"
+              onChange={handleInputValue("password_check")}
+            />
 
-              <label htmlFor="nickname">닉네임</label>
-              <input
-                type="text"
-                id="nickname"
-                placeholder="닉네임"
-                onChange={handleInputValue("nickname")}
-              />
+            <label htmlFor="nickname">닉네임</label>
+            <input
+              type="text"
+              id="nickname"
+              placeholder="닉네임"
+              onChange={handleInputValue("nickname")}
+            />
 
-              <label htmlFor="name">이름</label>
-              <input
-                type="text"
-                id="name"
-                placeholder="이름"
-                onChange={handleInputValue("name")}
-              />
+            <label htmlFor="name">이름</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="이름"
+              onChange={handleInputValue("name")}
+            />
 
-              <button className="signup_button" type="submit">
-                회원가입
-              </button>
-            </form>
-          </SignUpWrapper>
-        </SignModalView>
-      </ModalBackdrop>
+            <button className="signup_button" type="submit">
+              회원가입
+            </button>
+          </form>
+        </SignUpWrapper>
+      </SignModalView>
     </SignContainer>
   );
 }

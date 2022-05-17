@@ -83,9 +83,7 @@ const UserInfoBox = styled.div`
   }
   @media screen and (max-width: 500px) {
     font-size: 0.8rem;
-    .title-font {
-      font-size: 0.8rem;
-    }
+    height: max-content;
   }
 `;
 
@@ -412,7 +410,7 @@ function ModifyMyinfo({ AppuserInfo, setAppUserInfo }) {
             src={userInfo.profile}
             width="100"
             height="100"
-            style={{ borderRadius: "50%" }}
+            style={{ borderRadius: "50%", objectFit: "cover" }}
           ></img>
         </ImgContainer>
         <p>이미지 크기는 5MB 이하입니다.</p>

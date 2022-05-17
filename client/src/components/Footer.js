@@ -60,12 +60,14 @@ const Container = styled.div`
       dipslay: flex;
       position: relative;
       right: 30px;
+      width: 100%;
     }
     .logo-full {
       margin: 0px;
       display: none;
       position: relative;
       left: 40px;
+      width: 100%;
     }
   }
 `;

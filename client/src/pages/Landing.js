@@ -43,7 +43,7 @@ const Picture = styled.div`
   .wrapper {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    width: 2000px;
+    width: 100%;
     height: max-content;
 
     .intro {
@@ -72,6 +72,7 @@ const Picture = styled.div`
   @media screen and (max-width: 500px) {
     min-height: 300px;
     height: max-content;
+
     background-image: linear-gradient(
         to bottom,
         rgba(255, 255, 255, 0) 0%,
@@ -86,7 +87,7 @@ const Picture = styled.div`
     .wrapper {
       position: relative;
       display: block;
-      width: 100vw;
+      width: 100%;
       height: 100%;
 
       .intro {
@@ -211,7 +212,7 @@ function Landing() {
             <p>캠핑 여행을 떠나보아요</p> */}
             &nbsp;
             <p>가족, 친구와 함께 떠나는 캠핑</p>
-            <p>기억에 남는 캠핑 SITE</p>
+            <p>추억에 남는 캠핑 SITE</p>
             <p>지금 With You Camping 과 공유해요</p>
             <p></p>
           </div>
