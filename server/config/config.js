@@ -5,22 +5,22 @@ module.exports = {
     username: config.db.username,
     password: config.db.password,
     database: config.db.database,
-    host: config.db.host,
+    host: '127.0.0.1',
     dialect: 'mysql',
-  }, 
+  },
   test: {
     username: config.db.username,
     password: config.db.password,
     database: config.db.database,
     host: config.db.host,
     dialect: 'mysql',
-  }, 
+  },
   production: {
     username: config.rds.username,
     password: config.rds.password,
     database: config.rds.database,
     host: config.rds.host,
     dialect: 'mysql',
-    port: config.rds.port
+    port: config.rds.port,
   },
 };

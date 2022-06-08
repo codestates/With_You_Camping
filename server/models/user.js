@@ -23,7 +23,8 @@ module.exports = class User extends Sequelize.Model {
         profile: {
           type: Sequelize.STRING,
           allowNull: true,
-          defaultValue: "https://imgstorages.s3.ap-northeast-2.amazonaws.com/1652064944345.png"
+          defaultValue:
+            'https://imgstorages.s3.ap-northeast-2.amazonaws.com/1654665926395.png',
         },
         provider: {
           type: Sequelize.STRING(10),
